@@ -23,7 +23,6 @@ export default function App() {
 
   const byPrice = (a,b) => a.price-b.price
 
-
   const [store,updateStore] = useState(initialStoreItems)
   const [filter,updateFilter] = useState("all")
   const [cart,updateCart] = useState([])
