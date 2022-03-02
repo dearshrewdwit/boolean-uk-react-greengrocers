@@ -2,6 +2,8 @@ import './styles/reset.css'
 import './styles/index.css'
 import { useState } from 'react'
 import initialStoreItems from './store-items'
+import Cart from './components/cart'
+import Store from './components/store'
 
 export default function App () {
   // Setup state here...
@@ -17,7 +19,8 @@ export default function App () {
     setForm(x => { return { ...x, [name]: value } })
   }
 
-  console.log(formData)
+
+
 
   function addToCart (item) {
     checkQuantity(item.id) ? IncQuantity(item) : setCart([...cart, { ...item }])
@@ -34,24 +37,23 @@ export default function App () {
   function checkQuantity (id) {
     return cart.some(x => x.id === id)
   }
-
   const total = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)
 
-  const displayCart = cart.map(x => {
+  const displayCart = cart.map(item => {
     return (
-      <li key={ x.id } >
-        <img
-          class="cart--item-icon"
-          src={ "/assets/icons/" + x.id + '.svg' }
-          alt={ x.name }
-        />
-        <p>{ x.name }</p>
-        <button onClick={ () => removeFromCart(x) } class="quantity-btn remove-btn center">-</button>
-        <span class="quantity-text center">{ x.quantity }</span>
-        <button onClick={ () => addToCart(x) } class="quantity-btn add-btn center">+</button>
-      </li>
+      <Cart
+        item={ item }
+        removeFromCart={ removeFromCart }
+        addToCart={ addToCart }
+      />
+
     )
   })
+
+
+
+
+
 
   let finalStore = store
 
@@ -83,17 +85,21 @@ export default function App () {
     });
   }
 
-  const displayedStore = finalStore.map(x => {
+  const displayedStore = finalStore.map(item => {
     return (
-      (formData.filterType === '' || (x.type === formData.filterType)) &&
-      <li key={ x.id } >
-        <div class="store--item-icon">
-          <img src={ "/assets/icons/" + x.id + '.svg' } alt={ x.name } />
-        </div>
-        <button onClick={ () => addToCart(x) }>Add to cart</button>
-      </li>
+      (formData.filterType === '' || (item.type === formData.filterType)) &&
+      <Store
+        key={ item.id }
+        item={ item }
+        addToCart={ addToCart }
+      />
     )
   })
+
+
+
+
+
 
   return (
     <>
