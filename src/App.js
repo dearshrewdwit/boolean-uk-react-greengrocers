@@ -1,45 +1,39 @@
 import './styles/reset.css'
 import './styles/index.css'
 
-import initialStoreItems from './store-items'
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
-console.log(initialStoreItems)
+import { useState } from 'react'
+import StoreItems from './components/StoreItems'
+import Cart from './components/Cart'
 
 export default function App() {
-  // Setup state here...
+const [cart, setCart] = useState([])
 
+const total = () => {
+  let price = 0
+  for (const item of cart) {
+    price += (item.price*item.quantity)
+  }
+  return "£" + price.toFixed(2)
+}
+console.log("rendering app..")
+console.log(cart)
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
-        </ul>
+        <StoreItems cart={cart} setCart={setCart}/>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
-          </ul>
+          <Cart cart={cart} setCart={setCart} />
         </div>
         <div className="total-section">
           <div>
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{total()}</span>
           </div>
         </div>
       </main>

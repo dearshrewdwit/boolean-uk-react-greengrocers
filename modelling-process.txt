@@ -1,0 +1,18 @@
+** Components **
+1. Cart
+State - 
+[cart, setCart] = useState([])
+[filter, setFilter] = useState(null)
+
+-Need to keep track of items in cart via calling setCart() and rendering.
+-Keep a running total of items.
+-Items need a quantity.
+-If quantity is zero, item is removed from cart.
+
+Initialised as an empty array.
+
+2. StoreItems 
+No state - just a list of items available.
+Needs to modify Cart State by pushing items from the list into the cart Array.
+addItemToCart()
+
