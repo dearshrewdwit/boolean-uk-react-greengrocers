@@ -7,6 +7,17 @@ export default function App () {
   // Setup state here...
   const [store, setStore] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
+  const [formData, setForm] = useState({
+    filterType: '',
+    sortBy: ''
+  })
+
+  function handleChange (e) {
+    const { name, value } = e.target
+    setForm(x => { return { ...x, [name]: value } })
+  }
+
+  console.log(formData)
 
   function addToCart (item) {
     checkQuantity(item.id) ? IncQuantity(item) : setCart([...cart, { ...item }])
@@ -23,6 +34,7 @@ export default function App () {
   function checkQuantity (id) {
     return cart.some(x => x.id === id)
   }
+
   const total = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)
 
   const displayCart = cart.map(x => {
@@ -41,8 +53,39 @@ export default function App () {
     )
   })
 
-  const displayedStore = store.map(x => {
+  let finalStore = store
+
+  if (formData.sortBy === "") {
+    finalStore = store
+  }
+
+  if (formData.sortBy === 'alphabetically') {
+    finalStore.sort(function (a, b) {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  if (formData.sortBy === 'price-low-high') {
+    finalStore.sort(function (a, b) {
+      return a.price - b.price;
+    });
+  }
+  if (formData.sortBy === 'price-high-low') {
+    finalStore.sort(function (b, a) {
+      return a.price - b.price;
+    });
+  }
+
+  const displayedStore = finalStore.map(x => {
     return (
+      (formData.filterType === '' || (x.type === formData.filterType)) &&
       <li key={ x.id } >
         <div class="store--item-icon">
           <img src={ "/assets/icons/" + x.id + '.svg' } alt={ x.name } />
@@ -51,6 +94,7 @@ export default function App () {
       </li>
     )
   })
+
   return (
     <>
       <header id="store">
@@ -61,10 +105,33 @@ export default function App () {
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            { displayCart }
-          </ul>
+        <div className='select'>
+          <select
+            id='filterType'
+            name='filterType'
+            value={ formData.filterType }
+            onChange={ handleChange }
+          >
+            <option value=''>--filter by type--</option>
+            <option value='fruite'>Fruite</option>
+            <option value='vegetables'>Vegetables</option>
+          </select>
+          <div className="cart--item-list-container">
+            <ul className="item-list cart--item-list">
+              { displayCart }
+            </ul>
+          </div>
+          <select
+            id='sortBy'
+            name='sortBy'
+            value={ formData.sortBy }
+            onChange={ handleChange }
+          >
+            <option value=''>--sort by--</option>
+            <option value='price-low-high'>Price Low to High</option>
+            <option value='price-high-low'>Price High to Low</option>
+            <option value='alphabetically'>Alphabetically</option>
+          </select>
         </div>
         <div className="total-section">
           <div>
