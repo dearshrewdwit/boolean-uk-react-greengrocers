@@ -19,9 +19,6 @@ export default function App () {
     setForm(x => { return { ...x, [name]: value } })
   }
 
-
-
-
   function addToCart (item) {
     checkQuantity(item.id) ? IncQuantity(item) : setCart([...cart, { ...item }])
   }
@@ -39,74 +36,19 @@ export default function App () {
   }
   const total = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)
 
-  const displayCart = cart.map(item => {
-    return (
-      <Cart
-        item={ item }
-        removeFromCart={ removeFromCart }
-        addToCart={ addToCart }
-      />
-
-    )
-  })
-
-
-
-
-
 
   let finalStore = store
-
-  if (formData.sortBy === "") {
-    finalStore = store
-  }
-
-  if (formData.sortBy === 'alphabetically') {
-    finalStore.sort(function (a, b) {
-      var nameA = a.name.toUpperCase();
-      var nameB = b.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-  if (formData.sortBy === 'price-low-high') {
-    finalStore.sort(function (a, b) {
-      return a.price - b.price;
-    });
-  }
-  if (formData.sortBy === 'price-high-low') {
-    finalStore.sort(function (b, a) {
-      return a.price - b.price;
-    });
-  }
-
-  const displayedStore = finalStore.map(item => {
-    return (
-      (formData.filterType === '' || (item.type === formData.filterType)) &&
-      <Store
-        key={ item.id }
-        item={ item }
-        addToCart={ addToCart }
-      />
-    )
-  })
-
-
-
-
-
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          { displayedStore }
+          <Store
+            finalStore={ finalStore }
+            formData={ formData }
+            addToCart={ addToCart }
+          />
         </ul>
       </header>
       <main id="cart">
@@ -124,7 +66,11 @@ export default function App () {
           </select>
           <div className="cart--item-list-container">
             <ul className="item-list cart--item-list">
-              { displayCart }
+              <Cart
+                cart={ cart }
+                removeFromCart={ removeFromCart }
+                addToCart={ addToCart }
+              />
             </ul>
           </div>
           <select
