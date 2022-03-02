@@ -22,6 +22,17 @@ button {
 
 /* Store */
 
+header > div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+header > div > button {
+  margin-top: .6rem;
+  height: 2rem;
+}
+
 #store {
   height: 40vh;
   padding: 1rem;

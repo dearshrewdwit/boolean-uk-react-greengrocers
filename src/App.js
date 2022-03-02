@@ -8,19 +8,26 @@ import initialStoreItems from './store-items'
 
 import {useState} from 'react'
 
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
 export default function App() {
+  const alphabetically = (a,b) => {
+    if (a.name < b.name) return -1
+    if (a.name == b.name) return 0
+    if (a.name > b.name) return 1
+  }
+
+  const reverseAlphabetically = (a,b) => {
+    if (a.name < b.name) return 1
+    if (a.name == b.name) return 0
+    if (a.name > b.name) return -1
+  }
+
+  const byPrice = (a,b) => a.price-b.price
+
+
+  const [store,updateStore] = useState(initialStoreItems)
+  const [filter,updateFilter] = useState("all")
   const [cart,updateCart] = useState([])
+  const [[sorterFunc,sortName],updateSorter] = useState([alphabetically,"A-Z"])
 
   const addItemToCart = item => {
     const itemToAdd = cart.find(cartItem => cartItem.id === item.id)
@@ -33,14 +40,43 @@ export default function App() {
     updateCart(update)
   }
 
-  const calcTotal = cart => cart.reduce((a,b)=>a+(b.price*b.quantity),0.00)
+  const calcTotal = cart => cart.reduce((a,b)=>a+(b.price*b.quantity),0.00).toFixed(2)
+
+  const storeItemMapper = item => <StoreItem item={item} addItem={addItemToCart}/>
+
+  const changeFilter = () => {
+    switch(filter){
+      case "all": updateFilter("fruit");
+      break;
+      case "fruit": updateFilter("vegetable");
+      break;
+      case "vegetable": updateFilter("all");
+      break;
+    }
+  }
+
+  const changeSort = () => {
+    switch(sortName){
+      case "A-Z": updateSorter([reverseAlphabetically,"Z-A"])
+      break;
+      case "Z-A": updateSorter([byPrice,"Price"])
+      break;
+      case "Price": updateSorter([alphabetically,"A-Z"])
+    }
+  }
 
   return (
     <>
       <header id="store">
-        <h1>Greengrocers</h1>
+        <div>
+          <h1>Greengrocers</h1>
+          <button onClick={changeFilter}>Filter: {filter}</button>
+          <button onClick={changeSort}>Sort: {sortName}</button>
+        </div>
         <ul className="item-list store--item-list">
-          {initialStoreItems.map(item => <StoreItem item={item} addItem={addItemToCart}/>)}
+          {filter === "all"
+          ? store.sort(sorterFunc).map(storeItemMapper)
+          : store.sort(sorterFunc).filter(item => item.type === filter).map(storeItemMapper)}
         </ul>
       </header>
       <main id="cart">
@@ -55,7 +91,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">{`£${calcTotal(cart).toFixed(2)}`}</span>
+            <span className="total-number">{`£${calcTotal(cart)}`}</span>
           </div>
         </div>
       </main>
