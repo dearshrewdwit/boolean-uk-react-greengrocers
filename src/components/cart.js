@@ -1,8 +1,7 @@
 import React from 'react'
 
 export default function Cart (props) {
-  const array = props.cart
-  return array.map(item => {
+  return props.cart.map(item => {
     return (
       <li key={ item.id } >
         <img
@@ -17,5 +16,4 @@ export default function Cart (props) {
       </li>
     )
   })
-
 }

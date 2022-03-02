@@ -1,12 +1,14 @@
 import React from 'react'
+import { useState } from 'react'
+import initialStoreItems from '../store-items'
 
 export default function Store (props) {
-	console.log(props)
-	const arr = props.finalStore
 
+	const [store, setStore] = useState(initialStoreItems)
+	let finalStore = store
 
 	if (props.formData.sortBy === 'alphabetically') {
-		arr.sort(function (a, b) {
+		finalStore.sort(function (a, b) {
 			var nameA = a.name.toUpperCase();
 			var nameB = b.name.toUpperCase();
 			if (nameA < nameB) {
@@ -19,17 +21,17 @@ export default function Store (props) {
 		});
 	}
 	if (props.formData.sortBy === 'price-low-high') {
-		arr.sort(function (a, b) {
+		finalStore.sort(function (a, b) {
 			return a.price - b.price;
 		});
 	}
 	if (props.formData.sortBy === 'price-high-low') {
-		arr.sort(function (b, a) {
+		finalStore.sort(function (b, a) {
 			return a.price - b.price;
 		});
 	}
 
-	return arr.map(item => {
+	return finalStore.map(item => {
 		return (
 			(props.formData.filterType === '' || (item.type === props.formData.filterType)) &&
 			<li key={ item.id } >

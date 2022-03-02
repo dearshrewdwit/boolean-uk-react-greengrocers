@@ -1,13 +1,12 @@
 import './styles/reset.css'
 import './styles/index.css'
 import { useState } from 'react'
-import initialStoreItems from './store-items'
 import Cart from './components/cart'
 import Store from './components/store'
 
 export default function App () {
   // Setup state here...
-  const [store, setStore] = useState(initialStoreItems)
+
   const [cart, setCart] = useState([])
   const [formData, setForm] = useState({
     filterType: '',
@@ -18,7 +17,6 @@ export default function App () {
     const { name, value } = e.target
     setForm(x => { return { ...x, [name]: value } })
   }
-
   function addToCart (item) {
     checkQuantity(item.id) ? IncQuantity(item) : setCart([...cart, { ...item }])
   }
@@ -36,16 +34,13 @@ export default function App () {
   }
   const total = cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0)
 
-
-  let finalStore = store
-
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
           <Store
-            finalStore={ finalStore }
+            // finalStore={ finalStore }
             formData={ formData }
             addToCart={ addToCart }
           />
