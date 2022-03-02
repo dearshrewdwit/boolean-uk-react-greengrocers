@@ -1,9 +1,10 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import initialStoreItems from '../data/StoreItems'
 
+// const [storeItems, setStoreItems] = useState(initialStoreItems)
+
 const Store = () => {
-  // const [storeItems, setStoreItems] = useState(initialStoreItems)
-  // const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([])
 
   return (
     <header id="store">
