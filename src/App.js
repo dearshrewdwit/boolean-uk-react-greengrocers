@@ -12,15 +12,21 @@ Here's what a store item should look like
   name: 'beetroot',
   price: 0.35
 }
-
-What should a cart item look like? 🤔
 */
 
 function App() {
   const [cart, setCart] = useState([])
 
   const addItemToCart = item => {
+    if (findCartItem(item)) {
+      alert(`${item.name} is already in the cart`)
+      return
+    }
     setCart([...cart, item])
+  }
+
+  const findCartItem = cartItem => {
+    return cart.find(item => item === cartItem)
   }
 
   const renderCartItem = cartArray => {
