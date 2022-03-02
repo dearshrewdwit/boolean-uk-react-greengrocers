@@ -2,6 +2,7 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import { Fragment } from 'react'
 
 /*
 Here's what a store item should look like
@@ -14,13 +15,11 @@ Here's what a store item should look like
 What should a cart item look like? 🤔
 */
 
-console.log(initialStoreItems)
-
 export default function App() {
   // Setup state here...
 
   return (
-    <>
+    <Fragment>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
@@ -43,19 +42,6 @@ export default function App() {
           </div>
         </div>
       </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
-    </>
+    </Fragment>
   )
 }
