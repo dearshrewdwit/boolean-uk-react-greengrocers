@@ -22,6 +22,7 @@ function App() {
       alert(`${item.name} is already in the cart`)
       return
     }
+    item.quantity = 1
     setCart([...cart, item])
   }
 
