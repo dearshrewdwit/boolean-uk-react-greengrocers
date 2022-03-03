@@ -3,47 +3,65 @@ import './styles/index.css'
 
 import {StoreItem} from './StoreItem'
 import {CartItem} from './CartItem'
-
+import {Purchase} from './Purchase'
+import {alphabetically, reverseAlphabetically, byPrice, succ, pred} from './helperfunctions'
 import initialStoreItems from './store-items'
 
 import {useState} from 'react'
 
 export default function App() {
-  const alphabetically = (a,b) => {
-    if (a.name < b.name) return -1
-    if (a.name == b.name) return 0
-    if (a.name > b.name) return 1
-  }
-
-  const reverseAlphabetically = (a,b) => {
-    if (a.name < b.name) return 1
-    if (a.name == b.name) return 0
-    if (a.name > b.name) return -1
-  }
-
-  const byPrice = (a,b) => a.price-b.price
-
   const [store,updateStore] = useState(initialStoreItems)
   const [filter,updateFilter] = useState("all")
   const [cart,updateCart] = useState([])
   const [[sorterFunc,sortName],updateSorter] = useState([alphabetically,"A-Z"])
+  const [page,updatePage] = useState("cart")
 
-  const addItemToCart = item => {
-    const itemToAdd = cart.find(cartItem => cartItem.id === item.id)
-    if (itemToAdd) updateCart(cart => cart.map(cartItem => cartItem.id === item.id ? {...cartItem, quantity: cartItem.quantity+1} : cartItem))
-    else updateCart(cart => [...cart, {...item, ["quantity"]: 1}])
+  function processCart(){
+    updatePage("purchase")
   }
 
-  const changeCartQuantity = (id,func) => {
-    const update = cart => cart.map(cartItem => cartItem.id === id ? {...cartItem, quantity: func(cartItem.quantity)} : cartItem)
-    updateCart(update)
+  function returnToCart(){
+    updateCart([])
+    updatePage("cart")
   }
 
-  const calcTotal = cart => cart.reduce((a,b)=>a+(b.price*b.quantity),0.00).toFixed(2)
+  function modifyItemStock(array,id,func,prop){
+    return array.map(arrayItem => arrayItem.id === id ? {...arrayItem, [prop]: func(arrayItem[prop])} : arrayItem)
+  }
 
-  const storeItemMapper = item => <StoreItem item={item} addItem={addItemToCart}/>
+  function addItemToCart(item) {
+    const itemInCart = cart.find(cartItem => cartItem.id === item.id)
+    const itemInStore = store.find(storeItem => storeItem.id === item.id)
+    if (itemInStore.stock > 0){
+      if (itemInCart) {
+        updateCart(cart => modifyItemStock(cart,item.id,succ,'quantity'))
+        updateStore(store => modifyItemStock(store,item.id,pred,'stock'))
+      } else {
+        updateCart(cart => [...cart, {...item, ["quantity"]: 1}])
+        updateStore(store => modifyItemStock(store,item.id,pred,'stock'))
+      }
+    }
+  }
 
-  const changeFilter = () => {
+  function changeCartQuantity(id,func) {
+    let stockUpdateFunc
+    if (func === succ) {
+      if (store.find(item => item.id === id).stock <= 0) {return}
+      else {stockUpdateFunc = pred}
+    } else {stockUpdateFunc = succ}
+    updateCart(cart => modifyItemStock(cart,id,func,'quantity'))
+    updateStore(store => modifyItemStock(store,id,stockUpdateFunc,'stock'))
+  }
+
+  function calcTotal(cart) {
+  return cart.reduce((a,b)=>a+(b.price*b.quantity),0.00).toFixed(2)
+  }
+
+  function storeItemMapper(item){
+    return <StoreItem item={item} addItem={addItemToCart}/>
+  }
+
+  function toggleFilter(){
     switch(filter){
       case "all": updateFilter("fruit");
       break;
@@ -54,7 +72,7 @@ export default function App() {
     }
   }
 
-  const changeSort = () => {
+  function toggleSort() {
     switch(sortName){
       case "A-Z": updateSorter([reverseAlphabetically,"Z-A"])
       break;
@@ -69,8 +87,8 @@ export default function App() {
       <header id="store">
         <div>
           <h1>Greengrocers</h1>
-          <button onClick={changeFilter}>Filter: {filter}</button>
-          <button onClick={changeSort}>Sort: {sortName}</button>
+          <button onClick={toggleFilter}>Filter: {filter}</button>
+          <button onClick={toggleSort}>Sort: {sortName}</button>
         </div>
         <ul className="item-list store--item-list">
           {filter === "all"
@@ -78,7 +96,7 @@ export default function App() {
           : store.sort(sorterFunc).filter(item => item.type === filter).map(storeItemMapper)}
         </ul>
       </header>
-      <main id="cart">
+      {page === "cart" && <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
@@ -92,8 +110,10 @@ export default function App() {
           <div>
             <span className="total-number">{`£${calcTotal(cart)}`}</span>
           </div>
+          <button onClick={() => processCart()}>Purchase</button>
         </div>
-      </main>
+      </main>}
+      {page === "purchase" && <Purchase cart={cart} total={calcTotal(cart)} returnToCart={returnToCart}/>}
       <div>
         Icons made by
         <a
