@@ -41,6 +41,10 @@ button {
   grid-gap: 1rem;
   justify-content: center;
 }
+.filters-section {
+display: flex;
+justify-content: center;
+}
 
 .store--item-list li {
   display: grid;

@@ -27,7 +27,6 @@ function Cart(props) {
     }
   }
 
-  console.log('Cart:', props.cart)
   return (
     <ul className="item-list cart--item-list">
       {props.cart.map((cartItem, index) => (
