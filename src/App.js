@@ -41,10 +41,17 @@ export default function App() {
   
     
     const minusCount=(target)=>{
-      const updatedCart=cartItems.map(item=>item.id===target.id?{...item, quantity:item.quantity-1}: item)
+      if (target.quantity===1){
+        const updatedCart=cartItems.filter(item=>item.id!==target.id)
+        setcartItems(updatedCart) 
+      }else{
+        const updatedCart=cartItems.map(item=>item.id===target.id?{...item, quantity:item.quantity-1}: item)
+        setcartItems(updatedCart)
+      }
+      
       //If the item quantity is 0, I want to remove it from the list of cart items
       
-      setcartItems(updatedCart)
+      
     }
     
     
@@ -72,7 +79,7 @@ export default function App() {
           <ul className="item-list cart--item-list">
             {cartItems.map(cartContent =>{
               totalCartPrice+=cartContent.price*cartContent.quantity
-              console.log('cart', cartContent)
+              console.log('cart', totalCartPrice)
               return <li>
               <img
                 class="cart--item-icon"
