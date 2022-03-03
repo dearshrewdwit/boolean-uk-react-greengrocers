@@ -12,6 +12,21 @@ h2 {
 }
 
 /* Buttons */
+section{
+  display: flex;
+  place-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.filter-type{
+  width: 9rem;
+  font-size: medium;
+  margin-bottom: 2rem;
+} 
 
 button {
   padding: 0.25rem 0.5rem;

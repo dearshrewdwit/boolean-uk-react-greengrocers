@@ -11,7 +11,6 @@ const CartItem = props => {
             }
         }
     }
-
     const increaseQuantity = e => {
         const quantityIncrease = props.cartItems.map(item => item === e ? { ...item, quantity: item.quantity + 1 } : item)
         for (const total of quantityIncrease) {
