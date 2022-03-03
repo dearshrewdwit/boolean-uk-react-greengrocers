@@ -1,14 +1,13 @@
-import initialStoreItems from './store-items'
+
 import {useState} from 'react'
 
 export default function Header(props) {
 
-    const [storeItems, setStoreItems] = useState(initialStoreItems)
     const [filterValue, setFilterValue] = useState('most-popular')
     const [showFruit, setShowFruit] = useState(true)
     const [showVeg, setShowVeg] = useState(true)
 
-    let filteredStoreItems = storeItems
+    let filteredStoreItems = props.storeItems
 
     if (filterValue === "most-popular") {
       filteredStoreItems.sort((a, b) => a.id.localeCompare(b.id));

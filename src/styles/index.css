@@ -39,6 +39,23 @@ button {
   font-size: 0.725rem;
 }
 
+/* Navbar */
+
+.navbar {
+  grid-area: navbar;
+  background-color: transparent;
+  position: fixed;
+  margin: 0; 
+}
+
+.navbar li {
+  display: inline;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 5px;
+  background-color: #ffcdd2;
+}
+
 /* Store */
 
 #store {
@@ -223,7 +240,7 @@ button {
 .aside {
   grid-area: aside;
   display: grid;
-  grid-template-rows: 10vh 25vh 65vh;
+  grid-template-rows: 10vh 24vh 50vh 10vh;
   margin: 10px;
 }
 
@@ -233,7 +250,38 @@ button {
   margin-right: 10px;
 }
 
+.aside .add-cart {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
 .aside h2 {
   display: inline;
+}
+
+/* Purchase */
+
+.purchase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.purchase button {
+  margin: 5px;
+}
+
+/*Stock*/
+
+.stock {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 30%;
+  padding-right: 30%;
+}
+
+.stock div {
+  margin-top: 15px;
 }
 

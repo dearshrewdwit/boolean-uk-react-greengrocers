@@ -29,8 +29,9 @@ export default function Cart(props) {
           </div>
           <div>
             <span className="total-number">{`£${total.toFixed(2)}`}</span>
-          </div>
+          </div>  
         </div>
+        <button onClick={() => props.setPurchasePage(true)}>Purchase</button>
       </main>
     )
   }
