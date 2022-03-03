@@ -8,8 +8,12 @@ function App() {
   const [cart, setCart] = useState([])
   const [currentFilter, setCurrentFilter] = useState('show-all')
 
-  const filterFruits = initialStoreItems.filter(storeItem => storeItem.type === 'fruit')
-  const filterVegetables = initialStoreItems.filter(storeItem => storeItem.type === 'veg')
+  const filterFruits = initialStoreItems.filter(
+    storeItem => storeItem.type === 'fruit'
+  )
+  const filterVegetables = initialStoreItems.filter(
+    storeItem => storeItem.type === 'veg'
+  )
 
   let filteredItems = initialStoreItems
 
@@ -111,14 +115,16 @@ function App() {
         <label htmlFor="filter" id="filters-label">
           Filter products:
         </label>
-        <select name="product" id="select-products" onChange={(e) => setCurrentFilter(e.target.value)}>
+        <select
+          name="product"
+          id="select-products"
+          onChange={e => setCurrentFilter(e.target.value)}
+        >
           <option value="show-all">Show all</option>
           <option value="fruit">Fruit</option>
           <option value="veg">Vegetables</option>
         </select>
-        <ul className="item-list store--item-list">
-          {renderStoreItems()}
-        </ul>
+        <ul className="item-list store--item-list">{renderStoreItems()}</ul>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
