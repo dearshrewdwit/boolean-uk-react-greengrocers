@@ -11,11 +11,11 @@ Reusing an exercise that you already know will help you understand the fundament
 1. Fork this repository
 2. Clone the forked repository onto your local machines
 3. In the root directory, type `npm install`, which installs dependencies for the project
-4. Finally, type `npm run start`, which starts a development server that runs your website in the browser. That server will reload your website whenever you make any changes to source files
+4. Finally, type `npm run start`, which starts a development server that runs your website in the browser. That server will reload your website whenever you make any changes to source filesnpm
 
 ## Deliverables
 
-- A user can view a selection of items in the store
+- A user can view a selection of items in the store /
 - From the store, a user can add an item to their cart
 - From the cart, a user can view and adjust the number of items in their cart
     - If an item's quantity equals zero it is removed from the cart
