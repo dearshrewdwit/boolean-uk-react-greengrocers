@@ -15,15 +15,15 @@ Reusing an exercise that you already know will help you understand the fundament
 
 ## Deliverables
 
-- A user can view a selection of items in the store
-- From the store, a user can add an item to their cart
-- From the cart, a user can view and adjust the number of items in their cart
-    - If an item's quantity equals zero it is removed from the cart
-- A user can view the current total in their cart
+- A user can view a selection of items in the store                                   DONE
+- From the store, a user can add an item to their cart                                DONE
+- From the cart, a user can view and adjust the number of items in their cart         DONE    
+    - If an item's quantity equals zero it is removed from the cart                   DONE
+- A user can view the current total in their cart                                     DONE
 
 ## Instructions
 
-- Create all the components you need, using the templates as a reference
+- Create all the components you need, using the templates as a reference              
 - Create all the pieces of the state you need, using the example provided
 - Add all the event listeners you need to make the page reactive
 
