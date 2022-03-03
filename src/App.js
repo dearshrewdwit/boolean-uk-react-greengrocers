@@ -1,18 +1,8 @@
 import './styles/reset.css'
 import './styles/index.css'
-
 import initialStoreItems from './store-items'
 import { Fragment } from 'react'
 import { useState } from 'react'
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-*/
 
 function App() {
   const [cart, setCart] = useState([])
@@ -35,13 +25,25 @@ function App() {
 
   const decrementCartItemQuantity = item => {
     if (findCartItem(item)) {
-      item.quantity -= 1
+      if (item.quantity > 1) {
+        item.quantity -= 1
+      } else removeItemFromCart(item)
     }
     setCart([...cart])
   }
 
+  const removeItemFromCart = cartItem => {
+    cart.splice(cart.indexOf(cartItem), 1)
+  }
+
   const findCartItem = cartItem => {
     return cart.find(item => item === cartItem)
+  }
+
+  const priceItemsInCart = cartArray => {
+    const shoppingArray = cartArray.map(cartItem => cartItem.price * cartItem.quantity)
+    const totalPrice = 0 + shoppingArray.reduce((a, b) => a + b, 0)
+    return totalPrice.toFixed(2)
   }
 
   const renderCartItem = cartArray => {
@@ -54,9 +56,19 @@ function App() {
             alt="beetroot"
           />
           <p>{cartItem.name}</p>
-          <button class="quantity-btn remove-btn center" onClick={() => decrementCartItemQuantity(cartItem)}>-</button>
+          <button
+            class="quantity-btn remove-btn center"
+            onClick={() => decrementCartItemQuantity(cartItem)}
+          >
+            -
+          </button>
           <span class="quantity-text center">{cartItem.quantity}</span>
-          <button class="quantity-btn add-btn center" onClick={() => incrementCartItemQuantity(cartItem)}>+</button>
+          <button
+            class="quantity-btn add-btn center"
+            onClick={() => incrementCartItemQuantity(cartItem)}
+          >
+            +
+          </button>
         </li>
       )
     })
@@ -96,7 +108,7 @@ function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{`£ ${priceItemsInCart(cart)}`}</span>
           </div>
         </div>
       </main>
