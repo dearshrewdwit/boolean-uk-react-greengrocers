@@ -26,6 +26,20 @@ function App() {
     setCart([...cart, item])
   }
 
+  const incrementCartItemQuantity = item => {
+    if (findCartItem(item)) {
+      item.quantity += 1
+    }
+    setCart([...cart])
+  }
+
+  const decrementCartItemQuantity = item => {
+    if (findCartItem(item)) {
+      item.quantity -= 1
+    }
+    setCart([...cart])
+  }
+
   const findCartItem = cartItem => {
     return cart.find(item => item === cartItem)
   }
@@ -40,9 +54,9 @@ function App() {
             alt="beetroot"
           />
           <p>{cartItem.name}</p>
-          <button class="quantity-btn remove-btn center">-</button>
-          <span class="quantity-text center">1</span>
-          <button class="quantity-btn add-btn center">+</button>
+          <button class="quantity-btn remove-btn center" onClick={() => decrementCartItemQuantity(cartItem)}>-</button>
+          <span class="quantity-text center">{cartItem.quantity}</span>
+          <button class="quantity-btn add-btn center" onClick={() => incrementCartItemQuantity(cartItem)}>+</button>
         </li>
       )
     })
