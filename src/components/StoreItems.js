@@ -17,7 +17,7 @@ function StoreItems(props) {
     <ul className="item-list store--item-list">
       {props.storeItems.map((storeItem, index) => (
         <li key={index}>
-          <div class="store--item-icon">
+          <div class="store--item-icon" onClick={() => props.setSelectedStoreItem(storeItem)}>
             <img src={`/assets/icons/${storeItem.id}.svg`} alt={storeItem.name} />
           </div>
           <button onClick={() => {addItemToCart(storeItem)}}>Add to cart</button>

@@ -44,6 +44,12 @@ button {
 .filters-section {
 display: flex;
 justify-content: center;
+gap: 10px;
+}
+.selected-item {
+  display: flex;
+  align-items: flex;
+  gap: 10px;
 }
 
 .store--item-list li {

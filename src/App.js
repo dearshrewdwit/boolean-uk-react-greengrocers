@@ -5,11 +5,13 @@ import { useState } from 'react'
 import StoreItems from './components/StoreItems'
 import Cart from './components/Cart'
 import initialStoreItems from './store-items'
+import SelectedItem from './components/SelectedItem'
 
 export default function App() {
   const [cart, setCart] = useState([])
   const [filter, setFilter] = useState('none')
   const [filterTwo, setFilterTwo] = useState('none')
+  const [selectedStoreItem, setSelectedStoreItem] = useState(null)
 
   const getVeg = storeItems => storeItems.filter(item => item.type === 'veg')
   const getFruit = storeItems =>
@@ -36,7 +38,6 @@ export default function App() {
 
   const sortAlphabetically = storeItems => storeItems.sort(compare)
   const sortById = storeItems => storeItems.sort(compareTwo)
-  
 
   let filteredStoreItems = initialStoreItems
   if (filterTwo === 'none') {
@@ -46,14 +47,12 @@ export default function App() {
       filteredStoreItems = getFruit(initialStoreItems)
     }
     sortById(filteredStoreItems)
-  }
-  else if (filterTwo === 'alphabetically') {
+  } else if (filterTwo === 'alphabetically') {
     if (filter === 'veg') {
       filteredStoreItems = getVeg(initialStoreItems)
     } else if (filter === 'fruit') {
       filteredStoreItems = getFruit(initialStoreItems)
-    }
-    else if (filter === 'none') {
+    } else if (filter === 'none') {
     }
     sortAlphabetically(filteredStoreItems)
   }
@@ -65,10 +64,7 @@ export default function App() {
     }
     return '£' + price.toFixed(2)
   }
-
-  console.log('rendering app..')
   console.log(cart)
-  
   return (
     <>
       <header id="store">
@@ -95,11 +91,21 @@ export default function App() {
           </select>
         </div>
         <br />
-        <StoreItems
-          storeItems={filteredStoreItems}
-          cart={cart}
-          setCart={setCart}
-        />
+        {selectedStoreItem === null && (
+          <StoreItems
+            storeItems={filteredStoreItems}
+            cart={cart}
+            setCart={setCart}
+            setSelectedStoreItem={setSelectedStoreItem}
+          />
+        )}
+        {selectedStoreItem !== null && (
+          <SelectedItem
+            StoreItems={filteredStoreItems}
+            selectedStoreItem={selectedStoreItem}
+            setSelectedStoreItem={setSelectedStoreItem}
+          />
+        )}
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
