@@ -19,11 +19,6 @@ function App() {
     filteredItems = filterVegetables
   }
 
-  // const filterByType = (e) => {
-  //   console.log(e.target.value)
-  //    else return
-  // }
-
   const addItemToCart = item => {
     if (findCartItem(item)) {
       alert(`${item.name} is already in the cart`)
