@@ -6,11 +6,17 @@ import './styles/index.css'
 import Cart from './components/Cart'
 import Store from './components/Store'
 
+import { CartContext } from './helper/CartContext'
+
 const App = () => {
+  const [cart, setCart] = useState([])
+
   return (
     <>
-      <Store />
-      <Cart />
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Store />
+        <Cart />
+      </CartContext.Provider>
     </>
   )
 }

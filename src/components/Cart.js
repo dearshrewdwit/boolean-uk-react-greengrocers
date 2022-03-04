@@ -1,20 +1,18 @@
-const CartItem = props => {
-  return (
-    <li>
-      <img
-        className="cart--item-icon"
-        src={`../assets/icons/001-beetroot.svg`}
-        alt={'beetroot'}
-      />
-      <p>{'beetroot'}</p>
-      <button className="quantity-btn remove-btn center">-</button>
-      <span className="quantity-text center">{'3'}</span>
-      <button className="quantity-btn add-btn center">+</button>
-    </li>
-  )
-}
+import { useContext } from 'react'
+import { CartContext } from '../helper/CartContext'
+import CartItem from './CartItem'
 
 const Cart = () => {
+  const { cart, setCart } = useContext(CartContext)
+
+  const total = () => {
+    let price = 0
+    for (const item of cart) {
+      price += item.price * item.cartQuantity
+    }
+    return '£' + price.toFixed(2)
+  }
+
   return (
     <main id="cart">
       <h2>Your Cart</h2>
@@ -28,7 +26,7 @@ const Cart = () => {
           <h3>Total</h3>
         </div>
         <div>
-          <span className="total-number">£0.00</span>
+          <span className="total-number">{total()}</span>
         </div>
       </div>
     </main>
