@@ -1,11 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
 import initialStoreItems from '../store-items'
 
 export default function Store (props) {
-
-	const [store, setStore] = useState(initialStoreItems)
-	let finalStore = store
+	let finalStore = initialStoreItems
 
 	if (props.formData.sortBy === 'alphabetically') {
 		finalStore.sort(function (a, b) {

@@ -5,7 +5,7 @@ import Cart from './components/cart'
 import Store from './components/store'
 
 export default function App () {
-  // Setup state here...
+  // Setup state here... 
 
   const [cart, setCart] = useState([])
   const [formData, setForm] = useState({
