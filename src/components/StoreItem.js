@@ -1,5 +1,6 @@
 import { useState } from "react"
 import initialStoreItems from '../store-items'
+import Filters from "./Filters"
 
 const StoreItem = props => {
     const [storeItems, setStoreItems] = useState(initialStoreItems)
@@ -23,65 +24,8 @@ const StoreItem = props => {
 
     }
 
-    const displayFruit = () => {
-        const fruits = storeItems.filter(x => x.type === 'Fruit')
-        setStoreItems(fruits)
-    }
-    const displayVegetables = () => {
-        const vegetables = storeItems.filter(x => x.type === 'Vegetable')
-        setStoreItems(vegetables)
-    }
-    const resetFilter = () => {
-        setStoreItems(initialStoreItems)
-    }
-
-    const alphabeticalAToZ = sort => {
-        const sorted = storeItems.sort((a, b) => {
-            if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) return -1
-            if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) return 1
-            return 0
-        })
-        return sorted
-    }
-
-    const alphabeticalZToA = sort => {
-        const sorted = storeItems.sort((a, b) => {
-            if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) return -1
-            if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) return 1
-            return 0
-        })
-        return sorted
-    }
-
-    const sort = (sort) => {
-        if (sort === 'A-Z') {
-            const sorted = alphabeticalAToZ(sort)
-            console.log('A-Z', sorted)
-            setStoreItems(alphabeticalAToZ(sort))
-        }
-        if (sort === 'Z-A') {
-            const sorted = alphabeticalZToA(sort)
-            console.log('Z-A', sorted)
-            setStoreItems(alphabeticalZToA(sort))
-        }
-    }
-
     return <div>
-        <section>
-            <button className='filter-type' onClick={(e) => { displayFruit() }}>Fruits</button>
-            <button className='filter-type' onClick={(e) => { displayVegetables() }}>Vegetables</button>
-            <button className='filter-type' onClick={(e) => { resetFilter() }}>Reset</button>
-
-            <select name="sort" className="filter-type" onChange={(e) => { sort(e.target.value) }} >
-                <option value="">Sort items by...</option>
-                <option value="A-Z" >A - Z</option>
-                <option value="Z-A">Z to A</option>
-                <option value="price-hightolow">Price high to low</option>
-                <option value="price-lowtohigh">Price low to high</option>
-            </select>
-
-
-        </section>
+        <Filters storeItems={storeItems} setStoreItems={setStoreItems} initialStoreItems={initialStoreItems}/>
         <ul className="item-list store--item-list">
             {storeItems.map(item => <li key={item.id}>
                 <div class="store--item-icon">
