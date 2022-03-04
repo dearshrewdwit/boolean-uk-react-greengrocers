@@ -7,14 +7,9 @@ import StoreItem from './components/StoreItem'
 import Total from './components/Total'
 
 export default function App() {
-
   // STATE
   const [cartItems, setCartItems] = useState([])
-
-  const displayFruit = item => {
-
-  }
-
+  
   return (
     <>
       <header id="store">
