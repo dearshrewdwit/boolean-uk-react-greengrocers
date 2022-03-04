@@ -6,22 +6,22 @@ function Cart(props) {
   // out the item that has been clicked as that is the functionality required when clicking remove on 1 item
   const decreaseItem = item => {
     if (item.quantity > 1) {
-      setCart(
-        cart.map(existingItem =>
+      props.setCart(
+        props.cart.map(existingItem =>
           existingItem.name === item.name
             ? { ...existingItem, quantity: existingItem.quantity - 1 }
             : existingItem
         )
       )
     } else if (item.quantity === 1)
-      setCart(cart.filter(existingItem => existingItem !== item))
+      props.setCart(props.cart.filter(existingItem => existingItem !== item))
   }
   // The increase function works by mapping the cart array, when it finds the item that has been clicked it
   // adds 1 onto the quantity of the item and then sets the value of the cart array to that mapped array and
   // this causes the cart to re-render
   const increaseItem = item => {
-    setCart(
-      cart.map(existingItem =>
+    props.setCart(
+      props.cart.map(existingItem =>
         existingItem.name === item.name
           ? { ...existingItem, quantity: existingItem.quantity + 1 }
           : existingItem

@@ -6,21 +6,13 @@ import { useEffect, useState } from 'react'
 import Store from './Store'
 import Cart from './Cart'
 import Filters from './Filters'
-
-console.log(initialStoreItems)
+import Total from './Total'
 
 export default function App() {
   const [items, setItems] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
 
-  // This is pretty obvious
-  const total = () => {
-    let totalPrice = 0.0
-    for (const item of cart) {
-      totalPrice += item.price * item.quantity
-    }
-    return totalPrice.toFixed(2)
-  }
+  
 
   return (
     <>
@@ -47,7 +39,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£{total()}</span>
+            <Total cart={cart} />
           </div>
         </div>
       </main>
