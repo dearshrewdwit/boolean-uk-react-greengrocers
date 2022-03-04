@@ -22,13 +22,19 @@ button {
 
 /* Store */
 
-#filters-label {
+.filters-label {
   text-align: center;
+  display: inline;
+}
+
+#sort-products {
+  text-align: center;
+  margin: 0.5rem 12rem 1rem 12rem;
 }
 
 #select-products {
   text-align: center;
-  margin: 1rem 12rem 2rem 12rem;
+  margin: 0.5rem 12rem 2rem 12rem;
 }
 
 #store {

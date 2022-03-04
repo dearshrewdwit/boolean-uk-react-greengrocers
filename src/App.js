@@ -5,15 +5,14 @@ import { Fragment } from 'react'
 import { useState } from 'react'
 
 function App() {
+  console.log('HAKUNA MATATA')
   const [cart, setCart] = useState([])
   const [currentFilter, setCurrentFilter] = useState('show-all')
+  const [currentSorter, setCurrentSorter] = useState('sort-by')
 
-  const filterFruits = initialStoreItems.filter(
-    storeItem => storeItem.type === 'fruit'
-  )
-  const filterVegetables = initialStoreItems.filter(
-    storeItem => storeItem.type === 'veg'
-  )
+  const filterFruits = initialStoreItems.filter(storeItem => storeItem.type === 'fruit')
+
+  const filterVegetables = initialStoreItems.filter(storeItem => storeItem.type === 'veg')
 
   let filteredItems = initialStoreItems
 
@@ -21,6 +20,22 @@ function App() {
     filteredItems = filterFruits
   } else if (currentFilter === 'veg') {
     filteredItems = filterVegetables
+  }
+
+  const sortedByName = [...filteredItems]
+  sortedByName.sort((firstEl, secondEl) => firstEl.name.localeCompare(secondEl.name))
+
+  const sortedByPrice = [...filteredItems, ]
+  sortedByPrice.sort((firstEl, secondEl) =>  {
+    if (firstEl.price < secondEl.price) return -1
+    if (firstEl.price > secondEl.price) return 1
+    else return 0
+  })
+
+  if (currentSorter === 'alphabet') {
+    filteredItems = sortedByName
+  } else if (currentSorter === 'price') {
+    filteredItems = sortedByPrice
   }
 
   const addItemToCart = item => {
@@ -71,7 +86,7 @@ function App() {
           <img
             className="cart--item-icon"
             src={`/assets/icons/${cartItem.id}.svg`}
-            alt="beetroot"
+            alt={cartItem.name}
           />
           <p>{cartItem.name}</p>
           <button
@@ -112,7 +127,19 @@ function App() {
     <Fragment>
       <header id="store">
         <h1>Greengrocers</h1>
-        <label htmlFor="filter" id="filters-label">
+        <label htmlFor="filter" className="filters-label">
+          Sort products:
+        </label>
+        <select
+          name="product"
+          id="sort-products"
+          onChange={(e) => setCurrentSorter(e.target.value)}
+        >
+          <option value="sort-by">Sort by:</option>
+          <option value="alphabet">A-Z</option>
+          <option value="price">Price - Ascending</option>
+        </select>
+        <label htmlFor="filter" className="filters-label">
           Filter products:
         </label>
         <select
