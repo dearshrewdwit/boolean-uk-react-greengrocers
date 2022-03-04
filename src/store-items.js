@@ -47,7 +47,6 @@ const storeItems =  [
     name: "bell pepper",
     price: 0.45,
     type: 'veg',
-    type: 'fruit',
     stockQuantity: 10
   },
   {

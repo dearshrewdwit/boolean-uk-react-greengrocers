@@ -83,6 +83,7 @@ export default function App() {
       {storeOrStock === 'stock' ? (
         <Stock
           storeItems={storeItems}
+          setStoreItems={setStoreItems}
           addToStock={addToStock}
           cartItems={cartItems}
           setCartItems={setCartItems}

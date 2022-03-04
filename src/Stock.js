@@ -1,4 +1,14 @@
+import storeItems from "./store-items"
+import {useState} from 'react'
+
 export default function Stock(props) {
+
+  const [newStockForm, setNewStockForm] = useState( {
+    name: "",
+    image: "",
+    type: "",
+    price: ""
+  })
 
     const editStock = (item) => {
         props.addToStock(item)
@@ -12,6 +22,37 @@ export default function Stock(props) {
         props.setCartItems(updatedCart)
     }
 
+
+    // Example item
+    // name: "orange",
+    // image: `https://freesvg.org/img/Gerald_G_Simple_Fruit_(FF_Menu)_4.png`
+
+    
+    // handleInputChange(event) {
+    //   const target = event.target;
+    //   const value = target.type === 'checkbox' ? target.checked : target.value;
+    //   const name = target.name;
+  
+    //   this.setState({
+    //     [name]: value
+    //   });
+    // }
+    
+    const addNewStoreItem = (e) => {
+      e.preventDefault()
+      console.log(e)
+      const newItem = {
+        id: `0${props.storeItems.length + 1}-orange`,
+        name: 'orange',
+        price: Number("0.35"),
+        type: "fruit",
+        stockQuantity: 1,
+        image: 'https://freesvg.org/img/Gerald_G_Simple_Fruit_(FF_Menu)_4.png'
+      }
+      console.log(newItem)
+      props.setStoreItems([...storeItems, newItem])
+    }
+
     return (
         <div className="stock"> 
         <div>Add Items to Stock</div>
@@ -21,7 +62,7 @@ export default function Stock(props) {
                 return <li>
                 <img
                   class="cart--item-icon"
-                  src={`assets/icons/${storeItem.id}.svg`}
+                  src={"image" in storeItem ? storeItem.image : `assets/icons/${storeItem.id}.svg`}
                   alt={storeItem.name}
                 />
                 <p>{storeItem.name}</p>
@@ -35,10 +76,12 @@ export default function Stock(props) {
         <form>
             <p>Add New Item to Stock</p>
             <label>Name</label>
-            <input type="text"/><br/>
+            <input name="name" type="text"/><br/>
             <label>Image URL</label>
-            <input type="text"/><br/>
-            <button type="submit">Submit</button>
+            <input name="image" type="text"/><br/>
+            <label>Price</label>
+            <input name="price"type="text"/><br/>
+            <button type="submit" onClick={addNewStoreItem}>Submit</button>
         </form>
         </div>
       </div>

@@ -25,17 +25,17 @@ export default function Header(props) {
       filteredStoreItems.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    if(showFruit && !showVeg) {
-      filteredStoreItems = filteredStoreItems.filter(item => item.type === "fruit")
+    filteredStoreItems = filteredStoreItems.filter(item =>  {
+    if(item.type === "veg" && showVeg) {
+         return true
     }
-
-    if(!showFruit && showVeg) {
-      filteredStoreItems = filteredStoreItems.filter(item => item.type === "veg")
+    else if(item.type ==="fruit" && showFruit) {
+      return true
     }
-
-    if(!showFruit && !showVeg) {
-      filteredStoreItems = []
+    else {
+      return false
     }
+  })
 
     const detailClick = (item) => {
       props.setShowingDetail(true)
@@ -72,7 +72,7 @@ export default function Header(props) {
           {filteredStoreItems.map(item => {
             return <li>
             <div class="store--item-icon">
-              <img src={`/assets/icons/${item.id}.svg`} alt={item.name} onClick={() => detailClick(item)}/>
+              <img src={"image" in item ? item.image : `/assets/icons/${item.id}.svg`} alt={item.name} onClick={() => detailClick(item)}/>
             </div>
             <button onClick={() => props.addToCart(item)}>Add to cart</button>
           </li> 

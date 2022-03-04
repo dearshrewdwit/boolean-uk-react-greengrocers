@@ -12,7 +12,7 @@ export default function Cart(props) {
                 return <li>
                 <img
                   class="cart--item-icon"
-                  src={`assets/icons/${cartItem.id}.svg`}
+                  src={"image" in cartItem ? cartItem.image : `assets/icons/${cartItem.id}.svg`}
                   alt={cartItem.name}
                 />
                 <p>{cartItem.name}</p>
