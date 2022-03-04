@@ -34,7 +34,7 @@ function App() {
 
   const incrementCartItemQuantity = item => {
     if (findCartItem(item)) {
-      item.quantity += 1
+      item.quantity++
     }
     setCart([...cart])
   }
@@ -42,7 +42,7 @@ function App() {
   const decrementCartItemQuantity = item => {
     if (findCartItem(item)) {
       if (item.quantity > 1) {
-        item.quantity -= 1
+        item.quantity--
       } else removeItemFromCart(item)
     }
     setCart([...cart])
@@ -65,9 +65,9 @@ function App() {
   }
 
   const renderCartItem = cartArray => {
-    return cartArray.map((cartItem, i) => {
+    return cartArray.map((cartItem) => {
       return (
-        <li key={i}>
+        <li key={cartItem.id}>
           <img
             className="cart--item-icon"
             src={`/assets/icons/${cartItem.id}.svg`}
@@ -93,9 +93,9 @@ function App() {
   }
 
   const renderStoreItems = () => {
-    return filteredItems.map((storeItem, i) => {
+    return filteredItems.map((storeItem) => {
       return (
-        <li key={i}>
+        <li key={storeItem.id}>
           <div className="store--item-icon">
             <img
               src={`/assets/icons/${storeItem.id}.svg`}
@@ -145,7 +145,5 @@ function App() {
     </Fragment>
   )
 }
-
-//
 
 export default App
