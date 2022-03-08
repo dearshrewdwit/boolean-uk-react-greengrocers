@@ -3,67 +3,59 @@ import './styles/index.css'
 import { useState } from 'react'
 import initialStoreItems from './store-items'
 
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-// console.log(initialStoreItems)
-// UPDATE THE STATE
-// function addItemToCart(item) {
-//   const cartQntCtrl = state.cart.find(function (cartItem) {
-//     return cartItem.item === item
-//   })
-//   if (cartQntCtrl === undefined) {
-//     state.cart.push({
-//       item: item,
-//       quantity: 1
-//     })
-//   } else {
-//     cartQntCtrl.quantity++
-//   }}
 export default function App() {
-  // Setup state here...
   const [storeItems, setStoreItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
   // console.log('test Cart', cartItems)
 
-  // const addToCart = item => {
-  //   console.log(item)
-  //   item.quantity = 0
-
-  //   const newCartItem = [...cartItems]
-  //   newCartItem.filter(i => {})
-  //   newCartItem.push(item)
-  //   return setCartItems(newCartItem)
-  // }
-
-  function addToCart(item) {
-    // console.log(item)
-    item.quantity = 0
-
+  const addToCart = item => {
     const newCartItem = [...cartItems]
-
-    const addToQty = newCartItem.filter(cartItem => {
-      return cartItem.name === item
+    newCartItem.push({
+      item: item,
+      quantity: 1
     })
-
-    if (addToQty === undefined) {
-      newCartItem.push(item)
+    const exist = cartItems.find(exist => {
+      if (exist.item === item) {
+        return true
+      } else {
+        return false
+      }
+    })
+    console.log('item exist', exist)
+    if (exist !== undefined) {
+      exist.quantity++
+      console.log('quatity updated', exist.quantity)
+      setStoreItems([...cartItems])
     } else {
-      addToQty.quantity + 1
+      const newCartItem = [...cartItems]
+      newCartItem.push({
+        item: item,
+        quantity: 1
+      })
+      setCartItems(newCartItem)
+      console.log('new quatity updated', newCartItem)
     }
-
-    return setCartItems(newCartItem)
+  }
+  const quantityPlus = cartItem => {
+    cartItem.quantity++
+    setCartItems([...cartItems])
+  }
+  const quantityMinus = cartItem => {
+    cartItem.quantity--
+    if (cartItem.quantity === 0) {
+      const newCartArr = cartItems.filter(cartItemExisting => {
+        cartItemExisting !== item
+        setCartItems(newCartArr)
+      })
+    } else {
+      const newCartItem = [...cartItems]
+      setCartItems(newCartItem)
+    }
   }
 
   return (
     <>
+      {console.log('Page rendering')}
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
@@ -71,7 +63,7 @@ export default function App() {
             // console.log(i)
 
             return (
-              <li>
+              <li key={storeItems.id}>
                 <div class="store--item-icon">
                   <img src={`/assets/icons/${item.id}.svg`} />
                 </div>
@@ -81,28 +73,36 @@ export default function App() {
           })}
         </ul>
       </header>
-
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cartItems.map(item => {
-              console.log('Item is added to Cart', cartItems)
+            {cartItems.map(cartItem => {
+              // console.log('Item is added to Cart', cartItems)
               return (
-                <li>
+                <li key={cartItem.item.id}>
                   <img
-                    class="cart--item-icon"
+                    className="cart--item-icon"
                     alt="beetroot"
-                    src={`/assets/icons/${item.id}.svg`}
+                    src={`/assets/icons/${cartItem.item.id}.svg`}
                   />
 
-                  <p>{item.name}</p>
-                  <button class="quantity-btn remove-btn center">-</button>
-                  <span class="quantity-text center">1</span>
+                  <p>{cartItem.item.name}</p>
                   <button
-                    onClick={() => addToCart(item)}
-                    class="quantity-btn add-btn center"
-                  ></button>
+                    onClick={() => quantityMinus(cartItem)}
+                    className="quantity-btn remove-btn center"
+                  >
+                    -
+                  </button>
+                  <span className="quantity-text center">
+                    {cartItem.quantity}
+                  </span>
+                  <button
+                    className="quantity-btn add-btn center"
+                    onClick={() => quantityPlus(cartItem)}
+                  >
+                    +
+                  </button>
                 </li>
               )
             })}
