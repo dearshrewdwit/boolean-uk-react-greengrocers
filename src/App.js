@@ -1,10 +1,9 @@
 import './styles/reset.css'
 import './styles/index.css'
 
-import initialStoreItems from './store-items'
 import { useState } from 'react'
 
-import storeItem from './storeItem'
+
 
 /*
 Here's what a store item should look like
@@ -17,12 +16,12 @@ Here's what a store item should look like
 What should a cart item look like? 🤔
 */
 
-console.log(initialStoreItems)
+
 
 export default function App() {
   // Setup state here...
 
-  const [storeItems, setStoreItems] = useState(initialStoreItems) //I created a state to store the inital store items
+
 
   const [cartItems, setCartItems] = useState([]) // I created a state to store an empty array which will be used to add items to cart
 
@@ -113,7 +112,7 @@ console.log("rendering") // using rendering as string to let me know whats happe
                       <div class="store--item-icon">
                          <img src={`/assets/icons/${item.id}.svg`}  />  
                       </div>
-                      <button onClick={e=>addItemsToCart(item)}>Add to cart</button>
+                      <button onClick={()=>addItemsToCart(item)}>Add to cart</button>
                     </li>
                 })
           }
