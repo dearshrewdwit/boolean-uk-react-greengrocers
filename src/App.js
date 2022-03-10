@@ -1,35 +1,21 @@
 import './styles/reset.css'
 import './styles/index.css'
+import storeItems from './store-items'
 
 import { useState } from 'react'
-
-
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
+// import StoreItem from './components/StoreItem'
+// import StoreItemList from './components/StoreItemList'
 
 
 
 export default function App() {
   // Setup state here...
 
-
-
+  
   const [cartItems, setCartItems] = useState([]) // I created a state to store an empty array which will be used to add items to cart
 
   let totalCartPrice = 0;
- 
-// 1. Add onClick to button
-// 2. Create a function for addItemsToCart
-// 3.
+
 
 function addItemsToCart(item) {   //I created a function and passed in item which is an object for every for every item like apple.
   console.log("add item", item)   // checking if item displays on console
@@ -66,41 +52,9 @@ function removeItemsFromCart(item) {
 
     console.log(cartItemsCopy) // checking if cartItemsCopy displays on console
 }
-
-
-
-
-   // adding a key called quantity with a value 1 to the item object
-
-    // adding the item to the copy array using push
-
   
   
 console.log("rendering") // using rendering as string to let me know whats happening in console, for clarity.
-
-
-// const quantityIncrease = (item) => {   // creating an arrow function called quantity increase with the item argument
-//   console.log("am I going up?", item)  // checking if item displays in console
-// /* ----------------- I'm testing code below  --------------------- */
-// const cartItemsCopy = cartItems.map(function(addEl) { 
-
-//     if(addEl === item) {
-
-//       const cartItemsCopy = {...item}
-
-//       return cartItemsCopy
-//     }
-//     else {
-//       return addEl
-//     }
-//   })
-//   setCartItems(cartItemsCopy)
-// }
-
-// Line 76 - we are copying storeItems array and using map (change). We pass in item into the arrow function
-//Line 77-83 is return the list of items because on line 79 we are looping through all items and then on 82 we are adding the button
-//so when user clicks it will add item.
-// Line 93 - we are copying cartItems array and using map (change). We pass in item into the arrow function
 
   return (
     <>
