@@ -7,12 +7,14 @@ import Store from './Store'
 import Cart from './Cart'
 import Filters from './Filters'
 import Total from './Total'
+// import ExtraInfo from './ExtraInfo'
 
 export default function App() {
   const [items, setItems] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
+  const [selectedInfo, setSelectedInfo] = useState(null)
 
-  
+  console.log(selectedInfo)
 
   return (
     <>
@@ -24,8 +26,29 @@ export default function App() {
           items={items}
         />
         <ul className="item-list store--item-list">
-          <Store items={items} cart={cart} setCart={setCart} />
+          <Store
+            items={items}
+            cart={cart}
+            setCart={setCart}
+            selectedInfo={selectedInfo}
+            setSelectedInfo={setSelectedInfo}
+          />
         </ul>
+        {/* {selectedInfo !== null && (
+          <ExtraInfo
+            selectedInfo={selectedInfo}
+            setSelectedInfo={setSelectedInfo}
+            items={items}
+          />
+        )} 
+        {selectedInfo === null && (
+          <ExtraInfo
+            items={items}
+            cart={cart}
+            setCart={setCart}
+            setSelectedInfo={setSelectedInfo}
+          />
+        )} */}
       </header>
       <main id="cart">
         <h2>Your Cart</h2>

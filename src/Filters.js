@@ -1,13 +1,12 @@
 function Filters(props) {
+
   // A function that takes the argument e which is the event object from the listener, then checks if the value
   // on that object is equal to fruit or veg, if it is then it creates a filtered array from the initial array
   // and sets the items array to be that new array, or it sets the items array to be the initial array which
   // has the effect of restoring the starting items into the items array and therefore the store
   const filterItems = e => {
     if (e.target.value === 'veg' || e.target.value === 'fruit') {
-      props.setItems(
-        initialStoreItems.filter(item => item.category === e.target.value)
-      )
+      props.setItems(props.initialStoreItems.filter(item => item.category === e.target.value))
     } else props.setItems(props.initialStoreItems)
   }
 
