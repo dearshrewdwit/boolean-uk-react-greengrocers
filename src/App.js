@@ -1,18 +1,23 @@
 import './styles/reset.css'
 import './styles/index.css'
 import initialStoreItems from './store-items'
+import StoreList from './components/StoreList/StoreList'
+import Header from './components/Header/Header'
 import { Fragment } from 'react'
 import { useState } from 'react'
 
 function App() {
-  console.log('HAKUNA MATATA')
   const [cart, setCart] = useState([])
   const [currentFilter, setCurrentFilter] = useState('show-all')
   const [currentSorter, setCurrentSorter] = useState('sort-by')
 
-  const filterFruits = initialStoreItems.filter(storeItem => storeItem.type === 'fruit')
+  const filterFruits = initialStoreItems.filter(
+    storeItem => storeItem.type === 'fruit'
+  )
 
-  const filterVegetables = initialStoreItems.filter(storeItem => storeItem.type === 'veg')
+  const filterVegetables = initialStoreItems.filter(
+    storeItem => storeItem.type === 'veg'
+  )
 
   let filteredItems = initialStoreItems
 
@@ -23,10 +28,12 @@ function App() {
   }
 
   const sortedByName = [...filteredItems]
-  sortedByName.sort((firstEl, secondEl) => firstEl.name.localeCompare(secondEl.name))
+  sortedByName.sort((firstEl, secondEl) =>
+    firstEl.name.localeCompare(secondEl.name)
+  )
 
-  const sortedByPrice = [...filteredItems, ]
-  sortedByPrice.sort((firstEl, secondEl) =>  {
+  const sortedByPrice = [...filteredItems]
+  sortedByPrice.sort((firstEl, secondEl) => {
     if (firstEl.price < secondEl.price) return -1
     if (firstEl.price > secondEl.price) return 1
     else return 0
@@ -80,7 +87,7 @@ function App() {
   }
 
   const renderCartItem = cartArray => {
-    return cartArray.map((cartItem) => {
+    return cartArray.map(cartItem => {
       return (
         <li key={cartItem.id}>
           <img
@@ -107,52 +114,15 @@ function App() {
     })
   }
 
-  const renderStoreItems = () => {
-    return filteredItems.map((storeItem) => {
-      return (
-        <li key={storeItem.id}>
-          <div className="store--item-icon">
-            <img
-              src={`/assets/icons/${storeItem.id}.svg`}
-              alt={storeItem.name}
-            />
-          </div>
-          <button onClick={() => addItemToCart(storeItem)}>Add to cart</button>
-        </li>
-      )
-    })
-  }
-
   return (
     <Fragment>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <label htmlFor="filter" className="filters-label">
-          Sort products:
-        </label>
-        <select
-          name="product"
-          id="sort-products"
-          onChange={(e) => setCurrentSorter(e.target.value)}
-        >
-          <option value="sort-by">Sort by:</option>
-          <option value="alphabet">A-Z</option>
-          <option value="price">Price - Ascending</option>
-        </select>
-        <label htmlFor="filter" className="filters-label">
-          Filter products:
-        </label>
-        <select
-          name="product"
-          id="select-products"
-          onChange={e => setCurrentFilter(e.target.value)}
-        >
-          <option value="show-all">Show all</option>
-          <option value="fruit">Fruit</option>
-          <option value="veg">Vegetables</option>
-        </select>
-        <ul className="item-list store--item-list">{renderStoreItems()}</ul>
-      </header>
+      <Header
+        filteredItems={filteredItems}
+        addItemToCart={addItemToCart}
+        setCurrentSorter={setCurrentSorter}
+        setCurrentFilter={setCurrentFilter}
+      />
+
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
