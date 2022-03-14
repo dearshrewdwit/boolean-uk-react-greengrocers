@@ -1,8 +1,8 @@
 import './styles/reset.css'
 import './styles/index.css'
 import initialStoreItems from './store-items'
-import StoreList from './components/StoreList/StoreList'
 import Header from './components/Header/Header'
+import CartSection from './components/CartSection/CartSection'
 import { Fragment } from 'react'
 import { useState } from 'react'
 
@@ -122,23 +122,11 @@ function App() {
         setCurrentSorter={setCurrentSorter}
         setCurrentFilter={setCurrentFilter}
       />
-
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">{renderCartItem(cart)}</ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">{`£ ${priceItemsInCart(
-              cart
-            )}`}</span>
-          </div>
-        </div>
-      </main>
+      <CartSection
+        cart={cart}
+        renderCartItem={renderCartItem}
+        priceItemsInCart={priceItemsInCart}
+      />
     </Fragment>
   )
 }
