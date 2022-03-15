@@ -1,10 +1,29 @@
-function CartSection({ renderCartItem, priceItemsInCart, cart }) {
+import CartItem from '../CartItem/CartItem'
+
+function CartSection({
+  incrementCartItemQuantity,
+  decrementCartItemQuantity,
+  priceItemsInCart,
+  cart
+}) {
+  console.log('look here', cart)
   return (
     <>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">{renderCartItem(cart)}</ul>
+          <ul className="item-list cart--item-list">
+            {cart.map(cartItem => {
+              return (
+                <CartItem
+                  key={cartItem.id}
+                  cartItem={cartItem}
+                  incrementCartItemQuantity={incrementCartItemQuantity}
+                  decrementCartItemQuantity={decrementCartItemQuantity}
+                />
+              )
+            })}
+          </ul>
         </div>
         <div className="total-section">
           <div>

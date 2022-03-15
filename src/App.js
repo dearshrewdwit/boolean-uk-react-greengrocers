@@ -3,8 +3,7 @@ import './styles/index.css'
 import initialStoreItems from './store-items'
 import Header from './components/Header/Header'
 import CartSection from './components/CartSection/CartSection'
-import { Fragment } from 'react'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 
 function App() {
   const [cart, setCart] = useState([])
@@ -86,34 +85,6 @@ function App() {
     return totalPrice.toFixed(2)
   }
 
-  const renderCartItem = cartArray => {
-    return cartArray.map(cartItem => {
-      return (
-        <li key={cartItem.id}>
-          <img
-            className="cart--item-icon"
-            src={`/assets/icons/${cartItem.id}.svg`}
-            alt={cartItem.name}
-          />
-          <p>{cartItem.name}</p>
-          <button
-            className="quantity-btn remove-btn center"
-            onClick={() => decrementCartItemQuantity(cartItem)}
-          >
-            -
-          </button>
-          <span className="quantity-text center">{cartItem.quantity}</span>
-          <button
-            className="quantity-btn add-btn center"
-            onClick={() => incrementCartItemQuantity(cartItem)}
-          >
-            +
-          </button>
-        </li>
-      )
-    })
-  }
-
   return (
     <Fragment>
       <Header
@@ -124,8 +95,9 @@ function App() {
       />
       <CartSection
         cart={cart}
-        renderCartItem={renderCartItem}
         priceItemsInCart={priceItemsInCart}
+        incrementCartItemQuantity={incrementCartItemQuantity}
+        decrementCartItemQuantity={decrementCartItemQuantity}
       />
     </Fragment>
   )
