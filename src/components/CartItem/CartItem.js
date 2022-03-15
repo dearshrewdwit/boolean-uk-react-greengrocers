@@ -3,7 +3,6 @@ function CartItem({
   incrementCartItemQuantity,
   decrementCartItemQuantity
 }) {
-  console.log('cart item rendering', cartItem)
   return (
     <li key={cartItem.id}>
       <img

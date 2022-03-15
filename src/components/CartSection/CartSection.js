@@ -6,7 +6,6 @@ function CartSection({
   priceItemsInCart,
   cart
 }) {
-  console.log('look here', cart)
   return (
     <>
       <main id="cart">
