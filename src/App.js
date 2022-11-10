@@ -1,3 +1,8 @@
+import { useState } from 'react'
+
+import StoreItemList from './components/StoreItemList.js'
+import CartItemList from './components/CartItemList.js'
+
 import './styles/reset.css'
 import './styles/index.css'
 
@@ -24,14 +29,16 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
+          {/* Write some code here... */}
+          <StoreItemList />
         </ul>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
+            {/* Write some code here... */}
+            <CartItemList />
           </ul>
         </div>
         <div className="total-section">
@@ -43,7 +50,7 @@ export default function App() {
           </div>
         </div>
       </main>
-      <div>
+      <div className='footer'>
         Icons made by
         <a
           href="https://www.flaticon.com/authors/icongeek26"

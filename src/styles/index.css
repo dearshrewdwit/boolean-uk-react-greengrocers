@@ -4,6 +4,7 @@
 
 body {
   font-family: "Trebuchet MS", "Lucida Sans", Arial, sans-serif;
+  color: white;
 }
 
 h1,
@@ -28,7 +29,7 @@ button {
 
   overflow-y: scroll;
 
-  background-color: #e7f4ea;
+  background-color: #173122;
 }
 
 #store h1 {
@@ -76,7 +77,8 @@ button {
   grid-gap: 1rem;
   justify-content: center;
 
-  border-top: 2px solid #00675b;
+  border-top: 2px solid #727272;
+  background: #181A1B;
 }
 
 #cart h2 {
@@ -174,6 +176,12 @@ button {
 
 .total-number {
   font-weight: bold;
+}
+
+/* Footer */
+
+.footer {
+  background: #181A1B;
 }
 
 @media only screen and (max-width: 450px) {
