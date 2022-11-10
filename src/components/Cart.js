@@ -12,7 +12,7 @@ function Cart({ cart }) {
           })}
         </ul>
       </div>
-      <Total />
+      <Total cart={cart} />
     </main>
   )
 }
