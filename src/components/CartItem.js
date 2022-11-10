@@ -8,7 +8,7 @@ function CartItem({ product }) {
       />
       <p>{product.name}</p>
       <button class="quantity-btn remove-btn center">-</button>
-      <span class="quantity-text center">1</span>
+      <span class="quantity-text center">{product.quantity}</span>
       <button class="quantity-btn add-btn center">+</button>
     </li>
   )

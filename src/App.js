@@ -23,11 +23,13 @@ export default function App() {
   const [cart, setCart] = useState([])
 
   const addToCart = storeItem => {
-    // 1. Check if storeItem is already in cart- if so, increase the quantity by 1
-    // 2. If it's not, add to cart and set quantity to 1
-    // 3. Set cart to reflect updates
-    const newCart = [...cart, storeItem]
-    setCart(newCart)
+    // Using find to see if the storeItem is already in the cart
+    const found = cart.find(cartItem => cartItem.id === storeItem.id)
+    // If found is a truthy value, we do nothing (stops user from adding multiples of one item)
+    if (found) return
+
+    const newCartItem = { ...storeItem, quantity: 1 }
+    setCart([...cart, newCartItem])
   }
 
   console.log(cart)
