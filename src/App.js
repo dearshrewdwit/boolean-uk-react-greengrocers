@@ -7,9 +7,12 @@ import {useState} from'react'
 
 import initialStoreItems from './store-items'
 
+import Store from './components/Store.js'
+import Total from './components/Total.js'
+import Cart from './components/Cart.js'
+
 export default function App() {
 
-  const [storeItems, setStoreItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
   const [total, setTotal] = useState(0)
 
@@ -35,7 +38,6 @@ export default function App() {
     }
     setTotal(total + item.price)
   }
-
   const handlePlus = (cartItem)=>{
     const ammendedCart = cartItems.map((storedItem)=>{
       if (storedItem === cartItem){
@@ -73,50 +75,16 @@ export default function App() {
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {
-            storeItems.map((item)=>{
-              return (
-                <li key={item.id}>
-                  <div class="store--item-icon">
-                    <img src={"/assets/icons/" + item.id + ".svg"} alt={item.name} />
-                  </div>
-                  <button onClick={()=> addCartItem(item) }>Add to cart</button>
-                </li>
-              )
-            })
-          }
-        </ul>
+        <Store addCartItem={addCartItem} initialStoreItems={initialStoreItems}/>
       </header>
       <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {
-              cartItems.map((cartItem)=>{
-                return (
-                  <li key={cartItem.id}>
-                    <img
-                      class="cart--item-icon"
-                      src={"/assets/icons/" + cartItem.id + ".svg"}
-                      alt={cartItem.name}
-                    />
-                    <p>{cartItem.name}</p>
-                    <button onClick={()=> handleMinus(cartItem) } class="quantity-btn remove-btn center">-</button>
-                    <span class="quantity-text center">{cartItem.quantity}</span>
-                    <button onClick={()=> handlePlus(cartItem) } class="quantity-btn add-btn center">+</button>
-                  </li>
-                )
-              })
-            }
-          </ul>
-        </div>
+        <Cart handlePlus={handlePlus} handleMinus={handleMinus} cartItems={cartItems}/>
         <div className="total-section">
           <div>
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">{'£' + (Math.round(total * 100) / 100).toFixed(2)}</span>
+            <Total total={total}/>
           </div>
         </div>
       </main>
