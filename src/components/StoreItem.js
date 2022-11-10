@@ -1,10 +1,10 @@
-function StoreItem({ product }) {
+function StoreItem({ product, addToCart }) {
   return (
     <li>
       <div class="store--item-icon">
         <img src={`/assets/icons/${product.id}.svg`} alt={product.name} />
       </div>
-      <button>Add to cart</button>
+      <button onClick={() => addToCart(product)}>Add to cart</button>
     </li>
   )
 }

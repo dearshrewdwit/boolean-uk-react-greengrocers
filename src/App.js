@@ -22,10 +22,20 @@ export default function App() {
   // Setup state here...
   const [cart, setCart] = useState([])
 
+  const addToCart = storeItem => {
+    // 1. Check if storeItem is already in cart- if so, increase the quantity by 1
+    // 2. If it's not, add to cart and set quantity to 1
+    // 3. Set cart to reflect updates
+    const newCart = [...cart, storeItem]
+    setCart(newCart)
+  }
+
+  console.log(cart)
+
   return (
     <>
-      <Store />
-      <Cart />
+      <Store addToCart={addToCart} />
+      <Cart cart={cart} />
       <Footer />
     </>
   )
