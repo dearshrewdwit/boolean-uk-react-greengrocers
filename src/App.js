@@ -14,8 +14,16 @@ export default function App() {
   const addToCart = storeItem => {
     // Using find to see if the storeItem is already in the cart
     const found = cart.find(cartItem => cartItem.id === storeItem.id)
-    // If found is a truthy value, we do nothing (stops user from adding multiples of one item)
-    if (found) return
+    // If found is a truthy value, we increase the quantity of chosen item then return
+    if (found) {
+      const updatedCart = cart.map(item => {
+        if (item.name === storeItem.name) {
+          return { ...item, quantity: item.quantity + 1 }
+        }
+      })
+      setCart(updatedCart)
+      return
+    }
 
     const newCartItem = { ...storeItem, quantity: 1 }
     setCart([...cart, newCartItem])
