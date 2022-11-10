@@ -19,6 +19,30 @@ console.log(initialStoreItems)
 
 export default function App() {
   const [storeItems, setStoreItems] = useState(initialStoreItems)
+  const [cartItems, setCartItems] = useState([])
+
+  //function to add storeitem to cart
+  const AddToCart = item => {
+    //checks if item already exists in cart
+    const exists = cartItems.find(cartItem => cartItem.id === item.id)
+    if (exists) {
+      // if exists returns true,
+      const updateCartItems = cartItems.map(targetCartItem => {
+        if (targetCartItem.id === item.id) {
+          return { ...targetCartItem, quantity: targetCartItem.quantity + 1 }
+        }
+      })
+      setCartItems(updateCartItems)
+      return
+    } else {
+      const newCartItem = { ...item, quantity: 1 }
+      setCartItems([...cartItems, newCartItem])
+    }
+  }
+
+  const total = cartItems.reduce((amount, cartItem) => {
+    return (amount += cartItem.price * cartItem.quantity)
+  }, 0)
 
   return (
     <>
@@ -29,9 +53,9 @@ export default function App() {
           {storeItems.map(item => (
             <li key={item.id}>
               <div class="store--item-icon">
-                <img src={`/assets/icons/${item.id}.svg`} alt="beetroot" />
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
-              <button>Add to cart</button>
+              <button onClick={() => AddToCart(item)}>Add to cart</button>
             </li>
           ))}
         </ul>
@@ -41,6 +65,19 @@ export default function App() {
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {/* Wrtite some code here... */}
+            {cartItems.map(cartItem => (
+              <li key={cartItem.id}>
+                <img
+                  class="cart--item-icon"
+                  src={`assets/icons/${cartItem.id}.svg`}
+                  alt={cartItem.name}
+                />
+                <p>{cartItem.name}</p>
+                <button class="quantity-btn remove-btn center">-</button>
+                <span class="quantity-text center">{cartItem.quantity}</span>
+                <button class="quantity-btn add-btn center">+</button>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="total-section">
@@ -48,7 +85,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">£{total.toFixed(2)}</span>
           </div>
         </div>
       </main>
