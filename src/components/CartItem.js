@@ -1,4 +1,4 @@
-function CartItem({ product }) {
+function CartItem({ product, editCartItem }) {
   return (
     <li>
       <img
@@ -7,9 +7,19 @@ function CartItem({ product }) {
         alt={product.name}
       />
       <p>{product.name}</p>
-      <button class="quantity-btn remove-btn center">-</button>
+      <button
+        class="quantity-btn remove-btn center"
+        onClick={() => editCartItem(product, 'decrement')}
+      >
+        -
+      </button>
       <span class="quantity-text center">{product.quantity}</span>
-      <button class="quantity-btn add-btn center">+</button>
+      <button
+        class="quantity-btn add-btn center"
+        onClick={() => editCartItem(product, 'increment')}
+      >
+        +
+      </button>
     </li>
   )
 }

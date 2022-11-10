@@ -7,17 +7,6 @@ import Store from './components/Store'
 import Cart from './components/Cart'
 import Footer from './components/Footer'
 
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
 export default function App() {
   // Setup state here...
   const [cart, setCart] = useState([])
@@ -32,12 +21,34 @@ export default function App() {
     setCart([...cart, newCartItem])
   }
 
-  console.log(cart)
+  const editCartItem = (cartItem, operation) => {
+    let updatedCart
+
+    if (operation === 'decrement') {
+      updatedCart = cart.map(item => {
+        if (item.name === cartItem.name) {
+          const copy = { ...item, quantity: item.quantity - 1 }
+          if (copy.quantity === 0) return null
+          return copy
+        }
+        return item
+      })
+    } else if (operation === 'increment') {
+      updatedCart = cart.map(item => {
+        if (item.name === cartItem.name) {
+          return { ...item, quantity: item.quantity + 1 }
+        }
+        return item
+      })
+    }
+
+    setCart(updatedCart.filter(item => item !== null))
+  }
 
   return (
     <>
       <Store addToCart={addToCart} />
-      <Cart cart={cart} />
+      <Cart cart={cart} editCartItem={editCartItem} />
       <Footer />
     </>
   )
