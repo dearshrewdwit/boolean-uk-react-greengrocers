@@ -2,6 +2,7 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import { useState } from 'react'
 
 /*
 Here's what a store item should look like
@@ -17,7 +18,7 @@ What should a cart item look like? 🤔
 console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+  const [storeItems, setStoreItems] = useState(initialStoreItems)
 
   return (
     <>
@@ -25,6 +26,14 @@ export default function App() {
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
           {/* Wrtite some code here... */}
+          {storeItems.map(item => (
+            <li key={item.id}>
+              <div class="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt="beetroot" />
+              </div>
+              <button>Add to cart</button>
+            </li>
+          ))}
         </ul>
       </header>
       <main id="cart">
