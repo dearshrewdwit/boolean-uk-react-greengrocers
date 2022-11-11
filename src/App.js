@@ -23,48 +23,26 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
   function addToCart(itemToAdd) {
-    if (cartItems.includes(itemToAdd)) {
+    if (cartItems.find(item => item.id === itemToAdd.id)) {
       // check 2.1 immutable state slides 12 to 14. implement here
-      // function toggleTodoCompletion(target) {
-      //   const updatedTodos = todos.map(function (todo) {
-      //     if (todo === target) {
-      //       return { ...todo, completed: !todo.completed }
-      //     }
-      //     return todo
-      //   })
-      //   setTodos(updatedTodos)
-      // } see below for my version of this
 
-      // const updatedCartItem = cartItems.map(function (cartItems) {
-      //   if (cartItems === itemToAdd) {
-      //     return { ...(cartItems + 1) }
-      //   } else {
-      //     return setCartItems(updatedCartItem)
-      //   }
-      // })
-
-      console.log('this item is in the cart. Increase quantity')
+      const updatedCart = cartItems.map(function (item) {
+        if (item.id === itemToAdd.id) {
+          return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
+        }
+      })
+      setCartItems(updatedCart)
+      console.log('item already in cart', cartItems)
+      return
     } else {
-      // add the quantity property
-      itemToAdd.quantity = 1
-      // const newTodos = [...todos]
-      const newCart = [...cartItems]
-      // newTodos.push({ text, completed: false })
-      newCart.push(itemToAdd)
-      // setTodos(newTodos)
-      setCartItems(newCart)
-      console.log('adding to happen here', cartItems)
+      const itemToAddCopy = { ...itemToAdd, quantity: 1 }
+      setCartItems([...cartItems, itemToAddCopy])
     }
   }
-
-  // const addTodo = text => {
-  //   if (todos.some(todo => todo.text.toLowerCase() === text.toLowerCase())) {
-  //     alert('That todo already exists!')
-  //     return
-  //   }
-  //   setTodos([...todos, { text, completed: false }])
-  // }
-  // add quantity checking function here.
+  // define onclick for the increment and decrement buttons in the cart
+  // then this fucntion need on the onclick event on the increase and decrease button.
 
   return (
     <>
@@ -89,7 +67,7 @@ function App() {
                   />
                   <p>{item.name}</p>
                   <button class="quantity-btn remove-btn center">-</button>
-                  <span class="quantity-text center">1</span>
+                  <span class="quantity-text center">{item.quantity}</span>
                   <button class="quantity-btn add-btn center">+</button>
                 </li>
               )
