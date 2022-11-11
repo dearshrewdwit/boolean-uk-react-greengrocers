@@ -2,6 +2,9 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import Store from './Store'
+import { useState } from 'react'
+import Cart from './Cart'
 
 /*
 Here's what a store item should look like
@@ -18,22 +21,43 @@ console.log(initialStoreItems)
 
 export default function App() {
   // Setup state here...
+  const [cart, setCart] = useState([])
+  const [quantity, setQuantity]= useState(1)
 
+  //  Adding item into Cart
+  function addToCart(item) {
+    // check if the item is already in the cart
+    // if it is increase the quantity by 1 and return
+    const itemFound = cart.find(itemFromCart => itemFromCart.id === item.id)
+    if (itemFound) {
+      itemFound.quantity += 1
+    } else {
+      console.log(item)
+      const cartItem = { ...item, quantity: 1 }
+      setCart([...cart, cartItem])
+    }
+  }
+
+  // item increase  and decrease in Cart
+  
+  function handleIncrement (item) {
+    setQuantity(quantity + 1)
+  }
+  function handleDecrement(item){
+    setQuantity(quantity - 1)
+  }
+  
+
+  
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
-        </ul>
+        <Store addToCart={addToCart} />
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
-          </ul>
-        </div>
+        <Cart cart={cart} />
         <div className="total-section">
           <div>
             <h3>Total</h3>
