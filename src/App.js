@@ -19,6 +19,8 @@ export default function App() {
       const updatedCart = cart.map(item => {
         if (item.name === storeItem.name) {
           return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
         }
       })
       setCart(updatedCart)
@@ -28,6 +30,8 @@ export default function App() {
     const newCartItem = { ...storeItem, quantity: 1 }
     setCart([...cart, newCartItem])
   }
+
+  console.log(cart)
 
   const editCartItem = (cartItem, operation) => {
     let updatedCart
