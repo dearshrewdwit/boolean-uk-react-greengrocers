@@ -7,6 +7,7 @@ function Cart({ cart, editCartItem }) {
       <h2>Your Cart</h2>
       <div className="cart--item-list-container">
         <ul className="item-list cart--item-list">
+          {cart.length < 1 && <p>Your cart is currently empty.</p>}
           {cart.map(cartItem => {
             return (
               <CartItem

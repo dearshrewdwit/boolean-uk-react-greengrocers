@@ -1,19 +1,16 @@
 function CartItem({ product, editCartItem }) {
+  const { id, name, quantity } = product
   return (
     <li>
-      <img
-        class="cart--item-icon"
-        src={`assets/icons/${product.id}.svg`}
-        alt={product.name}
-      />
-      <p>{product.name}</p>
+      <img class="cart--item-icon" src={`assets/icons/${id}.svg`} alt={name} />
+      <p>{name}</p>
       <button
         class="quantity-btn remove-btn center"
         onClick={() => editCartItem(product, 'decrement')}
       >
         -
       </button>
-      <span class="quantity-text center">{product.quantity}</span>
+      <span class="quantity-text center">{quantity}</span>
       <button
         class="quantity-btn add-btn center"
         onClick={() => editCartItem(product, 'increment')}

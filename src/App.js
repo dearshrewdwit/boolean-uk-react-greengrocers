@@ -46,8 +46,9 @@ export default function App() {
       updatedCart = cart.map(item => {
         if (item.name === cartItem.name) {
           return { ...item, quantity: item.quantity + 1 }
+        } else {
+          return item
         }
-        return item
       })
     }
 
