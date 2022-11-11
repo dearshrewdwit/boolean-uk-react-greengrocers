@@ -25,6 +25,24 @@ function App() {
   function addToCart(itemToAdd) {
     if (cartItems.includes(itemToAdd)) {
       // check 2.1 immutable state slides 12 to 14. implement here
+      // function toggleTodoCompletion(target) {
+      //   const updatedTodos = todos.map(function (todo) {
+      //     if (todo === target) {
+      //       return { ...todo, completed: !todo.completed }
+      //     }
+      //     return todo
+      //   })
+      //   setTodos(updatedTodos)
+      // } see below for my version of this
+
+      // const updatedCartItem = cartItems.map(function (cartItems) {
+      //   if (cartItems === itemToAdd) {
+      //     return { ...(cartItems + 1) }
+      //   } else {
+      //     return setCartItems(updatedCartItem)
+      //   }
+      // })
+
       console.log('this item is in the cart. Increase quantity')
     } else {
       // add the quantity property
@@ -63,7 +81,7 @@ function App() {
           <ul className="item-list cart--item-list">
             {cartItems.map(item => {
               return (
-                <li>
+                <li key={item.id}>
                   <img
                     class="cart--item-icon"
                     src={`/assets/icons/${item.id}.svg`}
