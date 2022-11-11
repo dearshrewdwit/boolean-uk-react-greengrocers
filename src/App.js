@@ -73,10 +73,7 @@ export default function App() {
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
         <Store addCartItem={addCartItem} initialStoreItems={initialStoreItems}/>
-      </header>
       <main id="cart">
         <Cart handlePlus={handlePlus} handleMinus={handleMinus} cartItems={cartItems}/>
         <div className="total-section">

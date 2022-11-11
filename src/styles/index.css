@@ -35,6 +35,10 @@ button {
   text-align: center;
 }
 
+.show-sort {
+  padding-left: 300px;
+}
+
 .store--item-list {
   display: grid;
   grid-template-columns: repeat(4, 125px);
