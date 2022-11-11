@@ -1,6 +1,6 @@
 function Total({ cart }) {
   const totalAmount = cart.reduce((total, product) => {
-    return (total + product.price) * product.quantity
+    return total + product.price * product.quantity
   }, 0)
 
   const totalDisplay = `£${totalAmount.toFixed(2)}`
