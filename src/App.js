@@ -8,7 +8,6 @@ import Cart from './components/Cart'
 import Footer from './components/Footer'
 
 export default function App() {
-  // Setup state here...
   const [cart, setCart] = useState([])
 
   const addToCart = storeItem => {

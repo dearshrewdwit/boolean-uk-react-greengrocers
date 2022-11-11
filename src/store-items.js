@@ -57,7 +57,7 @@ const storeItems = [
   },
   {
     id: '008-berry',
-    name: 'berry',
+    name: 'cherry',
     price: 0.35,
     type: 'fruit',
     description:

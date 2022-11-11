@@ -52,6 +52,7 @@ button {
 .store--item-icon {
   width: 125px;
   height: 125px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
@@ -190,4 +191,18 @@ button {
   gap: 10px;
   justify-content: center;
   margin-bottom: 15px;
+}
+
+.instructions {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.description-container {
+  margin-top: 40px;
+  grid-column: 1 / -1;
+}
+
+.back-btn {
+  margin-top: 16px;
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import StoreItem from './StoreItem'
 import initialStoreItems from '../store-items'
+import Description from './Description'
 
 function Store({ addToCart }) {
   const [filterItems, setFilterItems] = useState('all')
@@ -45,6 +46,10 @@ function Store({ addToCart }) {
         <button onClick={() => setFilterItems('vegetables')}>Vegetables</button>
         <button onClick={() => setSort(!sort)}>Sort A-Z</button>
       </div>
+      <p className="instructions">
+        {showDescription === null &&
+          'Click on a product to see a description (If you dont know what fruit or vegetables are)'}
+      </p>
       <ul className="item-list store--item-list">
         {showDescription === null &&
           filteredStoreItems.map(product => {
@@ -53,10 +58,16 @@ function Store({ addToCart }) {
                 key={product.id}
                 product={product}
                 addToCart={addToCart}
+                setShowDescription={setShowDescription}
               />
             )
           })}
-        {showDescription && 'displaying description'}
+        {showDescription && (
+          <Description
+            product={showDescription}
+            setShowDescription={setShowDescription}
+          />
+        )}
       </ul>
     </header>
   )
