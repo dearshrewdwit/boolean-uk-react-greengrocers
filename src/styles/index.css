@@ -5,7 +5,19 @@
 body {
   font-family: "Trebuchet MS", "Lucida Sans", Arial, sans-serif;
 }
-
+.details {
+  background-color: greenyellow;
+  border: solid 1px pink;  
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px;
+}
+.details li {
+  text-align: center;
+}
+.show-sort {
+  position: absolute;
+  width: fit-content;
+}
 h1,
 h2 {
   margin-bottom: 1rem;
