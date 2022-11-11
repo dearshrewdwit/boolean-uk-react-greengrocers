@@ -1,6 +1,8 @@
 import initialStoreItems from '../store-items'
 import {useState} from 'react'
 
+import StoreItem from './StoreItem'
+
 export default function Store({addOneToQuantity, cartItems, setCartItems}) {
 
     const [storeItems, setStoreItems] = useState(initialStoreItems)
@@ -43,14 +45,7 @@ export default function Store({addOneToQuantity, cartItems, setCartItems}) {
 
           {storeItems.map((item, index) => {
             return (
-            
-              <li key={index}>
-                <div class="store--item-icon">
-                  <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-                </div>
-                <button onClick={ () => addItemToCart(item)}>Add to cart</button>
-              </li>
-
+              <StoreItem item={item} index={index} addItemToCart={addItemToCart} key={index}/>
             )
           
           })}
