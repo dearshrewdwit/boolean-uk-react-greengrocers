@@ -6,6 +6,7 @@ import initialStoreItems from '../store-items'
 function Store({ addToCart }) {
   const [filterItems, setFilterItems] = useState('all')
   const [sort, setSort] = useState(false)
+  const [showDescription, setShowDescription] = useState(null)
 
   let filteredStoreItems = initialStoreItems
 
@@ -45,15 +46,17 @@ function Store({ addToCart }) {
         <button onClick={() => setSort(!sort)}>Sort A-Z</button>
       </div>
       <ul className="item-list store--item-list">
-        {filteredStoreItems.map(product => {
-          return (
-            <StoreItem
-              key={product.id}
-              product={product}
-              addToCart={addToCart}
-            />
-          )
-        })}
+        {showDescription === null &&
+          filteredStoreItems.map(product => {
+            return (
+              <StoreItem
+                key={product.id}
+                product={product}
+                addToCart={addToCart}
+              />
+            )
+          })}
+        {showDescription && 'displaying description'}
       </ul>
     </header>
   )
