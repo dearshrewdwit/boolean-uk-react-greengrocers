@@ -16,18 +16,19 @@ function Cart(props) {
                 />
                 <p>{item.name}</p>
                 <button
-                  onClick={() => props.handleDecrement(item.quantity)}
+                  onClick={() => props.handleDecrement(item)}
                   class="quantity-btn remove-btn center"
                 >
                   -
                 </button>
                 <span class="quantity-text center">{item.quantity}</span>
                 <button
-                  onClick={() => props.handleIncrement(item.quantity)}
-                  class="quantity-btn add-btn center"
+                  onClick={() => props.handleIncrement(item)} 
+                  class="quantity-btn add-btn center" 
                 >
                   +
                 </button>
+                
               </li>
             )
           })}

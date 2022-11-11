@@ -22,7 +22,7 @@ console.log(initialStoreItems)
 export default function App() {
   // Setup state here...
   const [cart, setCart] = useState([])
-  const [quantity, setQuantity]= useState(1)
+  //const [quantity, setQuantity]= useState(1)
 
   //  Adding item into Cart
   function addToCart(item) {
@@ -30,9 +30,11 @@ export default function App() {
     // if it is increase the quantity by 1 and return
     const itemFound = cart.find(itemFromCart => itemFromCart.id === item.id)
     if (itemFound) {
+       const others = cart.filter(itemFromCart => itemFromCart.id !== item.id)
       itemFound.quantity += 1
+      setCart([...others, itemFound])
     } else {
-      console.log(item)
+      
       const cartItem = { ...item, quantity: 1 }
       setCart([...cart, cartItem])
     }
@@ -40,14 +42,25 @@ export default function App() {
 
   // item increase  and decrease in Cart
   
-  function handleIncrement (item) {
-    setQuantity(quantity + 1)
-  }
-  function handleDecrement(item){
-    setQuantity(quantity - 1)
+  function handleIncrement (item) 
+  
+  {
+    const itemFound = cart.find(itemFromCart => itemFromCart.id === item.id)
+    if (itemFound) {
+      const others = cart.filter(itemFromCart => itemFromCart.id !== item.id)
+      itemFound.quantity += 1
+      setCart([...others, itemFound])
+    }
   }
   
-
+  function handleDecrement(item){
+    const itemFound = cart.find(itemFromCart => itemFromCart.id === item.id)
+    if (itemFound) {
+      const others = cart.filter(itemFromCart => itemFromCart.id !== item.id)
+      itemFound.quantity -= 1
+      setCart([...others, itemFound])
+    }
+  }
   
   return (
     <>
@@ -57,7 +70,10 @@ export default function App() {
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
-        <Cart cart={cart} />
+        <Cart cart={cart}
+       
+        handleIncrement ={handleIncrement}
+        handleDecrement ={handleDecrement} />
         <div className="total-section">
           <div>
             <h3>Total</h3>
