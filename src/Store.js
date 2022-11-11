@@ -1,18 +1,26 @@
 import { useState } from "react"
-import storeItems from "./store-items"
+import initialStoreItems from './store-items'
 
 function Store (props) {
-    // {} = props
+    const { addToCart} = props
+    const [storeItems , setStoreItems] = useState(initialStoreItems)
+
+    // console.log(initialStoreItems)
     return (
         <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-         <li>
-            <div>
-            <img src="/assets/icons/001-beetroot.svg" alt="beetroot" />
-            </div>
-            <button>Add to cart</button>
-         </li>
+           { initialStoreItems.map ((item) => {
+                 return (
+                    <li>
+                        <div>
+                        <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+                        </div>
+                        <button onClick={() => addToCart(item)}>Add to cart</button>
+                    </li>
+                )
+            })}
+
         </ul>
       </header>
 
@@ -21,6 +29,3 @@ function Store (props) {
 
 export default Store
 
-// Import state @ the start 
-// Import the data for the items 
-// need a storeItemsa and setStoreItems in state 
