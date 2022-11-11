@@ -46,10 +46,10 @@ const addOneToQuantity = (item) => {
 
 const removeOneQuantity = (item) => {
   if (item.quantity <= 1) {
-    const CartWithoutRemoved = cartItems.filter(function(cartItems) {
+    const cartWithoutRemoved = cartItems.filter(function(cartItems) {
       return item !== cartItems
         })
-      setCartItems(CartWithoutRemoved) 
+      setCartItems(cartWithoutRemoved) 
 
   } else {  
     const updatedCart = cartItems.map((cartItem) => {
@@ -68,7 +68,6 @@ const createItemInCart = (item) => {
   newCartItems.push(item)
   setCartItems(newCartItems)
 }
-
 
 const totalPrice = () => {
   let totalPrice = 0
