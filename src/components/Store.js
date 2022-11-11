@@ -21,18 +21,18 @@ function Store({ addToCart }) {
     )
   }
 
+  const sortItems = (storeItems, property) => {
+    return (storeItems = storeItems.sort((a, b) => {
+      const property1 = a[property].toUpperCase()
+      const property2 = b[property].toUpperCase()
+      return property1 < property2 ? -1 : property1 > property2 ? 1 : 0
+    }))
+  }
+
   if (sort) {
-    filteredStoreItems = filteredStoreItems.sort((a, b) => {
-      const property1 = a.name.toUpperCase()
-      const property2 = b.name.toUpperCase()
-      return property1 < property2 ? -1 : property1 > property2 ? 1 : 0
-    })
+    filteredStoreItems = sortItems(filteredStoreItems, 'name')
   } else {
-    filteredStoreItems = filteredStoreItems.sort((a, b) => {
-      const property1 = a.id.toUpperCase()
-      const property2 = b.id.toUpperCase()
-      return property1 < property2 ? -1 : property1 > property2 ? 1 : 0
-    })
+    filteredStoreItems = sortItems(filteredStoreItems, 'id')
   }
 
   return (
