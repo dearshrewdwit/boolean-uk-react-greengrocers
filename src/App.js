@@ -31,8 +31,6 @@ export default function App() {
     setCart([...cart, newCartItem])
   }
 
-  console.log(cart)
-
   const editCartItem = (cartItem, operation) => {
     let updatedCart
 

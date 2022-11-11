@@ -1,9 +1,9 @@
-@import "./reset.css";
+@import './reset.css';
 
 /* Typography */
 
 body {
-  font-family: "Trebuchet MS", "Lucida Sans", Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
 }
 
 h1,
@@ -18,12 +18,13 @@ button {
 
   text-transform: uppercase;
   font-size: 0.725rem;
+  cursor: pointer;
 }
 
 /* Store */
 
 #store {
-  height: 40vh;
+  height: 50vh;
   padding: 1rem;
 
   overflow-y: scroll;
@@ -68,7 +69,7 @@ button {
 /* Cart */
 
 #cart {
-  height: 60vh;
+  height: 50vh;
   padding: 1rem;
 
   display: grid;
@@ -181,4 +182,12 @@ button {
     border-top: 2px solid #00675b;
     border-bottom: 2px solid #00675b;
   }
+}
+
+/* new filter/sort buttons */
+.btn-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
 }
