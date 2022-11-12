@@ -1,28 +1,24 @@
 import { useState } from "react"
-import initialStoreItems from './store-items'
 
 function Cart (props) {
-  // const {} = props
-  const [ cartItems, setCartItem] = useState(initialStoreItems)
+  const { cartItems , setCartItem} = props
   // const [total , setTotal] = useState(0)
-
-  // const addToCart = ()
 
     return (
         <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
+          <ul className="cart--item-list">
 
-          {cartItems.map(cartItem => {
+          {cartItems.map(item => {
             return (
               <li>
                 <img
                   class="cart--item-icon"
-                  src="assets/icons/001-beetroot.svg"
-                  alt="beetroot"
+                  src={`/assets/icons/${item.id}.svg`}
+                  alt={item.name}
                 />
-                <p>beetroot</p>
+                <p>{item.name}</p>
                 <button class="quantity-btn remove-btn center">-</button>
                 <span class="quantity-text center">1</span>
                 <button class="quantity-btn add-btn center">+</button>

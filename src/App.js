@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './styles/reset.css'
 import './styles/index.css'
 
@@ -15,22 +16,27 @@ Here's what a store item should look like
   price: 0.35,
   (need to add the quantity prop)
 }
-
-What should a cart item look like? 🤔
-
-It needs to have a qunatity prop just like how we added one in vanilla
-but how do I do that !!! :(
 */
 
 console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+  const [ cartItems, setCartItem] = useState([])
+
+  const addToCart = (item) => {
+    
+    const newCartItems = [...cartItems]
+    newCartItems.push(item)
+    setCartItem(newCartItems)
+    console.log("item is added", item)
+
+  }
+  
 
   return (
     <>
-      <Store />
-      <Cart />
+      <Store  addToCart = {addToCart}/>
+      <Cart cartItems = {cartItems} setCartItem = {setCartItem} />
       <Footer />
 
     </>

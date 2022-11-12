@@ -1,11 +1,10 @@
 import { useState } from "react"
 import initialStoreItems from './store-items'
 
-function Store (props) {
-    const { addToCart} = props
+function Store (props) {    
+    const {addToCart} = props
     const [storeItems , setStoreItems] = useState(initialStoreItems)
 
-    // console.log(initialStoreItems)
     return (
         <header id="store">
         <h1>Greengrocers</h1>
@@ -28,4 +27,3 @@ function Store (props) {
 }
 
 export default Store
-
