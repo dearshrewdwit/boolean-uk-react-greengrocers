@@ -1,10 +1,6 @@
 import { useState } from 'react';
 
-function Cart(props) {
-	// props: cartList, setCartList
-	console.log(`Cart is receiving props:`);
-	console.log(props);
-
+function Cart({cartList, setCartList}) {
 	const [cartTotal, setCartTotal] = useState(0);
 
 	return (
@@ -14,12 +10,11 @@ function Cart(props) {
 				<ul className="item-list cart--item-list">
 					{/* if (cartList.length === 0) {console.log('bu')} */}
 
-					{props.cartList.length === 0 ? (
+					{cartList.length === 0 ? (
 						<p>Empty Cart</p>
 					) : (
-						props.cartList.map(item => {
-							<p>{item.name}</p>;
-							console.log(item.name);
+						cartList.map((item, index) => {
+							return <p key={index}>{item.name}</p>;
 						})
 					)}
 				</ul>

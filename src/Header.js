@@ -1,16 +1,22 @@
 import initialStoreItems from './store-items';
+import StoreItem from './StoreItem';
 
-function Header(props) {
-	// props: cartList, setCartList
-	console.log(`Header is receiving props:`);
-	console.log(props);
-
+function Header({cartList, setCartList}) {
 	return (
 		<header id="store">
 			<h1>Greengrocers</h1>
 			<ul className="item-list store--item-list">
-				{initialStoreItems.map(item => {
-					console.log(item.name);
+				{initialStoreItems.map((item, index) => {
+					return (
+						<StoreItem
+							key={index}
+                            self={item}
+							id={item.id}
+							name={item.name}
+							cartList={cartList}
+							setCartList={setCartList}
+						/>
+					);
 				})}
 			</ul>
 		</header>
