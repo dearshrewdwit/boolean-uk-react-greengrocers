@@ -18,18 +18,23 @@ Here's what a store item should look like
 }
 */
 
-console.log(initialStoreItems)
-
 export default function App() {
   const [ cartItems, setCartItem] = useState([])
 
-  const addToCart = (item) => {
-    
+  const addToCart = (newItem) => {
+  
+   if (cartItems.find(item => item.id === newItem.id)) {
+    console.log("hey girl swirl")
+   
+    // need to tell it to not add another item to cart and increase quantity 
+  } else { 
     const newCartItems = [...cartItems]
-    newCartItems.push(item)
+    newCartItems.push(newItem)
     setCartItem(newCartItems)
-    console.log("item is added", item)
-
+    console.log("item added", newItem)
+  
+  }
+    
   }
   
 
