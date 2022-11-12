@@ -14,7 +14,7 @@ function Cart({cartList, setCartList}) {
 						<p>Empty Cart</p>
 					) : (
 						cartList.map((item, index) => {
-							return <p key={index}>{item.name}</p>;
+							return <p key={index}>{item.name} - Quantity: {item.quantity}</p>;
 						})
 					)}
 				</ul>
