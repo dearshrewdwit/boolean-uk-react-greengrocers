@@ -41,8 +41,17 @@ function App() {
       setCartItems([...cartItems, itemToAddCopy])
     }
   }
+
   // define onclick for the increment and decrement buttons in the cart
   // then this fucntion need on the onclick event on the increase and decrease button.
+  function cartQuantityIncrease() {
+    console.log('increase button clicked')
+  }
+  function cartQuantityDecrease() {
+    console.log('Decrease button clicked')
+  }
+  // refer to addToCart logic. & refer to the updateCart
+  // write two functions => attempt to combine.
 
   return (
     <>
@@ -66,9 +75,19 @@ function App() {
                     alt={item.name}
                   />
                   <p>{item.name}</p>
-                  <button class="quantity-btn remove-btn center">-</button>
+                  <button
+                    onClick={cartQuantityDecrease}
+                    class="quantity-btn remove-btn center"
+                  >
+                    -
+                  </button>
                   <span class="quantity-text center">{item.quantity}</span>
-                  <button class="quantity-btn add-btn center">+</button>
+                  <button
+                    onClick={cartQuantityIncrease}
+                    class="quantity-btn add-btn center"
+                  >
+                    +
+                  </button>
                 </li>
               )
             })}
