@@ -20,6 +20,7 @@ export default function Store({addOneToQuantity, cartItems, setCartItems}) {
     }
 
     const createItemInCart = (item) => {
+      // Crazy immutable state create method taken from the slides
       item.quantity = 1
       const newCartItems = [...cartItems]
       newCartItems.push(item)
