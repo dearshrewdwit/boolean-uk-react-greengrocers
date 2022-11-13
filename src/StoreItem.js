@@ -1,4 +1,6 @@
 function StoreItem({ item, cartList, setCartList }) {
+	// item is the iteration of initialStoreItems
+	
 	const addItemToCart = () => {
 		let itemQuantity = 1;
 

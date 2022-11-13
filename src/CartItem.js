@@ -1,18 +1,28 @@
 function CartItem({ item, cartList, setCartList, cartTotal, setCartTotal }) {
+	// item is the iteration of cartList
+
 	const increaseItem = () => {
 		const updatedList = [...cartList];
 
-		// Update the item quantity inside the UpdatedList only
-		// - Use of indexOf(item) -
-		// It works because prop "item" is the iteration of cartList (Map in Cart.js)
-		// The "item" in StoreItem.js is the iteration of initialStoreItems, different.
-		updatedList[updatedList.indexOf(item)].quantity = item.quantity + 1;
+		updatedList[updatedList.indexOf(item)].quantity += 1;
 
 		setCartList(updatedList);
 		updateTotal();
 	};
 	const decreaseItem = () => {
-		console.log('Decrease item');
+		let updatedList = [...cartList];
+
+		// REMOVED
+		if (item.quantity === 1) {
+			// Filter updatedList to remove item from it. Returns only not equal to item
+			updatedList = updatedList.filter(iterated => iterated.name !== item.name);
+		}
+		// DECREASED
+		else {
+			updatedList[updatedList.indexOf(item)].quantity -= 1;
+		}
+
+		setCartList(updatedList);
 
 		updateTotal();
 	};
