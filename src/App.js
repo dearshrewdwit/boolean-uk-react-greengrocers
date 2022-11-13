@@ -34,7 +34,7 @@ export default function App() {
 
 			<Cart
 				cartList={cartList}
-				setCartList={cartList}
+				setCartList={setCartList}
 				//
 				//
 			/>

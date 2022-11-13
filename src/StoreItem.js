@@ -7,7 +7,9 @@ function StoreItem({ item, cartList, setCartList }) {
 		if (cartList.find(iterated => iterated.name === item.name)) {
 			// Returns the item we've pressed in an Array
 			// then select the index 0 of this returned Array
-			let itemOfNewList = updatedList.filter(iterated => iterated.name === item.name)[0];
+			let itemOfNewList = updatedList.filter(
+				iterated => iterated.name === item.name
+			)[0];
 
 			// Quantity becomes the previous PLUS 1
 			itemQuantity = itemOfNewList.quantity += 1;
