@@ -6,8 +6,8 @@ export default function StoreItem(props) {
         <img src={`/assets/icons/${item.id}.svg`} alt={`${item.name}`} />
       </div>
       <button onClick={() => {
-        console.log("item", item)
-        addToCart(item)}}>Add to cart</button>
+        console.log("item", item);
+        return addToCart(item)}}>Add to cart</button>
     </li>
   )
 }
