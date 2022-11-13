@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import CartItem from './CartItem';
 
-function Cart({cartList, setCartList}) {
+function Cart({ cartList, setCartList }) {
 	const [cartTotal, setCartTotal] = useState(0);
 
 	return (
@@ -11,10 +12,19 @@ function Cart({cartList, setCartList}) {
 					{/* if (cartList.length === 0) {console.log('bu')} */}
 
 					{cartList.length === 0 ? (
-						<p>Empty Cart</p>
+						<h3>Empty Cart</h3>
 					) : (
 						cartList.map((item, index) => {
-							return <p key={index}>{item.name} - Quantity: {item.quantity}</p>;
+							return (
+								<CartItem
+									key={index}
+									item={item}
+									cartList={cartList}
+									setCartList={setCartList}
+									cartTotal={cartTotal}
+									setCartTotal={setCartTotal}
+								/>
+							);
 						})
 					)}
 				</ul>

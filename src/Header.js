@@ -10,9 +10,7 @@ function Header({cartList, setCartList}) {
 					return (
 						<StoreItem
 							key={index}
-                            self={item}
-							id={item.id}
-							name={item.name}
+                            item={item}
 							cartList={cartList}
 							setCartList={setCartList}
 						/>
