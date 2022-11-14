@@ -1,12 +1,15 @@
 import { useState } from 'react'
 
-import StoreItemList from './components/StoreItemList.js'
-import CartItemList from './components/CartItemList.js'
-
 import './styles/reset.css'
 import './styles/index.css'
 
+import Store from './components/Store.js'
+import CartItemList from './components/CartItemList.js'
+
+
+
 import initialStoreItems from './store-items'
+import storeItems from './store-items'
 
 /*
 Here's what a store item should look like
@@ -23,16 +26,11 @@ console.log(initialStoreItems)
 
 export default function App() {
   // Setup state here...
+  const [store, setStore] = useState([])
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-          <StoreItemList />
-        </ul>
-      </header>
+      <Store />
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
