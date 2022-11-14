@@ -5,9 +5,9 @@ function StoreItem(props) {
   return(
     <li>
       <div className="store--item-icon">
-        <ItemImage item={props.storeItem}/>
+        <ItemImage item={props.storeItem} />
       </div>
-      <button onClick={() => props.addItemsToCart(props.storeItem)}>Add to cart</button>
+      <button onClick={() => props.addItemToCart(props.storeItem)}>Add to cart</button>
     </li> 
   )
 }

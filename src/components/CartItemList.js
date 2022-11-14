@@ -3,7 +3,7 @@ import CartItem from './CartItem.js'
 function CartItemList(props) {
   console.log('CartItemList invoked')
 
-  const {cartItems} = props
+  const {cartItems, increaseQuantity, decreaseQuantity} = props
 
   return(
     <>
@@ -13,6 +13,8 @@ function CartItemList(props) {
           {cartItems.map(cartItem => {
             return <CartItem 
               key={cartItem.item.name}
+              cartItem={cartItem}
+              
             />
           })}
         </ul>
