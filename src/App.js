@@ -4,7 +4,9 @@ import initialStoreItems from './store-items'
 import StoreItem from './components/StoreItem'
 import CartItem from './components/CartItem'
 import { useState } from 'react'
-import { Total } from './components/Total'
+import { CalculateTotal } from './components/CalculateTotal'
+import Footer from './footer'
+import Total from './components/Total'
 
 export default function App() {
   const [storeItems, setStoreItem] = useState(initialStoreItems)
@@ -83,31 +85,9 @@ export default function App() {
             ))}
           </ul>
         </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">
-              {`£`}
-              <Total cartItems={cartItems} />
-            </span>
-          </div>
-        </div>
+        <Total cartItems={cartItems} />
       </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <Footer />
     </>
   )
 }
