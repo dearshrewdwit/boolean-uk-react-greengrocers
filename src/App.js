@@ -36,7 +36,6 @@ function App() {
       })
       setCartItems(updatedCart)
       console.log('item already in cart', cartItems)
-      return
     } else {
       const itemToAddCopy = { ...itemToAdd, quantity: 1 }
       setCartItems([...cartItems, itemToAddCopy])
@@ -46,54 +45,46 @@ function App() {
   // define onclick for the increment and decrement buttons in the cart
   // then this fucntion need on the onclick event on the increase and decrease button.
 
+  // const updatedArray = originalArray.map(function (item) {
+  //   if (item === theItemIWantToUpdate) {
+  //     return { ...item, propertyToUpdate: newValue }
+  //   } else {
+  //     // item shouild not be updated because it's not the one we want to update
+  //     return item
+  //   }
+  // })
+  // // set state
+  // setState(updatedArray)
+
   function cartQuantityIncrease(itemToIncrease) {
     console.log('increase button clicked')
 
-    if (itemToIncrease.id === cartItems.id) {
-      // refer to addToCart logic. & refer to the updateCart
-      const increaseQuantity = cartItems.map(function (item) {
-        return { ...item, quantity: item.quantity + 1 }
-      })
-      setCartItems(increaseQuantity)
-    }
+    const increaseQuantity = cartItems.map(function (item) {
+      if (item.id === itemToIncrease.id) {
+        return { ...item, quantity: ++item.quantity }
+      } else {
+        return item
+      }
+    })
+    setCartItems(increaseQuantity)
   }
 
-  // const editCartItem = (cartItem, operation) => {
-  //   let updatedCart
-
-  //   if (operation === 'decrement') {
-  //     updatedCart = cart.map(item => {
-  //       if (item.name === cartItem.name) {
-  //         const copy = { ...item, quantity: item.quantity - 1 }
-  //         if (copy.quantity === 0) return null
-  //         return copy
-  //       }
-  //       return item
-  //     })
-  //   } else if (operation === 'increment') {
-  //     updatedCart = cart.map(item => {
-  //       if (item.name === cartItem.name) {
-  //         return { ...item, quantity: item.quantity + 1 }
-  //       } else {
-  //         return item
-  //       }
-  //     })
-  //   }
-
-  //   setCart(updatedCart.filter(item => item !== null))
-  // }
-
-  function cartQuantityDecrease() {
+  function cartQuantityDecrease(itemToDecrease) {
     console.log('Decrease button clicked')
     // refer to addToCart logic. & refer to the updateCart
-    const decreaseQuantity = cartItems.map(function (item) {
-      return { ...item, quantity: item.quantity - 1 }
+    const increaseQuantity = cartItems.map(function (item) {
+      if (item.id === itemToDecrease.id) {
+        return { ...item, quantity: --item.quantity }
+      } else {
+        return item
+      }
     })
-    setCartItems(decreaseQuantity)
+    setCartItems(increaseQuantity)
   }
 
   // write two functions => attempt to combine.
-
+  // write the total amount function
+  // item. price * quanity
   return (
     <>
       <StoreItemList
@@ -117,14 +108,14 @@ function App() {
                   />
                   <p>{item.name}</p>
                   <button
-                    onClick={cartQuantityDecrease}
+                    onClick={() => cartQuantityDecrease(item)}
                     class="quantity-btn remove-btn center"
                   >
                     -
                   </button>
                   <span class="quantity-text center">{item.quantity}</span>
                   <button
-                    onClick={cartQuantityIncrease}
+                    onClick={() => cartQuantityIncrease(item)}
                     class="quantity-btn add-btn center"
                   >
                     +
