@@ -6,17 +6,6 @@ import Store from './Store'
 import Cart from './Cart'
 import Footer from './Footer'
 
-import initialStoreItems from './store-items'
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35,
-  (need to add the quantity prop)
-}
-*/
 
 export default function App() {
   const [ cartItems, setCartItems] = useState([])
@@ -43,10 +32,6 @@ export default function App() {
   
    }}
    
- 
- 
-  // need to make 2 functions for increase and decrease
-  // once code for add cart button is working  can copy into these 2 functions
   const addButton = (newItem) => {
     const updatedCart = cartItems.map((cartItem) => {
 
@@ -60,10 +45,23 @@ export default function App() {
    }
 
   
-  const minusButton = (item) => {
-
-  }
-  
+  const minusButton = (newItem) => {
+    
+     if(newItem.quantity > 1){
+      const updatedCart = cartItems.map((cartItem) => {
+     if (cartItem.id === newItem.id) {
+   return { ...cartItem, quantity : --cartItem.quantity }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+  } else {
+    const cartWithoutRemoved = cartItems.filter((cartItem)=> {
+      return cartItem !== newItem
+        })
+      setCartItems(cartWithoutRemoved) 
+      }
+    }
 
   return (
     <>
