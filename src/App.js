@@ -6,9 +6,6 @@ import './styles/index.css'
 import Store from './components/Store.js'
 import Cart from './components/Cart.js'
 
-
-import storeItems from './store-items'
-
 /*
 Here's what a store item should look like
 {
@@ -19,8 +16,6 @@ Here's what a store item should look like
 
 What should a cart item look like? 🤔
 */
-
-console.log(storeItems)
 
 export default function App() {
   // Setup state here...

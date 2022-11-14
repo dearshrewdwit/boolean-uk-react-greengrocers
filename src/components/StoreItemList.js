@@ -6,10 +6,10 @@ function StoreItemList(props) {
     <ul className="item-list store--item-list">
       {props.storeItems.map((storeItem) => (
         <StoreItem 
-        key={storeItem.id} 
-        storeItem={storeItem} 
-        addItemToCart={props.addItemToCart}
-      />
+          key={storeItem.id} 
+          storeItem={storeItem} 
+          addItemToCart={props.addItemToCart}
+        />
       ))}
       
     </ul>
