@@ -27,8 +27,13 @@ export default function App() {
   const [cartItems, setCartItems] = useState([])
 
   const addItemToCart = (item) => {
-    // need to add checking for if the cart item exists already 
-    setCartItems([...cartItems, {item: item, quantity: 1}])
+    const existingItem = cartItems.find((exist) => exist.item === item)
+    if (existingItem !== undefined) {
+      increaseQuantity(existingItem)
+    } else {
+      setCartItems([...cartItems, {item: item, quantity: 1}])
+    }
+    
   }
 
   const increaseQuantity = (cartItem) => {
