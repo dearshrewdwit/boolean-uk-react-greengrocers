@@ -45,18 +45,25 @@ export default function App() {
   }
   const DecreaseQuantity = cartItem => {
     const updatedCartItems = cartItems.map(targetCartItem => {
-      if (targetCartItem.id === cartItem.id) {
+      if (
+        targetCartItem.name === cartItem.name &&
+        targetCartItem.quantity >= 1
+      ) {
         return {
           ...targetCartItem,
           quantity: targetCartItem.quantity - 1
         }
       }
-      setCartItems(updatedCartItems)
+      return targetCartItem
 
       {
-        /*setCartItems(cartItems.filter(targetCartItem => item !== targetCartItem))*/
+        /*if (targetCartItem.quantity === 0)
+        return cartItems.filter(
+          targetCartItem => cartItem.name !== targetCartItem.name
+        )*/
       }
     })
+    setCartItems(updatedCartItems)
   }
   const IncreaseQuantity = cartItem => {
     const updatedCartItems = cartItems.map(targetCartItem => {
