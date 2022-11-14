@@ -1,4 +1,8 @@
-function Total({ total }) {
+function Total({ cartItems }) {
+  const total = cartItems.reduce((amount, cartItem) => {
+    return (amount += cartItem.price * cartItem.quantity);
+  }, 0);
+
   return (
     <div className="total-section">
       <div>
@@ -8,6 +12,6 @@ function Total({ total }) {
         <span className="total-number">£{total.toFixed(2)}</span>
       </div>
     </div>
-  )
+  );
 }
-export default Total
+export default Total;
