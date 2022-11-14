@@ -23,6 +23,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
   function addToCart(itemToAdd) {
+    // using the find() to find the first item that matches my itemToadd.id
     if (cartItems.find(item => item.id === itemToAdd.id)) {
       // check 2.1 immutable state slides 12 to 14. implement here
 
@@ -44,13 +45,53 @@ function App() {
 
   // define onclick for the increment and decrement buttons in the cart
   // then this fucntion need on the onclick event on the increase and decrease button.
-  function cartQuantityIncrease() {
+
+  function cartQuantityIncrease(itemToIncrease) {
     console.log('increase button clicked')
+
+    if (itemToIncrease.id === cartItems.id) {
+      // refer to addToCart logic. & refer to the updateCart
+      const increaseQuantity = cartItems.map(function (item) {
+        return { ...item, quantity: item.quantity + 1 }
+      })
+      setCartItems(increaseQuantity)
+    }
   }
+
+  // const editCartItem = (cartItem, operation) => {
+  //   let updatedCart
+
+  //   if (operation === 'decrement') {
+  //     updatedCart = cart.map(item => {
+  //       if (item.name === cartItem.name) {
+  //         const copy = { ...item, quantity: item.quantity - 1 }
+  //         if (copy.quantity === 0) return null
+  //         return copy
+  //       }
+  //       return item
+  //     })
+  //   } else if (operation === 'increment') {
+  //     updatedCart = cart.map(item => {
+  //       if (item.name === cartItem.name) {
+  //         return { ...item, quantity: item.quantity + 1 }
+  //       } else {
+  //         return item
+  //       }
+  //     })
+  //   }
+
+  //   setCart(updatedCart.filter(item => item !== null))
+  // }
+
   function cartQuantityDecrease() {
     console.log('Decrease button clicked')
+    // refer to addToCart logic. & refer to the updateCart
+    const decreaseQuantity = cartItems.map(function (item) {
+      return { ...item, quantity: item.quantity - 1 }
+    })
+    setCartItems(decreaseQuantity)
   }
-  // refer to addToCart logic. & refer to the updateCart
+
   // write two functions => attempt to combine.
 
   return (
