@@ -1,3 +1,5 @@
+![](images/Screenshot%202022-11-14%20110806.png)
+
 # React Greengrocers
 
 You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) from scratch. But this time, using React!

@@ -1,4 +1,3 @@
-
 const storeItems =  [
   {
     id: "001-beetroot",

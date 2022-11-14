@@ -1,10 +1,9 @@
-import initialStoreItems from './store-items';
+import initialStoreItems from '../store-items';
 import StoreItem from './StoreItem';
 
-function Header({ cartList, setCartList }) {
+function Store({ cartList, setCartList }) {
 	return (
-		<header id="store">
-			<h1>Greengrocers</h1>
+		<main id='store'>
 			<ul className="item-list store--item-list">
 				{initialStoreItems.map((item, index) => {
 					return (
@@ -17,8 +16,8 @@ function Header({ cartList, setCartList }) {
 					);
 				})}
 			</ul>
-		</header>
+		</main>
 	);
 }
 
-export default Header;
+export default Store;

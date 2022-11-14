@@ -1,4 +1,5 @@
 import CartItem from './CartItem';
+import Footer from './Footer';
 
 function Cart({ cartList, setCartList }) {
 	let cartTotal = 0;
@@ -10,7 +11,7 @@ function Cart({ cartList, setCartList }) {
 	}, 0);
 
 	return (
-		<main id="cart">
+		<aside id="cart">
 			<h2>Your Cart</h2>
 			<div className="cart--item-list-container">
 				<ul className="item-list cart--item-list">
@@ -40,7 +41,9 @@ function Cart({ cartList, setCartList }) {
 					<span className="total-number">£{Number(cartTotal).toFixed(2)}</span>
 				</div>
 			</div>
-		</main>
+
+			<Footer />
+		</aside>
 	);
 }
 
