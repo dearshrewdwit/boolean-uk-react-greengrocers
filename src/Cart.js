@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 function Cart (props) {
-  const { cartItems , setCartItem} = props
+  const { cartItems , setCartItems , quantity,  addButton, minusButton} = props
   // const [total , setTotal] = useState(0)
 
     return (
@@ -20,8 +20,9 @@ function Cart (props) {
                 />
                 <p>{item.name}</p>
                 <button class="quantity-btn remove-btn center">-</button>
-                <span class="quantity-text center">1</span>
+                <span class="quantity-text center">{quantity}</span>
                 <button class="quantity-btn add-btn center">+</button>
+                {/* thse all need on clicks with their increase or decrease functions */}
               </li>
             )
           })}

@@ -18,7 +18,7 @@ Reusing an exercise that you already know will help you understand the fundament
 - A user can view a selection of items in the store
 - From the store, a user can add an item to their cart
 - From the cart, a user can view and adjust the number of items in their cart
-    - If an item's quantity equals zero it is removed from the cart
+  - If an item's quantity equals zero it is removed from the cart
 - A user can view the current total in their cart
 
 ## Instructions
