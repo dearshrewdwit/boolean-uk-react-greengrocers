@@ -30,6 +30,8 @@ export default function App() {
     setCart([...cart, newCartItem])
   }
 
+  // One function to edit the cart quantities. Takes in the item and a string of either 'decrement' or 'increment'
+  // If the quantity is 0, we set it to null, then filter it out before updating the whole cart
   const editCartItem = (cartItem, operation) => {
     let updatedCart
 

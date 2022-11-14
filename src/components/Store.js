@@ -11,6 +11,7 @@ function Store({ addToCart }) {
 
   let filteredStoreItems = initialStoreItems
 
+  // Checking which categories need to be displayed. If the all button is clicked, we just display a copy of the entire store (above line)
   if (filterItems === 'fruit') {
     filteredStoreItems = filteredStoreItems.filter(
       item => item.type === 'fruit'
@@ -23,12 +24,14 @@ function Store({ addToCart }) {
     )
   }
 
+  // Refactored into one function, takes in the store array and which property it needs to be sorted by. Uses dynamic object
+  // properties to access the correct property (only works with square brackets)
   const sortItems = (storeItems, property) => {
-    return (storeItems = storeItems.sort((a, b) => {
+    return storeItems.sort((a, b) => {
       const property1 = a[property].toUpperCase()
       const property2 = b[property].toUpperCase()
       return property1 < property2 ? -1 : property1 > property2 ? 1 : 0
-    }))
+    })
   }
 
   if (sort) {
@@ -62,6 +65,7 @@ function Store({ addToCart }) {
               />
             )
           })}
+        {/* If item isn't null, the product description opens instead of the whole store */}
         {showDescription && (
           <Description
             product={showDescription}
