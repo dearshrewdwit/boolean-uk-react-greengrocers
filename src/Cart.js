@@ -3,17 +3,11 @@ import CartItem from './CartItem';
 function Cart({ cartList, setCartList }) {
 	let cartTotal = 0;
 
-	if (cartList.length !== 0) {
-		// Iterate though the item
-		for (let iteratedItem of cartList) {
-			// Iterate though the item quantity
-			for (let i = 0; i < iteratedItem.quantity; i++) {
-				cartTotal += iteratedItem.price;
-			}
-		}
-	}
-	// EMPTY CARTLIST, TOTAL SHOULD BE ZERO
-	else cartTotal = 0;
+	// Saw it in Joel's code. nice method
+	// reduce(function (accumulator, currentValue) {return}, initialValue)
+	cartTotal = cartList.reduce((accumulator, item) => {
+		return accumulator + item.price * item.quantity;
+	}, 0);
 
 	return (
 		<main id="cart">

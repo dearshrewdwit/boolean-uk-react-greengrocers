@@ -1,6 +1,4 @@
 function StoreItem({ item, cartList, setCartList }) {
-	// item is the iteration of initialStoreItems
-
 	const addItemToCart = () => {
 		let itemQuantity = 1;
 
@@ -14,17 +12,9 @@ function StoreItem({ item, cartList, setCartList }) {
 			itemQuantity = itemOfNewList.quantity += 1;
 
 			updatedList[updatedList.indexOf(itemOfNewList)].quantity = itemQuantity;
-		} else {
-			itemQuantity = 1;
-
-			updatedList.push({ ...item, quantity: itemQuantity });
-		}
-
-		console.log("CartList before update");
-		console.log(cartList);
+		} else updatedList.push({ ...item, quantity: itemQuantity });
+		
 		setCartList(updatedList);
-		console.log("CartList after update");
-		console.log(cartList);
 	};
 
 	return (

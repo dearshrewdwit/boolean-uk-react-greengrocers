@@ -11,7 +11,6 @@ export default function App() {
 
 	return (
 		<>
-			{/* props: cartList, setCartList, shopList, setShopList */}
 			<Header
 				cartList={cartList}
 				setCartList={setCartList}

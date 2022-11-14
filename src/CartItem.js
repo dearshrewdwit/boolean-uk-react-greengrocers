@@ -1,6 +1,4 @@
 function CartItem({ item, cartList, setCartList }) {
-	// item is the iteration of cartList
-
 	const increaseItem = () => {
 		const updatedList = [...cartList];
 
@@ -11,12 +9,9 @@ function CartItem({ item, cartList, setCartList }) {
 	const decreaseItem = () => {
 		let updatedList = [...cartList];
 
-		// REMOVED
 		if (item.quantity === 1) {
-			// Filter updatedList to remove item from it. Returns only not equal to item
 			updatedList = updatedList.filter(iterated => iterated.name !== item.name);
 		}
-		// DECREASED
 		else {
 			updatedList[updatedList.indexOf(item)].quantity -= 1;
 		}
