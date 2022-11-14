@@ -20,7 +20,7 @@ What should a cart item look like? 🤔
 console.log(initialStoreItems)
 
 export default function App() {
- 
+  const [store, setStore] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
   // Setup state here...
 
@@ -93,14 +93,28 @@ export default function App() {
       console.log("inside cart", cart)
     return `£${total.toFixed(2)}`
   }
+  const alphabeticFilter = () => {
+    const firstAndLast = (a, b) => {
+      console.log("a, b", a, b)
+      let letterA = a.name.toLowerCase()
+      let letterB = b.name.toLowerCase()
+      console.log("letterA", letterA)
+      return letterA < letterB ? -1 : letterA > letterB ? 1 : 0
+    }
+    const filtered = store.slice().sort(firstAndLast)
+    console.log("filtered", filtered)
+
+    setStore(filtered)
+  }
 
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
+        <button onClick={() => alphabeticFilter()}>Alphabetic Filter</button>
         <ul className="item-list store--item-list">
-          {initialStoreItems.map(item => (
+          {store.map(item => (
             <StoreItem 
             item={item} 
             addToCart={addToCart} />

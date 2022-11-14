@@ -3,7 +3,7 @@ export default function CartItem(props) {
   return (
     <li key={item.id}>
       <img
-        class="cart--item-icon"
+        className="cart--item-icon"
         src={`assets/icons/${item.id}.svg`}
         alt={`${item.name}`}
       />
