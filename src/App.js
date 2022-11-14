@@ -22,6 +22,7 @@ console.log(initialStoreItems)
 export default function App() {
   const [storeItems, setStoreItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
+  console.log(cartItems)
 
   //function to add storeitem to cart
   const AddToCart = item => {
@@ -58,14 +59,14 @@ export default function App() {
     })
   }
   const IncreaseQuantity = cartItem => {
-    cartItems.map(targetCartItem => {
-      if (targetCartItem.id === cartItem.id) {
-        setCartItems({
-          ...targetCartItem,
-          quantity: targetCartItem.quantity + 1
-        })
+    const updatedCartItems = cartItems.map(targetCartItem => {
+      if (targetCartItem.name === cartItem.name) {
+        return { ...targetCartItem, quantity: targetCartItem.quantity + 1 }
+      } else {
+        return targetCartItem
       }
     })
+    setCartItems(updatedCartItems)
   }
 
   const total = cartItems.reduce((amount, cartItem) => {
