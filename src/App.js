@@ -1,8 +1,10 @@
 import './styles/reset.css'
 import './styles/index.css'
+import Footer from './Components/Footer'
 
 import initialStoreItems from './store-items'
 import { useState } from 'react'
+import Total from './Components/Total'
 
 /*
 Here's what a store item should look like
@@ -27,17 +29,43 @@ export default function App() {
     const exists = cartItems.find(cartItem => cartItem.id === item.id)
     if (exists) {
       // if exists returns true,
-      const updateCartItems = cartItems.map(targetCartItem => {
+      const updateCartItem = cartItems.map(targetCartItem => {
         if (targetCartItem.id === item.id) {
           return { ...targetCartItem, quantity: targetCartItem.quantity + 1 }
         }
+
+        return targetCartItem
       })
-      setCartItems(updateCartItems)
-      return
+      setCartItems(updateCartItem)
     } else {
       const newCartItem = { ...item, quantity: 1 }
       setCartItems([...cartItems, newCartItem])
     }
+  }
+  const DecreaseQuantity = cartItem => {
+    const updatedCartItems = cartItems.map(targetCartItem => {
+      if (targetCartItem.id === cartItem.id) {
+        return {
+          ...targetCartItem,
+          quantity: targetCartItem.quantity - 1
+        }
+      }
+      setCartItems(updatedCartItems)
+
+      {
+        /*setCartItems(cartItems.filter(targetCartItem => item !== targetCartItem))*/
+      }
+    })
+  }
+  const IncreaseQuantity = cartItem => {
+    cartItems.map(targetCartItem => {
+      if (targetCartItem.id === cartItem.id) {
+        setCartItems({
+          ...targetCartItem,
+          quantity: targetCartItem.quantity + 1
+        })
+      }
+    })
   }
 
   const total = cartItems.reduce((amount, cartItem) => {
@@ -73,35 +101,26 @@ export default function App() {
                   alt={cartItem.name}
                 />
                 <p>{cartItem.name}</p>
-                <button class="quantity-btn remove-btn center">-</button>
+                <button
+                  class="quantity-btn remove-btn center"
+                  onClick={() => DecreaseQuantity(cartItem)}
+                >
+                  -
+                </button>
                 <span class="quantity-text center">{cartItem.quantity}</span>
-                <button class="quantity-btn add-btn center">+</button>
+                <button
+                  class="quantity-btn add-btn center"
+                  onClick={() => IncreaseQuantity(cartItem)}
+                >
+                  +
+                </button>
               </li>
             ))}
           </ul>
         </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£{total.toFixed(2)}</span>
-          </div>
-        </div>
+        <Total total={total} />
       </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <Footer />
     </>
   )
 }
