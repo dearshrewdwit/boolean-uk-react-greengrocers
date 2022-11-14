@@ -44,26 +44,24 @@ export default function App() {
     }
   }
   const DecreaseQuantity = cartItem => {
-    const updatedCartItems = cartItems.map(targetCartItem => {
-      if (
-        targetCartItem.name === cartItem.name &&
-        targetCartItem.quantity >= 1
-      ) {
-        return {
-          ...targetCartItem,
-          quantity: targetCartItem.quantity - 1
+    if (cartItem.quantity > 1) {
+      const updatedCartItems = cartItems.map(targetCartItem => {
+        if (targetCartItem.name === cartItem.name && targetCartItem.quantity) {
+          return {
+            ...targetCartItem,
+            quantity: targetCartItem.quantity - 1
+          }
         }
-      }
-      return targetCartItem
+        return targetCartItem
+      })
 
-      {
-        /*if (targetCartItem.quantity === 0)
-        return cartItems.filter(
-          targetCartItem => cartItem.name !== targetCartItem.name
-        )*/
-      }
-    })
-    setCartItems(updatedCartItems)
+      setCartItems(updatedCartItems)
+    } else {
+      const removeFromCart = cartItems.filter(
+        targetCartItem => targetCartItem.name !== cartItem.name
+      )
+      setCartItems(removeFromCart)
+    }
   }
   const IncreaseQuantity = cartItem => {
     const updatedCartItems = cartItems.map(targetCartItem => {
