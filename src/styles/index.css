@@ -41,21 +41,16 @@ button {
 
   cursor: pointer;
 }
-button:hover {
-  filter: brightness(92%);
-}
-button:active {
-  filter: brightness(88%);
-}
-
-/* active Button */
-.activeBtn {
-  filter: brightness(88%);
-}
-
-
-
-
+  button:hover {
+    filter: brightness(92%);
+  }
+  button:active {
+    filter: brightness(88%);
+  }
+  /* active Button */
+  .activeBtn {
+    filter: brightness(88%);
+  }
 
 /* Header ------------------------------------ Header */
 #header {
@@ -68,80 +63,70 @@ button:active {
 
   padding: 8px;
 }
+  #header h1 { margin: 0; }
+  #header .right-side {
+    display: grid;
+    grid-template-columns: auto auto;
 
-#header h1 { margin: 0; }
+    width: fit-content;
+    gap: 32px;
+    margin-right: 8px;
 
-#header .right-side {
-  display: grid;
-  grid-template-columns: auto auto;
+    justify-self: right;
+    align-content: center;
+  }
+  .dropdown {
+    /* Main Container <div>*/
+    position: relative;
+    display: inline-block;
+  }
+    .dropbtn {
+      /* Drop button */
+      border: none;
+      background-color: white;
+      box-shadow: none;
 
-  width: fit-content;
-  gap: 32px;
-  margin-right: 8px;
+      scale: 1.5;
+    }
+    .dropdown-content {
+      /* dropdown-content */
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: -14px;
 
-  justify-self: right;
-  align-content: center;
-}
+      background-color: white;
+      overflow: hidden;
+      /* Hide children border */
 
-.dropdown {
-  /* Main Container <div>*/
-  position: relative;
-  display: inline-block;
-}
+      border-radius: 8px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      /* Links of dropdown */
+      color: black;
+      background-color: white;
+      text-decoration: none;
+      padding: 12px 16px;
 
-.dropbtn {
-  /* Drop button */
-  border: none;
-  background-color: white;
-  box-shadow: none;
-
-  scale: 1.5;
-}
-
-.dropdown-content {
-  /* dropdown-content */
-  display: none;
-  position: absolute;
-  top: 50px;
-  left: -14px;
-
-  background-color: white;
-  overflow: hidden;
-  /* Hide children border */
-
-  border-radius: 8px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  /* Links of dropdown */
-  color: black;
-  background-color: white;
-  text-decoration: none;
-  padding: 12px 16px;
-
-  display: block;
-}
-
-.dropdown-content a:hover {
-  filter: brightness(92%);
-  cursor: pointer;
-}
-
-.dropdown-content a:active {
-  filter: brightness(88%);
-}
-
-/* Show on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change btn on hover*/
-.dropdown:hover .dropbtn {
-  filter: brightness(88%)
-}
+      display: block;
+    }
+    .dropdown-content a:hover {
+      filter: brightness(92%);
+      cursor: pointer;
+    }
+    .dropdown-content a:active {
+      filter: brightness(88%);
+    }
+    /* Show on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* Change btn on hover*/
+    .dropdown:hover .dropbtn {
+      filter: brightness(88%)
+    }
 
 
 /* Store ---------------------------------------------- Store */
@@ -190,7 +175,6 @@ button:active {
 }
 
 /* Cart ---------------------------------------- Cart */
-
 #cart {
   grid-area: aside;
   width: auto;
@@ -202,91 +186,80 @@ button:active {
   grid-gap: 1rem;
   justify-content: center;
 }
-
-#cart h2 {
-  margin-bottom: 0;
-  text-align: center;
-  grid-row: 1;
-}
-
-.cart--item-list-container {
-  min-width: 320px;
-  height: 100%;
-  padding: 0 1rem;
-  grid-row: 2;
-
-  overflow-y: scroll;
-
-  border-radius: 0.5rem;
-  border: 2px solid #757575;
-}
-
-@media only screen and (max-width: 450px) {
-  .cart--item-list-container {
-    border: none;
+  #cart h2 {
+    margin-bottom: 0;
+    text-align: center;
+    grid-row: 1;
   }
-}
+  .cart--item-list-container {
+    min-width: 320px;
+    height: 100%;
+    padding: 0 1rem;
+    grid-row: 2;
 
-.cart--item-list li {
-  padding: 1rem 0;
+    overflow-y: scroll;
 
-  display: grid;
-  grid-template-columns: 24px minmax(150px, 1fr) repeat(3, auto);
-  grid-gap: 0.5rem;
-  align-items: center;
+    border-radius: 0.5rem;
+    border: 2px solid #757575;
+  }
+  @media only screen and (max-width: 450px) {
+    .cart--item-list-container {
+      border: none;
+    }
+  }
+  .cart--item-list li {
+    padding: 1rem 0;
 
-  border-bottom: 1px dotted #000000;
+    display: grid;
+    grid-template-columns: 24px minmax(150px, 1fr) repeat(3, auto);
+    grid-gap: 0.5rem;
+    align-items: center;
 
-  font-size: 1.25rem;
-}
+    border-bottom: 1px dotted #000000;
 
-.cart--item-list li:last-child {
-  border-bottom: none;
-}
+    font-size: 1.25rem;
+  }
+  .cart--item-list li:last-child {
+    border-bottom: none;
+  }
+  .cart--item-icon {
+    width: 24px;
+  }
+  .center {
+    display: grid;
+    place-items: center;
+  }
+  .quantity-btn {
+    width: 20px;
+    height: 20px;
+    padding: 0;
 
-.cart--item-icon {
-  width: 24px;
-}
+    border-radius: 0.25rem;
 
-.center {
-  display: grid;
-  place-items: center;
-}
+    font-weight: bold;
+  }
+  .remove-btn {
+    border: 2px solid #d32f2f;
+    background-color: #ffcdd2;
+    color: #d32f2f;
+  }
+  .add-btn {
+    border: 2px solid #388e3c;
+    background-color: #c8e6c9;
+    color: #388e3c;
+  }
+  .quantity-text {
+    width: 24px;
+    height: 24px;
 
-.quantity-btn {
-  width: 20px;
-  height: 20px;
-  padding: 0;
+    border-radius: 0.25rem;
+    border: 2px solid #757575;
+    color: #757575;
 
-  border-radius: 0.25rem;
-
-  font-weight: bold;
-}
-
-.remove-btn {
-  border: 2px solid #d32f2f;
-  background-color: #ffcdd2;
-  color: #d32f2f;
-}
-
-.add-btn {
-  border: 2px solid #388e3c;
-  background-color: #c8e6c9;
-  color: #388e3c;
-}
-
-.quantity-text {
-  width: 24px;
-  height: 24px;
-
-  border-radius: 0.25rem;
-  border: 2px solid #757575;
-  color: #757575;
-
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
 
 /* Total */
 
