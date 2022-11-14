@@ -1,6 +1,5 @@
 import './styles/reset.css'
 import './styles/index.css'
-import storeItems from './store-items'
 
 function StoreItem(props) {
   const { singularItem, addToCart } = props

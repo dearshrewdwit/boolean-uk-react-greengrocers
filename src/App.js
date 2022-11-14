@@ -19,7 +19,7 @@ console.log(initialStoreItems)
 
 function App() {
   // Setup state here...
-  const [storeItems, setStoreItems] = useState(initialStoreItems)
+  const [storeItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
 
   function addToCart(itemToAdd) {
@@ -42,20 +42,6 @@ function App() {
     }
   }
 
-  // define onclick for the increment and decrement buttons in the cart
-  // then this fucntion need on the onclick event on the increase and decrease button.
-
-  // const updatedArray = originalArray.map(function (item) {
-  //   if (item === theItemIWantToUpdate) {
-  //     return { ...item, propertyToUpdate: newValue }
-  //   } else {
-  //     // item shouild not be updated because it's not the one we want to update
-  //     return item
-  //   }
-  // })
-  // // set state
-  // setState(updatedArray)
-
   function cartQuantityIncrease(itemToIncrease) {
     console.log('increase button clicked')
 
@@ -70,21 +56,45 @@ function App() {
   }
 
   function cartQuantityDecrease(itemToDecrease) {
-    console.log('Decrease button clicked')
-    // refer to addToCart logic. & refer to the updateCart
-    const increaseQuantity = cartItems.map(function (item) {
-      if (item.id === itemToDecrease.id) {
-        return { ...item, quantity: --item.quantity }
-      } else {
-        return item
-      }
+    if (itemToDecrease.quantity > 1) {
+      console.log('Decrease button clicked')
+      // refer to addToCart logic. & refer to the updateCart
+      const increaseQuantity = cartItems.map(function (item) {
+        if (item.id === itemToDecrease.id) {
+          return { ...item, quantity: --item.quantity }
+        } else {
+          return item
+        }
+        // 1. If statement in the decrease function that checks in quantity = 0
+      })
+      setCartItems(increaseQuantity)
+    } else {
+      const cartIfQuantityZero = cartItems.filter(cartItem => {
+        return cartItem !== itemToDecrease
+      })
+      setCartItems(cartIfQuantityZero)
+    }
+  }
+  // write the total amount function
+
+  // 2. Total - add up the cartItem.price and * quantity
+  const cartTotal = () => {
+    // This works out the cart total using price * quantity of the items in the cart
+
+    let totalPrice = 0
+
+    cartItems.forEach(item => {
+      totalPrice += item.price * item.quantity
     })
-    setCartItems(increaseQuantity)
+
+    const formatCurrency = new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP'
+    })
+    console.log(totalPrice)
+    return formatCurrency.format(totalPrice)
   }
 
-  // write two functions => attempt to combine.
-  // write the total amount function
-  // item. price * quanity
   return (
     <>
       <StoreItemList
@@ -130,7 +140,7 @@ function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{cartTotal()}</span>
           </div>
         </div>
       </main>
