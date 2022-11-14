@@ -66,6 +66,14 @@ button {
   }
 }
 
+.extra-info {
+  display: grid;
+  place-items: center center;
+  padding: 1rem;
+  border: solid black 2px;
+  font-size: 0.65rem;
+}
+
 /* Cart */
 
 #cart {
