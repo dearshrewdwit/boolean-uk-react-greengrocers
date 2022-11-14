@@ -25,27 +25,50 @@ export default function App() {
   
    if (cartItems.find(item => item.id === newItem.id)) {
 
-    return {...cartItems, quantity: ++cartItems.quantity }
-    console.log(cartItems.quantity)
+    const updatedCart = cartItems.map((cartItem) => {
 
+      if (cartItem.id === newItem.id) {
+   return { ...cartItem, quantity : ++cartItem.quantity }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+    console.log(cartItems)
    } else { 
      const newCartItems = [...cartItems]
+     newItem.quantity = 1
      newCartItems.push(newItem)
      setCartItems(newCartItems)
      console.log("item added", newItem)
   
    }}
+   
+ 
  
   // need to make 2 functions for increase and decrease
   // once code for add cart button is working  can copy into these 2 functions
-  const addButton = (item) => {}
-  const minusButton = (item) => {}
+  const addButton = (newItem) => {
+    const updatedCart = cartItems.map((cartItem) => {
+
+      if (cartItem.id === newItem.id) {
+   return { ...cartItem, quantity : ++cartItem.quantity }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+    console.log(cartItems)
+   }
+
+  
+  const minusButton = (item) => {
+
+  }
   
 
   return (
     <>
       <Store  addToCart = {addToCart}/>
-      <Cart cartItems = {cartItems}  addButton = {addButton} minusButton = {minusButton} quantity = {cartItems.quantity} />
+      <Cart cartItems = {cartItems}  addButton = {addButton} minusButton = {minusButton} />
       <Footer />
 
     </>
