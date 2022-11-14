@@ -1,6 +1,5 @@
 function Cart (props) {
-  const { cartItems , addButton, minusButton} = props
-  // const [total , setTotal] = useState(0)
+  const { cartItems , addButton, minusButton, cartTotal} = props
 
     return (
         <main id="cart">
@@ -30,7 +29,7 @@ function Cart (props) {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{cartTotal ()}</span>
           </div>
         </div>
       </main>

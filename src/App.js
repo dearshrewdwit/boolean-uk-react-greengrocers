@@ -63,10 +63,28 @@ export default function App() {
       }
     }
 
+    const cartTotal = () => {
+     
+      let totalPrice = 0
+  
+      cartItems.forEach((item)=>{
+       totalPrice +=  item.price * item.quantity
+  
+      })
+     
+      const formatCurrency = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+     })
+      
+    return formatCurrency.format(totalPrice)
+  
+    }
+
   return (
     <>
       <Store  addToCart = {addToCart}/>
-      <Cart cartItems = {cartItems}  addButton = {addButton} minusButton = {minusButton} />
+      <Cart cartItems = {cartItems}  addButton = {addButton} minusButton = {minusButton} cartTotal = {cartTotal} />
       <Footer />
 
     </>
