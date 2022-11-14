@@ -40,10 +40,3 @@ function Cart (props) {
 }
 
 export default Cart
-
-
-// Import state @ the top
-// Use a state called cart Itmes and setCartItem
-// Create addToCart function here that processes store click event 
-// need a state for total ?? => total + setTotal?
-// Work out how to do total in here than move to another file and import it here
