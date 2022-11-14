@@ -2,6 +2,7 @@ import './styles/reset.css'
 import './styles/index.css'
 import initialStoreItems from './store-items'
 import StoreItem from './components/StoreItem'
+import CartItem from './components/CartItem'
 import { useState } from 'react'
 
 /*
@@ -20,15 +21,70 @@ console.log(initialStoreItems)
 export default function App() {
   // Setup state here...
   // const [storeItem, setStoreItem] = useState()
-  const [storeItem, setStoreItem] = useState(initialStoreItems)
-  const [cartItem, setCartItem] = ''
+  const [storeItems, setStoreItem] = useState(initialStoreItems)
+  const [cartItems, setCartItems] = useState([])
+
+  // function AddToCart(clickedItem) {
+  //   const ids = []
+  //   cartItems.forEach(cartItem => ids.push(cartItem.id))
+  //   let newCartItems = [...cartItems]
+  //   if (!ids.includes(clickedItem.id)) {
+  //     let newCartItem = clickedItem
+  //     newCartItem.quanity = 0
+  //     newCartItems.push(newCartItem)
+  //   }
+  //   setCartItems(
+  //     cartItems.map(cartItem => {
+  //       if (newCartItem.id === cartItem.id)
+  //         return { ...cartItem, quantity: cartItem.qnantity + 1 }
+  //       return cartItem
+  //     })
+  //   )
+  // }
+  function AddToCart(storeItem) {
+    const found = cartItems.find(item => item.id === storeItem.id)
+    if (found) {
+      const updatedCartItems = cartItems.map(clickedItem => {
+        if (clickedItem.id === item.id) {
+          return { ...clickedItem, quantity: clickedItem.quantity + 1 }
+        }
+      })
+
+      setCartItems(updateCartItems)
+      return
+    } else {
+      const newCartItem = { ...storeItem, quantity: 1 }
+      setCartItems([...cartItems, newCartItem])
+    }
+  }
+
+  const increase = item => {
+    const updatedCart = cartItems.map(cartItem => {
+      if (item.name === cartItem.name) {
+        return { ...cartItem, quantity: cartItem.quantity + 1 }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+  }
+  // Needs condition to remove 0 quantity
+  const decrease = item => {
+    const updatedCart = cartItems.map(cartItem => {
+      if (item.name === cartItem.name) {
+        return { ...cartItem, quantity: cartItem.quantity - 1 }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+    console.log('updatedCart:', updatedCart)
+  }
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {initialStoreItems.map(item => (
-            <StoreItem item={item} key={item.id} />
+          {storeItems.map(item => (
+            <StoreItem item={item} key={item.id} AddToCart={AddToCart} />
           ))}
         </ul>
       </header>
@@ -36,7 +92,14 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
+            {cartItems.map(item => (
+              <CartItem
+                item={item}
+                key={item.id}
+                increase={increase}
+                decrease={decrease}
+              />
+            ))}
           </ul>
         </div>
         <div className="total-section">

@@ -1,15 +1,31 @@
-function CartItem({ item }) {
+function CartItem({ item, itemName, increase, decrease }) {
+  // const cart.quantity=
   return (
     <li>
       <img
-        class="cart--item-icon"
-        src={'assets/icons/{item.id}.svg'}
-        alt={Item.name}
+        className="cart--item-icon"
+        src={`assets/icons/${item.id}.svg`}
+        alt={item.name}
       />
       <p>{item.name}</p>
-      <button class="quantity-btn remove-btn center">-</button>
-      <span class="quantity-text center">1</span>
-      <button class="quantity-btn add-btn center">+</button>
+      <button
+        className="quantity-btn remove-btn center"
+        onClick={() => {
+          decrease
+        }}
+      >
+        -
+      </button>
+      <span className="quantity-text center">{item.quantity}</span>
+      <button
+        className="quantity-btn add-btn center"
+        onClick={() => {
+          increase
+        }}
+      >
+        +
+      </button>
     </li>
   )
 }
+export default CartItem
