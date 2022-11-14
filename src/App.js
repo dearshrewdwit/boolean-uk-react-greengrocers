@@ -4,11 +4,9 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import Store from './components/Store.js'
-import CartItemList from './components/CartItemList.js'
+import Cart from './components/Cart.js'
 
 
-
-import initialStoreItems from './store-items'
 import storeItems from './store-items'
 
 /*
@@ -22,32 +20,21 @@ Here's what a store item should look like
 What should a cart item look like? 🤔
 */
 
-console.log(initialStoreItems)
+console.log(storeItems)
 
 export default function App() {
   // Setup state here...
-  const [store, setStore] = useState([])
+  const [cartItems, setCartItems] = useState([])
+
+  const addItemToCart = (item) => {
+    // need to add checking for if the cart item exists already 
+    setCartItems([...cartItems, {item: item, quantity: 1}])
+  }
 
   return (
     <>
-      <Store />
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-            <CartItemList />
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Store addItemToCart={addItemToCart}/>
+      <Cart cartItems={cartItems}/>
       <div className='footer'>
         Icons made by
         <a
