@@ -14,13 +14,14 @@ export default function App() {
     //if item already in the cart
     const found = cartItems.find(item => item.id === storeItem.id)
     if (found) {
-      const updatedCartItems = cartItems.map(clickedItem => {
-        if (clickedItem.id === storeItem.id) {
-          return { ...clickedItem, quantity: clickedItem.quantity + 1 }
-        }
-      })
+      increase(found)
+      // const updatedCartItems = cartItems.map(clickedItem => {
+      //   if (clickedItem.id === storeItem.id) {
+      //     return { ...clickedItem, quantity: clickedItem.quantity + 1 }
+      //   }
+      // })
 
-      setCartItems(updatedCartItems)
+      // setCartItems(updatedCartItems)
       return
     } else {
       //if no item found in the cart
