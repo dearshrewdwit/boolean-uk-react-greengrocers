@@ -29,7 +29,8 @@ button {
 
   overflow-y: scroll;
 
-  background-color: #173122;
+  background-color: #F3E600;
+  color: black;
 }
 
 #store h1 {
@@ -71,7 +72,28 @@ button {
   place-items: center center;
   padding: 1rem;
   border: solid black 2px;
+  border-radius: 10px;
   font-size: 0.65rem;
+}
+
+.extra-info button:hover {
+  scale: 1.1
+}
+
+.info-button {
+  border-radius: 10px;
+  background: #F3E600;
+  border: solid black 2px;
+}
+
+.info-button:hover {
+  cursor: pointer;
+  scale: 1.1;
+} 
+
+button:hover {
+  cursor: pointer;
+  scale: 1.1;
 }
 
 /* Cart */

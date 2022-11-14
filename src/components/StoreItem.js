@@ -31,7 +31,7 @@ function StoreItem(props) {
 
         <li>
           <div className="store--item-icon">
-            <button type='button' onClick={hide}>
+            <button className='info-button' type='button' onClick={hide}>
               <ItemImage item={props.storeItem} />
             </button>
           </div>
