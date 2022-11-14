@@ -1,11 +1,17 @@
 import CartItemList from './CartItemList.js'
 
 function Cart(props) {
-  const {cartItems} = props
+  console.log('Cart invoked')
+
+  const {cartItems, increaseQuantity, decreaseQuantity} = props
 
   return (
     <main id='cart'>
-      <CartItemList cartItems={cartItems}/>
+      <CartItemList 
+        cartItems={cartItems}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+      />
     </main>
   )
 }

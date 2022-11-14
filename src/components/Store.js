@@ -2,7 +2,7 @@ import storeItems from '../store-items.js'
 import StoreItemList from './StoreItemList'
 
 function Store(props) {
-
+  console.log('Store invoked')
   // placeholders for applying filters
 
   const filteredStoreItems = storeItems

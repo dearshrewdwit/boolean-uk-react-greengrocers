@@ -14,7 +14,8 @@ function CartItemList(props) {
             return <CartItem 
               key={cartItem.item.name}
               cartItem={cartItem}
-              
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
             />
           })}
         </ul>

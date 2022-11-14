@@ -31,10 +31,32 @@ export default function App() {
     setCartItems([...cartItems, {item: item, quantity: 1}])
   }
 
+  const increaseQuantity = (cartItem) => {
+    cartItem.quantity++
+    setCartItems([...cartItems])
+  }
+
+  const decreaseQuantity = (cartItem) => {
+    if (cartItem.quantity === 1) {
+      removeItemFromCart(cartItem)
+    } else {
+      cartItem.quantity--
+      setCartItems([...cartItems])
+    }
+  }
+
+  const removeItemFromCart = (cartItem) => {
+    setCartItems(cartItems.filter((existingCartItem) => cartItem != existingCartItem))
+  }
+
   return (
     <>
       <Store addItemToCart={addItemToCart}/>
-      <Cart cartItems={cartItems}/>
+      <Cart
+        cartItems={cartItems}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+      />
       <div className='footer'>
         Icons made by
         <a
