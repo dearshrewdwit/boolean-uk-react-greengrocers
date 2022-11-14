@@ -1,17 +1,16 @@
 function CartItem({ item, itemName, increase, decrease }) {
-  // const cart.quantity=
   return (
     <li>
       <img
         className="cart--item-icon"
         src={`assets/icons/${item.id}.svg`}
-        alt={item.name}
+        alt={itemName}
       />
       <p>{item.name}</p>
       <button
         className="quantity-btn remove-btn center"
         onClick={() => {
-          decrease
+          decrease(item)
         }}
       >
         -
@@ -20,7 +19,7 @@ function CartItem({ item, itemName, increase, decrease }) {
       <button
         className="quantity-btn add-btn center"
         onClick={() => {
-          increase
+          increase(item)
         }}
       >
         +

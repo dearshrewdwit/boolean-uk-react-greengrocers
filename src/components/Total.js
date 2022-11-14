@@ -1,6 +1,7 @@
-export const Total = ({ cartItem }) => {
+export const Total = ({ cartItems }) => {
   let total = 0
-  cartItems.forEach(item => {
-    total += cartiItem.price * cartItem.quantaty
+  cartItems.forEach(cartItem => {
+    total += cartItem.price * cartItem.quantity
   })
+  return total.toFixed(2)
 }

@@ -4,55 +4,26 @@ import initialStoreItems from './store-items'
 import StoreItem from './components/StoreItem'
 import CartItem from './components/CartItem'
 import { useState } from 'react'
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
-console.log(initialStoreItems)
+import { Total } from './components/Total'
 
 export default function App() {
-  // Setup state here...
-  // const [storeItem, setStoreItem] = useState()
   const [storeItems, setStoreItem] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
 
-  // function AddToCart(clickedItem) {
-  //   const ids = []
-  //   cartItems.forEach(cartItem => ids.push(cartItem.id))
-  //   let newCartItems = [...cartItems]
-  //   if (!ids.includes(clickedItem.id)) {
-  //     let newCartItem = clickedItem
-  //     newCartItem.quanity = 0
-  //     newCartItems.push(newCartItem)
-  //   }
-  //   setCartItems(
-  //     cartItems.map(cartItem => {
-  //       if (newCartItem.id === cartItem.id)
-  //         return { ...cartItem, quantity: cartItem.qnantity + 1 }
-  //       return cartItem
-  //     })
-  //   )
-  // }
   function AddToCart(storeItem) {
+    //if item already in the cart
     const found = cartItems.find(item => item.id === storeItem.id)
     if (found) {
       const updatedCartItems = cartItems.map(clickedItem => {
-        if (clickedItem.id === item.id) {
+        if (clickedItem.id === storeItem.id) {
           return { ...clickedItem, quantity: clickedItem.quantity + 1 }
         }
       })
 
-      setCartItems(updateCartItems)
+      setCartItems(updatedCartItems)
       return
     } else {
+      //if no item found in the cart
       const newCartItem = { ...storeItem, quantity: 1 }
       setCartItems([...cartItems, newCartItem])
     }
@@ -60,23 +31,32 @@ export default function App() {
 
   const increase = item => {
     const updatedCart = cartItems.map(cartItem => {
-      if (item.name === cartItem.name) {
+      console.log(item)
+      if (item.id === cartItem.id) {
         return { ...cartItem, quantity: cartItem.quantity + 1 }
       }
       return cartItem
     })
     setCartItems(updatedCart)
   }
-  // Needs condition to remove 0 quantity
+  // condition to remove 0 quantity from the cart
   const decrease = item => {
-    const updatedCart = cartItems.map(cartItem => {
-      if (item.name === cartItem.name) {
-        return { ...cartItem, quantity: cartItem.quantity - 1 }
-      }
-      return cartItem
-    })
-    setCartItems(updatedCart)
-    console.log('updatedCart:', updatedCart)
+    if (item.quantity <= 1) {
+      const filteredCart = cartItems.filter(function (cartItems) {
+        return item !== cartItems
+      })
+      setCartItems(filteredCart)
+      //remove 1 from the quantity
+    } else {
+      const updatedCart = cartItems.map(cartItem => {
+        if (item.name === cartItem.name) {
+          return { ...cartItem, quantity: cartItem.quantity - 1 }
+        }
+        return cartItem
+      })
+      setCartItems(updatedCart)
+      console.log('updatedCart:', updatedCart)
+    }
   }
   return (
     <>
@@ -107,7 +87,10 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">
+              {`£`}
+              <Total cartItems={cartItems} />
+            </span>
           </div>
         </div>
       </main>
