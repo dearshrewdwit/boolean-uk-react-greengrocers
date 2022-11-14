@@ -3,13 +3,16 @@
 /* Typography */
 
 body {
-  font-family: "Trebuchet MS", "Lucida Sans", Arial, sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
+  color: violet
 }
 .details {
   background-color: greenyellow;
   border: solid 1px pink;  
   border-radius: 5px;
   box-shadow: 2px 2px 2px;
+  color: violet;
+  margin: 50px
 }
 .details li {
   text-align: center;
@@ -17,6 +20,18 @@ body {
 .show-sort {
   position: absolute;
   width: fit-content;
+  color: violet;
+}
+.show-sort-title {
+  background-color: black;
+  padding: 5px;
+  margin: 5px;
+  width: fit-content;
+  display: inline;
+}
+.shop-name {
+  background-color: black;
+  margin: 0px 700px 10px
 }
 h1,
 h2 {
@@ -40,7 +55,7 @@ button {
 
   overflow-y: scroll;
 
-  background-color: #e7f4ea;
+  background-color: violet
 }
 
 #store h1 {
@@ -67,6 +82,13 @@ button {
 .store--item-icon {
   width: 125px;
   height: 125px;
+  filter: invert()
+
+}
+
+.store--item-icon:hover {
+  cursor: pointer;
+  filter: drop-shadow(4px 4px 7px greenyellow) invert() grayscale(75%)
 }
 
 @media only screen and (max-width: 600px) {
@@ -84,6 +106,7 @@ button {
 /* Cart */
 
 #cart {
+  background-color: turquoise;
   height: 60vh;
   padding: 1rem;
 
@@ -98,6 +121,7 @@ button {
 #cart h2 {
   margin-bottom: 0;
   text-align: center;
+  background-color: black;
 }
 
 .cart--item-list-container {
@@ -105,7 +129,7 @@ button {
   height: 100%;
   padding: 0 1rem;
 
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 
   border-radius: 0.5rem;
   border: 2px solid #757575;
@@ -125,6 +149,13 @@ button {
   grid-gap: 0.5rem;
   align-items: center;
 
+  background-color: violet;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: black 2px 2px 2px;
+
+
   border-bottom: 1px dotted #000000;
 
   font-size: 1.25rem;
@@ -136,6 +167,10 @@ button {
 
 .cart--item-icon {
   width: 24px;
+  filter: invert()
+}
+.cart-name {
+  margin-right: 40px;
 }
 
 .center {
@@ -161,8 +196,7 @@ button {
 
 .add-btn {
   border: 2px solid #388e3c;
-  background-color: #c8e6c9;
-  color: #388e3c;
+  background-color: greenyellow;
 }
 
 .quantity-text {
@@ -171,7 +205,8 @@ button {
 
   border-radius: 0.25rem;
   border: 2px solid #757575;
-  color: #757575;
+  color: greenyellow;
+  background-color: black;
 
   text-align: center;
   font-size: 0.75rem;
@@ -186,6 +221,8 @@ button {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
+
+  background-color: black;
 }
 
 .total-number {

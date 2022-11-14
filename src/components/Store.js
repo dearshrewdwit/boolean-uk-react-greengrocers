@@ -57,16 +57,16 @@ function Store ({initialStoreItems, addCartItem}){
     return (
       
       <header id="store">
-      <h1>Greengrocers</h1>
+      <h1 className="shop-name">Greengrocers</h1>
       <div className="show-sort">
       <div>
-        <h3>show</h3>
+        <h3 className='show-sort-title'>show</h3>
       <button onClick={handleFruit}>Fruit</button>
       <button onClick={handleVeg}>Veg</button>
       <button onClick={handleAll}>All</button>
       </div>
       <div>
-        <h3>sort</h3>
+        <h3 className='show-sort-title'>sort</h3>
       <button onClick={handleSortByPrice}>Price</button>
       <button onClick={handleSortByName}>Name</button>
       </div>
