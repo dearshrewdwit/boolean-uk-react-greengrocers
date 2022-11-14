@@ -1,4 +1,5 @@
 import CartItemList from './CartItemList.js'
+import CartTotal from './CartTotal'
 
 function Cart(props) {
   console.log('Cart invoked')
@@ -12,6 +13,7 @@ function Cart(props) {
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
       />
+      <CartTotal cartItems={cartItems}/>
     </main>
   )
 }
