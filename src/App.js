@@ -20,37 +20,56 @@ What should a cart item look like? 🤔
 console.log(initialStoreItems)
 
 export default function App() {
-  // const [items, setItems] = useState(initialStoreItems)
+ 
   const [cart, setCart] = useState([])
   // Setup state here...
 
   const addToCart = selection => {
+    // if selected item is not in the cart, the cart will 
+    // from quantity 1
     if (!cart.includes(selection)) {
+      console.log("cart", !cart, "selection", selection)
       selection.quantity = 1
+      //  upgrade state with an array whatever is inside the cart
       setCart([...cart, selection])
     } else {
+      // if selected item includes in the cart, will add more 
+      // selected item on top
       selection.quantity++
+      // update cart whatever inside it.
       setCart([...cart])
       console.log('add to cart', selection)
     }
   }
   const decreaseItem = selection => {
+    // arrow decreaseItem function for decreasing selected
+    // item
     const updatedCart = cart =>
+      // inside this function other function to map cart
       cart.map(item =>
-
+        // turnery condition if selected items id matches cart
+        // item id 
         item.id === selection.id
+          // above condition true, return items object quantity by decrimenting it
           ? { ...item, quantity: item.quantity-- }
+          // if above not true, return only item
           : item
       )
+    // update state with outcome of updateCart function
     setCart(updatedCart)
   }
 
   const removeFromCart = (selection) => {
     console.log("target item", selection.quantity)
     if (selection.quantity === 1) {
+      // if selected item quantity equals to 1 the filter function will run
       console.log("selection", selection)
+      // if filter function returns true it will keep item, if it false
+      // it won't return anything, 
       const updatedCart = cart.filter(item => item !== selection)
+      // keep everyrhing what is not our selection
       console.log("updatedCart", updatedCart)
+      // update state
       setCart(updatedCart)
     }
   }
@@ -71,6 +90,7 @@ export default function App() {
   const calculateTotal = () => {
     let total = 0
     cart.forEach(item => (total += item.quantity * item.price))
+      console.log("inside cart", cart)
     return `£${total.toFixed(2)}`
   }
 
@@ -91,40 +111,14 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cart.map(item => {
-              // <CartItem 
-              // item={item}
-              // decreaseItem={decreaseItem}
-              // removeFromCart={removeFromCart}
-              // addItem={addItem}
-              // />
-              return (
-                <li key={item.id}>
-                  <img
-                    className="cart--item-icon"
-                    src={`/assets/icons/${item.id}.svg`}
-                    alt={item.alt}
-                  />
-                  <p>{item.name}</p>
-                  <button
-                    className="quantity-btn remove-btn center"
-                    onClick={() => {
-                      console.log('clicked -', item.name)
-                      decreaseItem(item)
-                      removeFromCart(item)
-                    }}
-                  >-</button>
-                  <span className="quantity-text center">{item.quantity}</span>
-                  <button
-                    className="quantity-btn add-btn center"
-                    onClick={() => {
-                      console.log('clicked +', item.name)
-                      addItem(item)
-                    }}
-                  >+</button>
-                </li>
-              )
-            })}
+            {cart.map(item => (
+              <CartItem 
+              item={item}
+              decreaseItem={decreaseItem}
+              removeFromCart={removeFromCart}
+              addItem={addItem}
+              />
+            ))}
           </ul>
         </div>
         <div className="total-section">
