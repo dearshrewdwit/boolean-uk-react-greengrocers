@@ -1,7 +1,7 @@
 import initialStoreItems from './store-items';
 import StoreItem from './StoreItem';
 
-function Header({cartList, setCartList}) {
+function Header({ cartList, setCartList }) {
 	return (
 		<header id="store">
 			<h1>Greengrocers</h1>
@@ -10,7 +10,7 @@ function Header({cartList, setCartList}) {
 					return (
 						<StoreItem
 							key={index}
-                            item={item}
+							item={item}
 							cartList={cartList}
 							setCartList={setCartList}
 						/>

@@ -1,33 +1,30 @@
 function StoreItem({ item, cartList, setCartList }) {
 	// item is the iteration of initialStoreItems
-	
+
 	const addItemToCart = () => {
 		let itemQuantity = 1;
 
 		const updatedList = [...cartList];
 
 		if (cartList.find(iterated => iterated.name === item.name)) {
-			// Returns the item we've pressed in an Array
-			// then select the index 0 of this returned Array
 			let itemOfNewList = updatedList.filter(
 				iterated => iterated.name === item.name
 			)[0];
 
-			// Quantity becomes the previous PLUS 1
 			itemQuantity = itemOfNewList.quantity += 1;
 
-			// Update the quantity of the Item inside array
 			updatedList[updatedList.indexOf(itemOfNewList)].quantity = itemQuantity;
 		} else {
-			// First time in cart, so 1
 			itemQuantity = 1;
 
-			// Update the Array to have the new item
 			updatedList.push({ ...item, quantity: itemQuantity });
 		}
 
-		// updatedList is a clone of cartList, and has the updated quantity or the new item added
+		console.log("CartList before update");
+		console.log(cartList);
 		setCartList(updatedList);
+		console.log("CartList after update");
+		console.log(cartList);
 	};
 
 	return (

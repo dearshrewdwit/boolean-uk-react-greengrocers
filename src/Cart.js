@@ -1,8 +1,19 @@
-import { useState } from 'react';
 import CartItem from './CartItem';
 
 function Cart({ cartList, setCartList }) {
-	const [cartTotal, setCartTotal] = useState(0);
+	let cartTotal = 0;
+
+	if (cartList.length !== 0) {
+		// Iterate though the item
+		for (let iteratedItem of cartList) {
+			// Iterate though the item quantity
+			for (let i = 0; i < iteratedItem.quantity; i++) {
+				cartTotal += iteratedItem.price;
+			}
+		}
+	}
+	// EMPTY CARTLIST, TOTAL SHOULD BE ZERO
+	else cartTotal = 0;
 
 	return (
 		<main id="cart">
@@ -21,8 +32,6 @@ function Cart({ cartList, setCartList }) {
 									item={item}
 									cartList={cartList}
 									setCartList={setCartList}
-									cartTotal={cartTotal}
-									setCartTotal={setCartTotal}
 								/>
 							);
 						})

@@ -6,21 +6,8 @@ import Header from './Header';
 import Cart from './Cart';
 import Footer from './Footer';
 
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
-// console.log(initialStoreItems);
-
 export default function App() {
-	const [cartList, setCartList] = useState([]);
+	const [cartList, setCartList] =useState([]); 
 
 	return (
 		<>
@@ -35,8 +22,6 @@ export default function App() {
 			<Cart
 				cartList={cartList}
 				setCartList={setCartList}
-				//
-				//
 			/>
 
 			<Footer />

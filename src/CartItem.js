@@ -1,4 +1,4 @@
-function CartItem({ item, cartList, setCartList, cartTotal, setCartTotal }) {
+function CartItem({ item, cartList, setCartList }) {
 	// item is the iteration of cartList
 
 	const increaseItem = () => {
@@ -7,7 +7,6 @@ function CartItem({ item, cartList, setCartList, cartTotal, setCartTotal }) {
 		updatedList[updatedList.indexOf(item)].quantity += 1;
 
 		setCartList(updatedList);
-		updateTotal();
 	};
 	const decreaseItem = () => {
 		let updatedList = [...cartList];
@@ -23,12 +22,8 @@ function CartItem({ item, cartList, setCartList, cartTotal, setCartTotal }) {
 		}
 
 		setCartList(updatedList);
-
-		updateTotal();
 	};
-	const updateTotal = () => {
-		console.log('Update total');
-	};
+	
 
 	return (
 		<li>
