@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+// import storeItems from './StoreItems.js'
+// import InsideCart from './InsideCart.js'
 
 /*
 Here's what a store item should look like
@@ -18,6 +21,7 @@ console.log(initialStoreItems)
 
 export default function App() {
   // Setup state here...
+  // cosnt [cartItem, setCartItem] =useState(cartArray)
 
   return (
     <>
@@ -25,6 +29,17 @@ export default function App() {
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
           {/* Wrtite some code here... */}
+          {/* <StoreItems /> */}
+          {initialStoreItems.map((item) =>
+            <li>
+              <div class="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+              </div>
+              <button>Add to cart</button>
+            </li>
+          )}
+
+
         </ul>
       </header>
       <main id="cart">
