@@ -1,29 +1,40 @@
 import { useState } from 'react'
-import initialStoreItems from './store-items'
 
-//props.cartItems
+import storeItems from './store-items'
+//storeItems = [array of initialStoreItems]
+
+
+
 function StoreSection(props) {
-    //maybe?
-    // const storeItems = initialStoreItems
+    const [storeItem, setStoreItem] = useState('name')
 
     return (
         <header id="store">
             <h1>Greengrocers</h1>
             <ul className="item-list store--item-list">
-                {initialStoreItems.map((item) =>
+                {storeItems.map((item) =>
                     <li>
                         <div class="store--item-icon">
                             <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
                         </div>
-                        <button onClick={() =>
-                            console.log("item clicked:", `${item.name}`)
-                            //if not already in cartarray props.cart? (then later cart ={cart})
+                        {/* <button onClick={addItemToCart}>Add to cart</button> */}
+                        <button onClick={() => {
+                            console.log("you clicked:", item.name)
+                            const pushedToCart = []
+        
+                            //need to add a quantity key
+                            props.cart.push({ ...item, quantity: 1 })
+                            console.log("item pushed into cart = []:", pushedToCart)
+                            //now to add this to the cart array in app.js/copy and replace and rerender
 
-                            // {props.setCartItem}([ ...InsideCart[i], quantity: 1])
-                        }>Add to cart</button>
+                            console.log("props.cart", props.cart)
+                        }
+
+                        }>
+                            Add to cart</button>
                     </li>
                 )}
-        </ul>
+            </ul>
         </header >
     )
 }
