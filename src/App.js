@@ -5,6 +5,8 @@ import './styles/index.css'
 
 
 import Store from './Store'
+import Item from './Item';
+import CartItem from './Cart-Item';
 
 
 
@@ -22,19 +24,55 @@ What should a cart item look like? 🤔
 // console.log(initialStoreItems)
 
 export default function App() {
-  const [cartItems, setCartItems] = useState(cartItems)
-  function addToCart(item){
-    const itemPresent = cartItems.find(itemInCart => 
-      itemInCart.id === item.id 
-    )
-    if(itemPresent) {
-      const other = cartItems.filter(itemInCart => itemInCart.id !== item.id)
-      itemPresent.quantity += 1
-      setCartItems([...other, itemPresent])
-      console.log(cartItems)
+  const [cart, setCartItems] = useState([])
+  const addToCart = newItem => {
+    if (cart.find(item => item.id === newItem.id)) {
+
+      const updateQuantity = cart.map(item => {
+        console.log(item)
+        if (item.id === newItem.id) {
+          return { ...item, quantity: item.quantity + 1 }
+        }
+        else {
+          return item
+        }
+      })
+      setCartItems(updateQuantity)
+      console.log('items is already in cart', cart)
+    }
+    else {
+      const itemToAdd = { ...newItem, quantity: 1 }
+      setCartItems([...cart, itemToAdd])
+      console.log('new Item in Cart', cart)
     }
   }
 
+  const handleDecrement = removeItem => {
+    const updateQuantitySubb = cart.map(item => {
+      if (item.id === removeItem.id) {
+        const quantityDecrement = { ...item, quantity: item.quantity - 1 }
+        if (removeItem.quantity === 1) {
+          return ''
+        }
+        else {
+          return quantityDecrement
+        }
+      }
+      return item
+    })
+    setCartItems(updateQuantitySubb.filter(item => item !== ''))
+
+  }
+  const handleIncrement = item => {
+    const updatedCart = cart.map(cartItem => {
+      if (item.id === cartItem.id) {
+        return { ...cartItem, quantity: cartItem.quantity + 1 }
+      }
+      return cartItem
+    })
+    setCartItems(updatedCart)
+  }
+  
   return (
     <>
       <header id="store">
@@ -45,7 +83,9 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
+            {cart.map((item, index) => (
+              <CartItem cartItem={item} key={index} handleIncrement={handleIncrement} handleDecrement={handleDecrement} />
+            ))}
           </ul>
         </div>
         <div className="total-section">
