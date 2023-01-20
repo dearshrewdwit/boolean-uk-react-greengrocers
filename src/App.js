@@ -10,13 +10,14 @@ import InsideCart from './InsideCart.js'
 
 export default function App() {
   // Setup state here...
-  // cosnt [cartItem, setCartItem] =useState(cartArray)
+  const cart = [];
+  const [cartItem, setCartItem] = useState(cart);
 
   return (
     <>
-      <StoreSection />
+      <StoreSection setCartItem={setCartItem}/>
 
-      <InsideCart />
+      <InsideCart cart={cart} />
 
       <div>
         Icons made by
