@@ -1,12 +1,13 @@
 function Store(props) {
   const listOfFruits = props.storeItems
+  const sendItemsToCart = props.cartItems
 
   return (
     <>
       {listOfFruits.map((fruit, index) => (
-        <li>{fruit.id}
-            <img src={`./assets/icons/${fruit.id}.svg`}></img>
-            <button>Add To Cart</button>
+        <li>
+            <img className="store--item-icon " src={`./assets/icons/${fruit.id}.svg`}></img>
+            <button onClick={() => sendItemsToCart(fruit)} >Add To Cart</button>
         </li>
       ))}
     </>
