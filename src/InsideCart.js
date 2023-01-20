@@ -1,15 +1,28 @@
-// import  {useState} from "react";
+import  {useState} from "react";
 
 // import Total from "./Total.js"
 
-// function InsideCart() {
-// return (
-//     // buncha code to render the cart list item
+function InsideCart() {
+return (
+    <main id="cart">
+    <h2>Your Cart</h2>
+    <div className="cart--item-list-container">
+      <ul className="item-list cart--item-list">
+        {/* Wrtite some code here... */}
+      </ul>
+    </div>
+    <div className="total-section">
+      <div>
+        <h3>Total</h3>
+      </div>
+      <div>
+        <span className="total-number">£0.00</span>
+      </div>
+    </div>
+  </main>
+    // <Total />
+)
 
+}
 
-//     <Total />
-// )
-
-// }
-
-// export default InsideCart;
+export default InsideCart;

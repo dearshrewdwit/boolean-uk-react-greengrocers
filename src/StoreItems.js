@@ -1,11 +1,26 @@
-// import { useState } from "react"
-// import initialStoreItems from './store-items'
+import initialStoreItems from './store-items'
 
-// function StoreItems() {
-//     const [storeItem, setStoreItem] = useState(initialStoreItems)
-//     const groceryItems = state.items
+function StoreSection() {
 
-// console.log("StoreItems", initialStoreItems)
- 
-// }
+    const handleClick = () => {
+        
+    }
 
+return (
+    <header id="store">
+        <h1>Greengrocers</h1>
+        <ul className="item-list store--item-list">
+          {initialStoreItems.map((item) =>
+            <li>
+              <div class="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+              </div>
+              <button>Add to cart</button>
+            </li>
+          )}
+        </ul>
+      </header>
+)
+}
+
+export default StoreSection
