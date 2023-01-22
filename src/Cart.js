@@ -1,18 +1,20 @@
+import { useState } from "react"
+import App from "./App"
+
 function Cart(props) {
-  const cartItems = props.itemsForCart
-  console.log(cartItems)
+    const cartItemList = props.cartItems
 
   return (
     <>
-      {/* {cartItems.map((cartFruit, index) => (
-        <li>
-          <img src={`./assets/icons/${cartItems.id}.svg`}></img>
-          <p>{cartItems.name}</p>
-          <button>-</button>
-          <p></p>
-          <button>+</button>
+      {cartItemList.map((cartFruit, index) => (
+        <li key={index}>
+          <img src={`./assets/icons/${cartFruit.id}.svg`}></img>
+          <p>{cartFruit.name}</p>
+          <button onClick={() => setCartQuantity(cartQuantity - 1)}>-</button>
+          <p>{cartFruit.quantity}</p>
+          <button onClick={() => props.handleQuantity(cartFruit)}>+</button>
         </li>
-      ))} */}
+      ))}
     </>
   )
 }

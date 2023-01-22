@@ -15,10 +15,3 @@ function Store(props) {
 }
 
 export default Store
-
-// {listOfFruits.map((fruit, index) => (
-//     <li key={index} className={fruit.name}>
-//         <img></img>
-//         <button></button>
-//     </li>
-// ))}
