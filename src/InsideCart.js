@@ -11,7 +11,7 @@ function InsideCart(props) {
         <ul className="item-list cart--item-list">
           {/* Wrtite some code here... */}
           { props.cart.map((item) =>
-              <li>
+              <li key={item.id}>
                 <img
                   className="cart--item-icon"
                   src={`/assets/icons/${item.id}.svg`}
@@ -23,8 +23,6 @@ function InsideCart(props) {
                 <button className="quantity-btn add-btn center">+</button>
               </li>
             )}
-            
-            {console.log("cart length:", props.cart.length)}
         </ul>
       </div>
 
