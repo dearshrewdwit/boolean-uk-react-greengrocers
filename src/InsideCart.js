@@ -1,17 +1,15 @@
 import { useState } from "react";
 
-import Total from "./Total.js";
 
 function InsideCart(props) {
-  //cartItem
   return (
-    <main id="cart">
+    <div id="cart">
       <h2>Your Cart</h2>
       <div className="cart--item-list-container">
         <ul className="item-list cart--item-list">
           {/* Wrtite some code here... */}
-          {props.cart.map((item) =>
-            <li key={item.index}>
+          {props.cart.map((item, index) =>
+            <li key={index}>
               <img
                 className="cart--item-icon"
                 src={`/assets/icons/${item.id}.svg`}
@@ -35,6 +33,7 @@ function InsideCart(props) {
                     console.log("props.cart after- when quantity is  0:", cartMinusItem)
                   }
                   console.log("props.cart after -", props.cart)
+                  props.handleTotal()
                 }
                 }
               >-</button>
@@ -48,6 +47,8 @@ function InsideCart(props) {
                   // update the cart
                   props.setCartItem(increasedCart)
                   console.log("props.cart after +", props.cart)
+
+                  props.handleTotal()
                 }}
               >+</button>
             </li>
@@ -55,10 +56,7 @@ function InsideCart(props) {
 
         </ul>
       </div>
-
-      <Total />
-
-    </main>
+    </div>
   )
 }
 

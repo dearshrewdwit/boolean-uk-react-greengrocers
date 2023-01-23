@@ -1,6 +1,6 @@
 function Acknowledgements() {
     return (
-        <div>
+        <footer>
         Icons made by
         <a
           href="https://www.flaticon.com/authors/icongeek26"
@@ -12,7 +12,7 @@ function Acknowledgements() {
         <a href="https://www.flaticon.com/" title="Flaticon">
           www.flaticon.com
         </a>
-      </div>
+      </footer>
     )
 }
 
