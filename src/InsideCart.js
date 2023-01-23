@@ -2,6 +2,7 @@ import { useState } from "react";
 
 
 function InsideCart(props) {
+  console.log('checkwtfthecartishere', props.cart)
   return (
     <div id="cart">
       <h2>Your Cart</h2>

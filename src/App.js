@@ -20,9 +20,9 @@ export default function App() {
     cart.map((item) => {
       let total = 0
       let totalOfEachItem = item.price * item.quantity
-      console.log("totalOfEachItem", totalOfEachItem)
+      // console.log("totalOfEachItem", totalOfEachItem)
       total += totalOfEachItem
-     console.log("total after calculation", total)
+    //  console.log("total after calculation", total)
 
       setTotalCart(total.toFixed(2))
 

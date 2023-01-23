@@ -18,20 +18,28 @@ function StoreSection(props) {
 
                         <button onClick={() => {
                             console.log("you clicked:", item.name)
-                            console.log("you clicked check props.cart:", props.cart)
-
+                            // console.log("you clicked check props.cart:", props.cart)
+                          
+                            // for (let i = 0; i < props.cart.length; i++) {
+                            //     const inCartItem = props.cart[i]
+                            //     // console.log('before if to fill undefined  statement')
+                            //     if (inCartItem.id === item.id) {
+                            //         existingCartItem = inCartItem
+                            //         props.setCartItem(existingCartItem)
+                            //         break
+                            //     }
+                            // }
 
                             //if item.id === same as in cart, update the inner quantity
                             let existingCartItem = undefined
-                            for (let i = 0; i < props.cart.length; i++) {
-                                const inCartItem = props.cart[i]
-                                console.log('before if to fill undefined  statement')
-                                if (inCartItem.id === item.id) {
-                                    existingCartItem = inCartItem
-                                    props.setCartItem(existingCartItem)
-                                    break
+                            const updateExistingCart = props.cart.map(function (item) {
+                                const existingCartItem = [...props.cart]
+                                if (existingCartItem === item.id) {
+                                    return { ...props.cart, quantity: ++quantity }
                                 }
-                            }
+                                props.setCartItem(updateExistingCart)
+
+                            })
 
                             if (existingCartItem !== undefined) {
                                 console.log('You clicked on existing item! cart size:', props.cart.length)
@@ -39,15 +47,16 @@ function StoreSection(props) {
                                 // increment
                                 // const stillExistingCartItem = [...props.cart]
                                 existingCartItem.quantity += 1
+
                                 props.setCartItem(existingCartItem)
 
-                                console.log('You clicked on existing item! props.cart item quantity:', props.cart)
+                                // console.log('You clicked on existing item! props.cart item quantity:', props.cart)
                                 props.handleTotal()
                             }
 
                             else {
                                 //need to add a quantity key
-                                console.log("item pushed into cart = []:", props.cart)
+                                // console.log("item pushed into cart = []:", props.cart)
 
                                 //now to add this to the cart array in app.js/copy and replace and rerender
                                 const newCart = [...props.cart] // copy the cart contents, creating a new array
@@ -58,9 +67,9 @@ function StoreSection(props) {
                                 props.setCartItem(newCart)
 
                                 props.handleTotal()
-                                console.log("props.cart", props.cart)
+                                // console.log("props.cart", props.cart)
                             }
-                        }} 
+                        }}
                         > Add to cart</button>
                     </li>
                 )}
