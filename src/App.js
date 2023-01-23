@@ -5,6 +5,7 @@ import Cart from './Cart.js'
 import { useState } from 'react'
 
 import initialStoreItems from './store-items'
+import Total from './Total'
 // LOGIC -
 // Store items are within store-items.js / this is like the state in the last challenge
 // 2.) Render Store items with .map function (I think this should be done in another component file??)
@@ -35,6 +36,7 @@ import initialStoreItems from './store-items'
 export default function App() {
   const [storeItems, setStoreItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
+  // const [updatedCartItemsState, setUpdatedCartItemsState] = useState([])
 
   const handleAddToCart = fruit => {
     const newCartItems = [...cartItems]
@@ -49,11 +51,21 @@ export default function App() {
     }
   };
 
-  const handleQuantity = cartFruit => {
-    console.log(cartFruit)
-    const updatedCartItem = cartFruit
-    console.log(cartItems, cartFruit)
+  const handleQuantityIncrease = cartFruit => {
+    const updatedCartItems = [...cartItems]
+    cartFruit.quantity++
+    setCartItems(updatedCartItems)
+  }
 
+  const handleQuantityDecrease = cartFruit => {
+    const updatedCartItems = [...cartItems]
+    cartFruit.quantity--
+    if (cartFruit.quantity >= 1){
+      setCartItems(updatedCartItems)
+    } else {
+      const cartWithoutFruit = cartItems.filter((fruit) => fruit.id !== cartFruit.id)
+      setCartItems(cartWithoutFruit)
+    }
   }
 
 
@@ -69,17 +81,10 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            <Cart cartItems={cartItems} handleQuantity={handleQuantity} />
+            <Cart cartItems={cartItems} handleQuantityIncrease={handleQuantityIncrease} handleQuantityDecrease={handleQuantityDecrease} />
           </ul>
         </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
+        <Total cartItems={cartItems}/>
       </main>
       <div>
         Icons made by

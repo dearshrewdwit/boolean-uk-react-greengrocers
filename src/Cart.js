@@ -1,4 +1,3 @@
-import { useState } from "react"
 import App from "./App"
 
 function Cart(props) {
@@ -10,9 +9,9 @@ function Cart(props) {
         <li key={index}>
           <img src={`./assets/icons/${cartFruit.id}.svg`}></img>
           <p>{cartFruit.name}</p>
-          <button onClick={() => setCartQuantity(cartQuantity - 1)}>-</button>
+          <button onClick={() => props.handleQuantityDecrease(cartFruit)}>-</button>
           <p>{cartFruit.quantity}</p>
-          <button onClick={() => props.handleQuantity(cartFruit)}>+</button>
+          <button onClick={() => props.handleQuantityIncrease(cartFruit)}>+</button>
         </li>
       ))}
     </>
