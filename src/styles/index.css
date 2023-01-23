@@ -35,6 +35,14 @@ button {
   text-align: center;
 }
 
+.filter-buttons {
+    display: grid;
+    grid-template-columns: 150px 150px 150px;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
 .store--item-list {
   display: grid;
   grid-template-columns: repeat(4, 125px);
@@ -51,7 +59,26 @@ button {
 .store--item-icon {
   width: 125px;
   height: 125px;
+  position: relative;
 }
+
+/* .store-item-details {
+    display: grid;
+    place-items: center;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border: 1px #00675b solid;
+    position: absolute;
+    top: 1px;
+    border-radius: 10px;
+    
+} */
+
+/* .hidden {
+    display: none;
+} */
 
 @media only screen and (max-width: 600px) {
   .store--item-list {
