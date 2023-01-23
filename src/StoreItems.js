@@ -4,8 +4,8 @@ import storeItems from './store-items'
 //storeItems = [array of initialStoreItems]
 
 function StoreSection(props) {
-    const [storeItem, setStoreItem] = useState('name')
-
+    const [storeItem, setStoreItem] = useState(storeItems)
+    
     return (
         <header id="store">
             <h1>Greengrocers</h1>
@@ -38,19 +38,18 @@ function StoreSection(props) {
                                 existingCartItem.quantity += 1
                                 props.setCartItem(existingCartItem)
 
-                                console.log('You clicked on existing item! props.cart item quantity:', props.cartItem)
+                                console.log('You clicked on existing item! props.cart item quantity:', props.cart)
                             }
 
                             else {
                                 //need to add a quantity key
-                                props.cart.push({ ...item, quantity: 1 })
                                 console.log("item pushed into cart = []:", props.cart)
 
                                 //now to add this to the cart array in app.js/copy and replace and rerender
                                 const newCart = [...props.cart] // copy the cart contents, creating a new array
                                 // add a new cart item, by copying the current item and adding a quantity property and pushing it
                                 // into the new cart
-                                newCart.push({ ...item })
+                                newCart.push({ ...item, quantity: 1})
                                 // update the cart
                                 props.setCartItem(newCart)
 

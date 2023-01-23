@@ -3,7 +3,7 @@ import { useState } from "react";
 import Total from "./Total.js";
 
 function InsideCart(props) {
-
+  //cartItem
   return (
     <main id="cart">
       <h2>Your Cart</h2>
@@ -11,7 +11,7 @@ function InsideCart(props) {
         <ul className="item-list cart--item-list">
           {/* Wrtite some code here... */}
           {props.cart.map((item) =>
-            <li key={item.id}>
+            <li key={item.index}>
               <img
                 className="cart--item-icon"
                 src={`/assets/icons/${item.id}.svg`}
@@ -21,46 +21,45 @@ function InsideCart(props) {
               <button className="quantity-btn remove-btn center"
                 onClick={() => {
                   console.log("item when - button clicked:", item)
-                  if (item.quantity <= 0) {
+                  const reducedCart = [...props.cart]
+                  item.quantity--
+                  if (item.quantity >= 1) {
+                    props.setCartItem(reducedCart)
+                  }
+                  else {
                     console.log('There are 0', item.name, 'left')
                     //remove the cart item from props.cart, and update setCart
-                    const reducedCart = props.cart.filter(item => item.quantity !== 0);
-                    props.setCartItem(reducedCart)
-                  
-                    console.log('cart should not have item with quantity 0', reducedCart)
-                  } else {
-                    item.quantity--
-                  props.setCartItem(...props.cart)
+                    const cartMinusItem = props.cart.filter((veg) => veg.id !== item.id);
+                    props.setCartItem(cartMinusItem)
+
+                    console.log("props.cart after- when quantity is  0:", cartMinusItem)
                   }
-                  // update the cart
-                  // props.setCartItem(...props.cart)
                   console.log("props.cart after -", props.cart)
-                }}
+                }
+                }
               >-</button>
               <span className="quantity-text center">{item.quantity}</span>
               <button className="quantity-btn add-btn center"
                 onClick={() => {
                   console.log("item when + button clicked:", item)
+                  const increasedCart = [...props.cart]
                   item.quantity++
 
                   // update the cart
-                  props.setCartItem(
-                    ...props.cart
-                  )
-
+                  props.setCartItem(increasedCart)
                   console.log("props.cart after +", props.cart)
                 }}
               >+</button>
             </li>
           )}
-          
+
         </ul>
       </div>
 
       <Total />
+
     </main>
   )
-
 }
 
 export default InsideCart;
