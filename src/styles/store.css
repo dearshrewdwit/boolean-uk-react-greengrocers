@@ -1,0 +1,37 @@
+.details {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 25vw;
+
+    padding: 1rem;
+
+    background-color: white;
+    border: 0px;
+    border-radius: 10px;
+
+    box-shadow: 3px 3px 9px black;
+}
+
+.details .info {
+    margin: 1rem .5rem;
+}
+
+.details button {
+    display: flex;
+    margin: .5rem auto;
+}
+
+.details #close {
+    position: absolute;
+    right: 1rem;
+    color: black;
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.details h2 {
+    text-align: center;
+    text-transform: capitalize;
+}

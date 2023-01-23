@@ -15,7 +15,7 @@ const storeItems =  [
   {
     id: "003-apple",
     name: "apple",
-    price: 0.35,
+    price: 0.55,
     type: 'fruit'
   },
   {
@@ -57,7 +57,7 @@ const storeItems =  [
   {
     id: "010-eggplant",
     name: "eggplant",
-    price: 0.35,
+    price: 0.15,
     type: 'fruit'
   }
 ]

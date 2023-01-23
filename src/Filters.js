@@ -2,7 +2,7 @@ import './styles/filters.css'
 import { gsap } from 'gsap'
 import { useEffect, useRef, useLayoutEffect } from 'react'
 
-const  Filters = ({showFilters, selectedFilters, setSelectedFilters}) => {
+const  Filters = ({showFilters, selectedFilters, setSelectedFilters, setSortType}) => {
 
     let width = 0
     const tl = useRef()
@@ -40,6 +40,14 @@ const  Filters = ({showFilters, selectedFilters, setSelectedFilters}) => {
     return (
         <div className="filters" ref={filters} >
             
+            <select name="list-style" id="list-style" onChange={(e)=> {setSortType(e.target.value)}}>
+                <option value="">Default</option>
+                <option value="AtoZ">A to Z</option>
+                <option value="ZtoA">Z to A</option>
+                <option value="lowToHigh">Price: low to high</option>
+                <option value="highToLow">Price: high to low</option>
+            </select>
+
             <form>
                 <input type='checkbox' name='fruit' onChange={()=>updateFilters('fruit')}/>
                 <label htmlFor='fruit'>Fruit</label>

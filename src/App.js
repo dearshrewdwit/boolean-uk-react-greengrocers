@@ -16,6 +16,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([])
   const [showFilters, setShowFilters] = useState(false)
   const [selectedFilters, setSelectedFilters] = useState([])
+  const [sortType, setSortType] = useState('')
 
   const addItemToCart = (item) => {
     if (!cartItems.includes(item)) {
@@ -58,11 +59,13 @@ export default function App() {
           showFilters={showFilters}
           selectedFilters={selectedFilters}
           setSelectedFilters={setSelectedFilters}
+          setSortType={setSortType}
           />
         </div>
         <Store 
         addItemToCart={addItemToCart}
         selectedFilters={selectedFilters}
+        sortType={sortType}
         />
       </header>
       <main id="cart">
