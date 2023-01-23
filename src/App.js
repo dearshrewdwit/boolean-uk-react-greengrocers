@@ -22,64 +22,88 @@ What should a cart item look like? 🤔
 export default function App() {
   // STATES
   const [store, setStore] = useState(initialStoreItems)
-  const [cart, setCart] = useState([
-    /* {
-      id: '002-carrot',
-      name: 'carrot',
-      price: 0.35,
-      quantity: 1
-    },
-    {
-      id: '006-bananas',
-      name: 'bananas',
-      price: 0.35,
-      quantity: 1
-    } */
-  ])
+  const [cart, setCart] = useState([])
   const [total, setTotal] = useState(0.0)
 
-  console.log('the cart is: ', cart)
+  // console.log('the cart is: ', cart)
 
   // Check if item is already in cart
   // <StoreItem/> Will need to access addToCart via props
   // If not in cart: add to cart state
 
-  const addToCart = targetStoreItem => {
-    console.log('Add to cart: ', targetStoreItem)
-    // Check if item is already in cart
-    let alreadyInCart = false
+  const incrementQuantity = id => {
+    console.log('ID: ', id)
     cart.forEach(cartItem => {
-      if (cartItem.id === targetStoreItem.id) {
-        console.log(targetStoreItem.name, ' is already in cart!')
-        alreadyInCart = true
+      if (cartItem.id === id) {
+        cartItem.quantity += 1
       }
     })
+    setCart([...cart])
+  }
 
-    // Executes if the item is already in cart
-    if (alreadyInCart) {
-      const cartUpdatedQuantity = cart.map(cartItem => {
-        // For the target item, increase the quantity by 1
-        if (cartItem.id === targetStoreItem.id) {
-          const updatedcartItem = { ...cartItem }
-          updatedcartItem.quantity += 1
-          console.log('updatedCartItem: ', updatedcartItem)
-          return updatedcartItem
-        } else {
-          return cartItem
+  const decrementQuantity = id => {
+    console.log('ID: ', id)
+    cart.forEach((cartItem, index) => {
+      if (cartItem.id === id) {
+        cartItem.quantity -= 1
+        if (!cartItem.quantity) {
+          cart.splice(index, 1)
+        }
+      }
+    })
+    setCart([...cart])
+  }
+  const addToCart = newCartItem => {
+    console.log('Add to cart: ', newCartItem)
+    // changing quantity
+    if (!newCartItem.quantity) {
+      newCartItem.quantity = 1
+      cart.push(newCartItem)
+      // console.log('HELLO!!', newCartItem)
+    } else {
+      cart.forEach(cartItem => {
+        if (cartItem.id === newCartItem.id) {
+          // console.log(newCartItem.name, ' is already in cart!')
+          cartItem.quantity += 1
         }
       })
-      setCart(cartUpdatedQuantity)
-    } else {
-      // If the item is NOT in cart
-      targetStoreItem.quantity = 1
-      setCart([...cart, targetStoreItem])
     }
+    // console.log('CART: ', cart)
+    setCart([...cart])
+
+    // LONG VERSION
+    // Executes if the item is already in cart
+    // if (alreadyInCart) {
+    /* const cartUpdatedQuantity = cart.map(cartItem => {
+      // For the target item, increase the quantity by 1
+      if (cartItem.id === storeItem.id) {
+        // const updatedcartItem = { ...cartItem }
+        // updatedcartItem.quantity += 1
+        cartItem.quantity += 1
+
+        console.log('updatedCartItem: ', cartItem)
+        return cartItem
+      } else {
+        storeItem.quantity = 1
+        return cartItem
+      }
+    }) */
+
+    // } else {
+    // If the item is NOT in cart
+    // storeItem.quantity = 1
+    // setCart([...cart, storeItem])
+    // }
   }
 
   return (
     <>
       <Store store={store} setStore={setStore} addToCart={addToCart} />
-      <Cart cart={cart} />
+      <Cart
+        cart={cart}
+        incrementQuantity={incrementQuantity}
+        decrementQuantity={decrementQuantity}
+      />
       <div>
         Icons made by
         <a

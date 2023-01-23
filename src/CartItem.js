@@ -9,9 +9,19 @@ function CartItem(props) {
       <p>{`${props.cartItem.name}`}</p>
       {/* Add onClick's for decrementer and incrementer */}
       {/* Change the quantity, e.g. props.cartItem.quantity */}
-      <button className="quantity-btn remove-btn center">-</button>
-      <span className="quantity-text center">1</span>
-      <button className="quantity-btn add-btn center">+</button>
+      <button
+        onClick={() => props.decrementQuantity(props.cartItem.id)}
+        className="quantity-btn remove-btn center"
+      >
+        -
+      </button>
+      <span className="quantity-text center">{props.cartItem.quantity}</span>
+      <button
+        onClick={() => props.incrementQuantity(props.cartItem.id)}
+        className="quantity-btn add-btn center"
+      >
+        +
+      </button>
     </li>
   )
 }
