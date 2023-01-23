@@ -3,10 +3,9 @@ import { useState } from 'react';
 import './styles/reset.css'
 import './styles/index.css'
 
-
 import Store from './Store'
-import Item from './Item';
 import CartItem from './Cart-Item';
+import Total from './Total';
 
 
 
@@ -25,6 +24,7 @@ What should a cart item look like? 🤔
 
 export default function App() {
   const [cart, setCartItems] = useState([])
+  
   const addToCart = newItem => {
     if (cart.find(item => item.id === newItem.id)) {
 
@@ -72,7 +72,7 @@ export default function App() {
     })
     setCartItems(updatedCart)
   }
-  
+
   return (
     <>
       <header id="store">
@@ -88,14 +88,7 @@ export default function App() {
             ))}
           </ul>
         </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
+        <Total cart={cart} />
       </main>
       <div>
         Icons made by
