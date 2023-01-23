@@ -1,8 +1,11 @@
+import { useState } from "react"
+
 function Total() {
     //if (cartArray.length === 0) {let total = £0}
     //else (calulate the quantity * price inside each array, 
     //THEN take those new totals and add those together for final total to display )
     //remember toFloor(2) for decimals
+
 
     return (
         <div className="total-section">
@@ -10,7 +13,7 @@ function Total() {
                 <h3>Total</h3>
             </div>
             <div>
-                <span className="total-number">£0.00</span>
+                <span className="total-number">£0</span>
             </div>
         </div>
     )
