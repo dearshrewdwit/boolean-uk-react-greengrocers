@@ -1,5 +1,27 @@
 import initialStoreItems from './store-items'
+import {useState} from 'react'
 export default function Filtering({setStoreItem}) {
+
+    const [filteredArray, setFilteredArray] = useState(initialStoreItems)
+    function sortAToZ(a, b) {
+        if ( a.name < b.name ){
+            return -1;
+          }
+          if ( a.name > b.name ){
+            return 1;
+          }
+          return 0;
+    }
+    function sortZtoA(a, b) {
+        if ( a.name > b.name ){
+            return -1;
+          }
+          if ( a.name < b.name ){
+            return 1;
+          }
+          return 0;
+    }
+    
     return (
         <div className="filter-buttons">
         <button
@@ -12,6 +34,7 @@ export default function Filtering({setStoreItem}) {
                     return false
                 }
             })
+            setFilteredArray(fruitItems)
             setStoreItem(fruitItems)
         }}
         >Fruit</button>
@@ -25,14 +48,30 @@ export default function Filtering({setStoreItem}) {
                     return false
                 }
             })
+            setFilteredArray(vegItems)
             setStoreItem(vegItems)
         }}
         >Vegetables</button>
         <button
         onClick={() => {
+            setFilteredArray(initialStoreItems)
             setStoreItem(initialStoreItems)
         }}
         >All</button>
+        <button
+        onClick={() => {
+            const sortThisArray = [...filteredArray]
+            const alphabetArray = sortThisArray.sort(sortAToZ)
+            setStoreItem(alphabetArray)
+        }}
+        >A to Z</button>
+        <button
+        onClick={() => {
+            const sortThisArray = [...filteredArray]
+            const alphabetArray = sortThisArray.sort(sortZtoA)
+            setStoreItem(alphabetArray)
+        }}
+        >Z to A</button>
     </div> 
     )
 }
