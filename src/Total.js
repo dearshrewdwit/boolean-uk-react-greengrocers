@@ -1,17 +1,14 @@
 import { useState } from 'react'
 
-function Total(props) {
-//   const [total, setTotal] = useState(0)
+function Total(props) { 
 
-//   const total = props.cartItems.reduce(
-//     (prevValue, currentValue) => prevValue + currentValue.quantity,
-//     0
-//   )
+  let total = 0
 
-const total = props.cartItems.reduce(
-    (prevValue, currentValue) => prevValue + currentValue.quantity,
-    0
-  )
+  props.cartItems.map(getTotal)
+  function getTotal(fruit) {
+    let totalPerItem = fruit.quantity * fruit.price
+    total += totalPerItem
+  }
 
   return (
     <>
@@ -20,7 +17,7 @@ const total = props.cartItems.reduce(
           <h3>Total</h3>
         </div>
         <div>
-          <span className="total-number">{total}</span>
+          <span className="total-number">£{total.toFixed(2)}</span>
         </div>
       </div>
     </>
