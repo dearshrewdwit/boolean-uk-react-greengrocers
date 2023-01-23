@@ -23,7 +23,7 @@ console.log(initialStoreItems)
 export default function App() {
   // Setup state here...
 const [storeItem, setStoreItem] = useState(initialStoreItems)
-const [cartItem, setCartItems] = useState ([])
+const [cartItems, setCartItems] = useState ([])
 
 
 // by using the button "add to cart"
@@ -35,25 +35,59 @@ const itemsInStore = storeItem.find(items =>
   {
     return items.id === item.target.id
   }) 
-  const itemInCart = cartItem.find(itemInCart => {
+  const itemInCart = cartItems.find(itemInCart => {
       return itemInCart.id === item.target.id
       })
       if (itemInCart) {
         itemInCart.quantity++
-            setCartItems([...cartItem])
+            setCartItems([...cartItems])
           } else {
             let newCartItem = { ...itemsInStore, quantity: 1 }
-            setCartItems([...cartItem, newCartItem])
+            setCartItems([...cartItems, newCartItem])
           }
 }
 
 const CalculateCartTotal = () => {
   let currentTotal = 0
-  cartItem.map(itemInCart => {
+  cartItems.forEach(itemInCart => {
     currentTotal += itemInCart.quantity * itemInCart.price
   })
 console.log(currentTotal)
   return currentTotal.toFixed(2)
+}
+  //  increase the quantity of items
+const handleIncrement = cartItem => {
+
+  const newCartItems = cartItems.map(targetCartItem => {
+    if (targetCartItem.name === cartItem.name) {
+    console.log("increase item", targetCartItem)
+      return {...targetCartItem, quantity: targetCartItem.quantity +1}
+    } else {
+      return targetCartItem
+    }
+  })
+ 
+  setCartItems(newCartItems)
+}
+// decrement button
+// check if the quqntity is more than 1 ,implement decrese 1
+// otherwise if it is equal to 1 remove from cart
+const handleDecrement =cartItem =>{
+  if(cartItem.quantity > 1) {
+    const newCartItems = cartItems.map(targetCartItem => {
+      if(targetCartItem.name === cartItem.name && targetCartItem.quantity) {
+        return {...targetCartItem, quantity:targetCartItem.quantity -1}
+      }
+      return targetCartItem
+    })
+    setCartItems(newCartItems)
+   
+  }else {
+    const removeItem = cartItems.filter(targetCartItem =>
+      targetCartItem.name !== cartItem.name)
+      setCartItems(removeItem)
+  
+  }
 }
 
   return (
@@ -68,6 +102,7 @@ console.log(currentTotal)
           name={items.name}
           price={items.price}
           addItemCart ={addItemCart}
+          
           />
           ))}
         </ul>
@@ -77,14 +112,15 @@ console.log(currentTotal)
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {/* Wrtite some code here... */}
-            {cartItem.map(itemInCart =>
+            {cartItems.map(itemInCart =>
               (<CartItem
                 id={itemInCart.id}
                 name={itemInCart.name}
                 price={itemInCart.price}
                 quantity={itemInCart.quantity}
                 addItemCart ={addItemCart}
-              
+                handleIncrement = {handleIncrement}
+                handleDecrement = {handleDecrement}
               />
               ))}
           </ul>
