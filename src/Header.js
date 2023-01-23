@@ -4,7 +4,6 @@ import Filtering from './Filtering'
 
 export default function Header({cartItem, setCartItem, priceUpdate}) {
     const [storeItem, setStoreItem] = useState(initialStoreItems)
-    const [showDetails, setShowDetails] = useState(false)
 
     // function capitalise(string) {
     //     return string.charAt(0).toUpperCase() + string.slice(1);
