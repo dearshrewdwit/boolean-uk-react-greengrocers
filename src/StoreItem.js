@@ -1,7 +1,8 @@
 function StoreItem(props) {
-  // Return an li here
-  console.log(props.storeItem.id)
+  // console.log(props.storeItem.id)
+
   return (
+    // A <li> element will be made for each store item, made from the map function in Store.js
     <li>
       <div className="store--item-icon">
         <img
@@ -9,7 +10,10 @@ function StoreItem(props) {
           alt={`${props.storeItem.name}`}
         />
       </div>
-      <button>Add to cart</button>
+      {/* When user clicks the button: */}
+      <button onClick={() => props.addToCart(props.storeItem)}>
+        Add to cart
+      </button>
     </li>
   )
 }

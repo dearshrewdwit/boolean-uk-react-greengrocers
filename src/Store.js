@@ -9,7 +9,11 @@ function Store(props) {
         {/* Have a map here with the <StoreItem /> component inside. Don't forget key={index} */}
         {/* props.filteredStoreItems.map((storeItem, index)) */}
         {props.store.map((storeItem, index) => (
-          <StoreItem storeItem={storeItem} key={index} />
+          <StoreItem
+            storeItem={storeItem}
+            key={index}
+            addToCart={props.addToCart}
+          />
         ))}
       </ul>
     </header>

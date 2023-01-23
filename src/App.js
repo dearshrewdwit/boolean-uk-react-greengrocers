@@ -4,6 +4,7 @@ import './styles/index.css'
 import { useState } from 'react'
 import initialStoreItems from './store-items'
 import Store from './Store'
+import Cart from './Cart'
 
 /*
 Here's what a store item should look like
@@ -21,26 +22,37 @@ What should a cart item look like? 🤔
 export default function App() {
   // STATES
   const [store, setStore] = useState(initialStoreItems)
+  const [cart, setCart] = useState([])
+  const [total, setTotal] = useState(0.0)
+
+  // Check if item is already in cart
+
+  // Both the <StoreItem/> and <Cart/> components will need to access the cart state
+
+  // If not in cart: add to cart state
+  const addToCart = storeItem => {
+    setCart(
+      cart.map(targetStoreItem => {
+        if (targetStoreItem === storeItem) {
+          console.log("It's the same")
+          // If this condition is true, then the item is already in cart
+          // TODO: Call a function that increments the quantity
+        } else {
+          // Else: the item isn't already in the cart
+          return { ...cart, targetStoreItem }
+        }
+      })
+    )
+  }
+
+  // If in cart, increment quantity:
+  // cart.ITEM_TO_INCREMENT
+  // setCart(updatedCart)
 
   return (
     <>
-      <Store store={store} setStore={setStore} />
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Store store={store} setStore={setStore} addToCart={addToCart} />
+      <Cart addToCart={addToCart} />
       <div>
         Icons made by
         <a
