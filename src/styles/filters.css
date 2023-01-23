@@ -1,0 +1,17 @@
+.filters {
+    position: relative;
+
+    margin-top: 15px;
+    padding: 1rem;
+
+    background-color: white;
+    border: solid 1px white;
+    border-radius: 5px;
+}
+
+.filters form {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+}
+

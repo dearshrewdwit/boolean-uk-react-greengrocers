@@ -1,47 +1,78 @@
 import './styles/reset.css'
 import './styles/index.css'
 
-import initialStoreItems from './store-items'
+import { useState } from 'react'
+import Store from './Store.js'
+import Cart from './Cart_Components/Cart'
+import Total from './Cart_Components/Total'
+import Filters from './Filters'
 
 /*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
 What should a cart item look like? 🤔
 */
 
-console.log(initialStoreItems)
-
 export default function App() {
   // Setup state here...
+  const [cartItems, setCartItems] = useState([])
+  const [showFilters, setShowFilters] = useState(false)
+  const [selectedFilters, setSelectedFilters] = useState([])
+
+  const addItemToCart = (item) => {
+    if (!cartItems.includes(item)) {
+      item.quantity = 1
+      cartItems.push(item)
+    } else {
+      item.quantity++
+    }
+    setCartItems([...cartItems])
+    console.log(cartItems)
+  }
+
+  const increaseQuant = (item) => {
+    item.quantity++
+    setCartItems([...cartItems])
+  }
+
+  const decreaseQuant = (item) => {
+    if (item.quantity > 1) {
+      item.quantity--
+      setCartItems([...cartItems])
+    } else {
+      const newCartItems = cartItems.filter((cartItem) => cartItem.id !== item.id)
+      setCartItems([...newCartItems])
+    }
+  }
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters)
+  }
+
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
-        </ul>
+        <div className='filter-btn'>
+          <button onClick={()=>toggleFilters()}>Filters</button>
+          <Filters 
+          showFilters={showFilters}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
+          />
+        </div>
+        <Store 
+        addItemToCart={addItemToCart}
+        selectedFilters={selectedFilters}
+        />
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
+        <Cart 
+          cartItems={cartItems}
+          increaseQuant={increaseQuant}
+          decreaseQuant={decreaseQuant}
+        />
+        <Total cartItems={cartItems}/>
       </main>
       <div>
         Icons made by

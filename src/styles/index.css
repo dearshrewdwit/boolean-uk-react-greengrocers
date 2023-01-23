@@ -1,5 +1,6 @@
 @import "./reset.css";
 
+
 /* Typography */
 
 body {
@@ -181,4 +182,9 @@ button {
     border-top: 2px solid #00675b;
     border-bottom: 2px solid #00675b;
   }
+}
+
+
+.filter-btn {
+  position: absolute;
 }
