@@ -1,3 +1,6 @@
+// Intelligence will tell you that an Eggplant, Bell Pepper, and Avocado are all
+// Fruits. However, Wisdom will tell you to keep them all far away from a
+// fruit salad.
 
 const storeItems =  [
   {
@@ -28,7 +31,7 @@ const storeItems =  [
     id: "005-avocado",
     name: "avocado",
     price: 0.35,
-    type: "fruit"
+    type: "vegetable"
   },
   {
     id: "006-bananas",
@@ -40,7 +43,7 @@ const storeItems =  [
     id: "007-bell-pepper",
     name: "bell pepper",
     price: 0.35,
-    type: "fruit"
+    type: "vegetable"
   },
   {
     id: "008-berry",
@@ -58,7 +61,7 @@ const storeItems =  [
     id: "010-eggplant",
     name: "eggplant",
     price: 0.35,
-    type: "fruit"
+    type: "vegetable"
   }
 ]
 

@@ -57,7 +57,7 @@ export default function Filtering({setStoreItem}) {
             setFilteredArray(initialStoreItems)
             setStoreItem(initialStoreItems)
         }}
-        >All</button>
+        >Reset</button>
         <button
         onClick={() => {
             const sortThisArray = [...filteredArray]

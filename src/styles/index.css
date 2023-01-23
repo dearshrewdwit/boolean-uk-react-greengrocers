@@ -63,16 +63,33 @@ button {
 }
 
 .store-item-details {
-    display: grid;
+    /* display: grid; */
     place-items: center;
     padding: 10px;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 500px;
     background-color: #ffffff;
     border: 1px #00675b solid;
     position: absolute;
-    top: 1px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
     border-radius: 10px;
+}
+
+.store-item-details > p {
+    text-align: center;
+    cursor: pointer;
+}
+
+.store-item-details > h2 {
+    text-align: center;
+}
+
+.store-item-details > .align-me-right {
+    text-align: right;
+    font-weight: bold;
 }
 
 .hidden {
