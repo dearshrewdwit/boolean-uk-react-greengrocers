@@ -22,37 +22,64 @@ What should a cart item look like? 🤔
 export default function App() {
   // STATES
   const [store, setStore] = useState(initialStoreItems)
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([
+    /* {
+      id: '002-carrot',
+      name: 'carrot',
+      price: 0.35,
+      quantity: 1
+    },
+    {
+      id: '006-bananas',
+      name: 'bananas',
+      price: 0.35,
+      quantity: 1
+    } */
+  ])
   const [total, setTotal] = useState(0.0)
 
+  console.log('the cart is: ', cart)
+
   // Check if item is already in cart
-
-  // Both the <StoreItem/> and <Cart/> components will need to access the cart state
-
+  // <StoreItem/> Will need to access addToCart via props
   // If not in cart: add to cart state
-  const addToCart = storeItem => {
-    setCart(
-      cart.map(targetStoreItem => {
-        if (targetStoreItem === storeItem) {
-          console.log("It's the same")
-          // If this condition is true, then the item is already in cart
-          // TODO: Call a function that increments the quantity
+
+  const addToCart = targetStoreItem => {
+    console.log('Add to cart: ', targetStoreItem)
+    // Check if item is already in cart
+    let alreadyInCart = false
+    cart.forEach(cartItem => {
+      if (cartItem.id === targetStoreItem.id) {
+        console.log(targetStoreItem.name, ' is already in cart!')
+        alreadyInCart = true
+      }
+    })
+
+    // Executes if the item is already in cart
+    if (alreadyInCart) {
+      const cartUpdatedQuantity = cart.map(cartItem => {
+        // For the target item, increase the quantity by 1
+        if (cartItem.id === targetStoreItem.id) {
+          const updatedcartItem = { ...cartItem }
+          updatedcartItem.quantity += 1
+          console.log('updatedCartItem: ', updatedcartItem)
+          return updatedcartItem
         } else {
-          // Else: the item isn't already in the cart
-          return { ...cart, targetStoreItem }
+          return cartItem
         }
       })
-    )
+      setCart(cartUpdatedQuantity)
+    } else {
+      // If the item is NOT in cart
+      targetStoreItem.quantity = 1
+      setCart([...cart, targetStoreItem])
+    }
   }
-
-  // If in cart, increment quantity:
-  // cart.ITEM_TO_INCREMENT
-  // setCart(updatedCart)
 
   return (
     <>
       <Store store={store} setStore={setStore} addToCart={addToCart} />
-      <Cart addToCart={addToCart} />
+      <Cart cart={cart} />
       <div>
         Icons made by
         <a
