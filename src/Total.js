@@ -8,9 +8,7 @@ function Total(props) {
                 <h3>Total</h3>
             </div>
             <div>
-                <span className="total-number">£{props.totalCart}
-                    
-                    </span>
+                <span className="total-number">£{props.totalCart}</span>
             </div>
         </div>
     )

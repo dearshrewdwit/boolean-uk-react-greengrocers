@@ -1,10 +1,15 @@
 import { useState } from "react";
+import Total from "./Total.js";
 
 
 function InsideCart(props) {
-  console.log('checkwtfthecartishere', props.cart)
+  const [totalCart, setTotalCart] = useState(0);
+
+  console.log('checkwtfthecartishere')
+  console.table(props.cart)
+
   return (
-    <div id="cart">
+    <main id="cart">
       <h2>Your Cart</h2>
       <div className="cart--item-list-container">
         <ul className="item-list cart--item-list">
@@ -54,10 +59,10 @@ function InsideCart(props) {
               >+</button>
             </li>
           )}
-
         </ul>
       </div>
-    </div>
+
+    </main>
   )
 }
 

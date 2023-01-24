@@ -17,15 +17,14 @@ export default function App() {
   const [totalCart, setTotalCart] = useState(0);
 
   function handleTotal() {
+    let total = 0
+    
     cart.map((item) => {
-      let total = 0
-      let totalOfEachItem = item.price * item.quantity
+      const totalOfEachItem = item.price * item.quantity
       // console.log("totalOfEachItem", totalOfEachItem)
       total += totalOfEachItem
     //  console.log("total after calculation", total)
-
       setTotalCart(total.toFixed(2))
-
     })
   }
 
