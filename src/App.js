@@ -76,7 +76,7 @@ const handleDecrement =cartItem =>{
   if(cartItem.quantity > 1) {
     const newCartItems = cartItems.map(targetCartItem => {
       if(targetCartItem.name === cartItem.name && targetCartItem.quantity) {
-        return {...targetCartItem, quantity:targetCartItem.quantity -1}
+        return {...targetCartItem, quantity: targetCartItem.quantity -1}
       }
       return targetCartItem
     })
@@ -152,5 +152,3 @@ const handleDecrement =cartItem =>{
 }
 
 
-// Todo: work InCreament and Decrement(use if condition for reomving item from the cart) buttons.
-// find why the setsstore item is not selected.
