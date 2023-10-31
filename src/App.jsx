@@ -18,8 +18,6 @@ import Header from './components/Header'
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
-
 export default function App() {
   // Setup state here...
 

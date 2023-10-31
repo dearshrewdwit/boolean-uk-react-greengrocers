@@ -1,16 +1,13 @@
+import StoreItem from "./StoreItem"
+
 function Header({store}) {
 
     return (
         <header id="store">
             <h1>Greengrocers</h1>
             <ul className="item-list store--item-list">
-            {store.map((item) =>
-                <li key={item.id}>
-                <div className="store--item-icon">
-                    <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-                </div>
-                <button>Add to cart</button>
-                </li>
+                {store.map((item) =>
+                    <StoreItem key={item.id} item={item}></StoreItem>   
                 )}
             </ul>
         </header>
