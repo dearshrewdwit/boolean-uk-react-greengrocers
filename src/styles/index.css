@@ -137,6 +137,10 @@ button {
   font-weight: bold;
 }
 
+button:hover{
+  cursor: pointer;
+}
+
 .remove-btn {
   border: 2px solid #d32f2f;
   background-color: #ffcdd2;

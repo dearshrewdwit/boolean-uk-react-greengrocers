@@ -26,6 +26,7 @@ export default function App() {
     if (cartItems.some((item) => item.name === itemClicked.name)) {
       const foundItem = cartItems.find(item => item.id === itemClicked.id)
       foundItem.quantity+=1
+      setCartItems([...cartItems])
     } else {
       const newItem = {
         ...itemClicked,
@@ -37,10 +38,12 @@ export default function App() {
 
   const plusOne = (itemClicked) => {
       itemClicked.quantity+=1
+      setCartItems([...cartItems])
   }
 
   const minusOne = (itemClicked) => {
     itemClicked.quantity-=1
+    setCartItems([...cartItems])
 }
 
   return (
