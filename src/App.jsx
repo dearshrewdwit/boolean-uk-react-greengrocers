@@ -23,6 +23,8 @@ export default function App() {
   const [store, setStoreItems] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
 
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
+
   const fruits = ["apple", "apricot", "bananas", "berry", "blueberry"]
   const filteredForFruits = store.filter(item => fruits.includes(item.name))
   const vegetables = ["beetroot", "carrot", "avocado", "bell pepper", "eggplant"]
@@ -33,7 +35,6 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {/* {store.map(item => <li>{item.name}</li>)} */}
           {
             store.map((item, index) => <StoreItem item={item} index={index} />)
           }
@@ -43,7 +44,7 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
+            {cart.map((item, index) => <CartItem item={item} index={index} />)}
           </ul>
         </div>
         <div className="total-section">
