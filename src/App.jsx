@@ -39,6 +39,19 @@ export default function App() {
   const [storeItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
 
+  const handleAddToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  const handleRemoveItem = (itemId) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    setCartItems(updatedCartItems);
+  };
+
+    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    setCartItems(updatedCartItems);
+  };
+  
   return (
     <>
       <header id="store">
@@ -46,7 +59,7 @@ export default function App() {
 
         <ul className="item-list store--item-list">
           {initialStoreItems.map(item => (
-            <Items key={item.id} item={item} />
+            <Items key={item.id} item={item} onAddToCart={handleAddToCart}/>
           ))}
         </ul>
 
@@ -57,7 +70,7 @@ export default function App() {
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {cartItems.map(cartItem => (
-              <Cart />
+              <CartItem key={cartItem.id} item={cartItem} onRemove={handleRemoveItem}  />
             ))}
           </ul>
         </div>
