@@ -12,8 +12,16 @@ export default function Main({ cartItems, setCartItems }) {
       const index = cartItems.findIndex((item) => item.id === inputItem.id);
       cartItems.splice(index, 1);
     }
-    
+
     setCartItems([...cartItems]);
+  }
+
+  function sumOfCart() {
+    const pence = cartItems.reduce((sum, item) => {
+      return sum + (item.price * item.quantity)
+    }, 0);
+
+    return (pence / 100).toFixed(2)
   }
 
   return (
@@ -53,7 +61,7 @@ export default function Main({ cartItems, setCartItems }) {
           <h3>Total</h3>
         </div>
         <div>
-          <span className="total-number">£0.00</span>
+          <span className="total-number">${sumOfCart()}</span>
         </div>
       </div>
     </main>

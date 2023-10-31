@@ -8,24 +8,9 @@ import "./styles/index.css";
 
 import initialStoreItems from "./store-items";
 
-const initialCartItems = [
-  {
-    id: "002-carrot",
-    name: "carrot",
-    price: 35,
-    quantity: 1,
-  },
-  {
-    id: "004-apricot",
-    name: "apricot",
-    price: 20,
-    quantity: 3,
-  },
-];
-
 export default function App() {
   const [storeItems] = useState(initialStoreItems);
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const [cartItems, setCartItems] = useState([]);
 
   return (
     <>
