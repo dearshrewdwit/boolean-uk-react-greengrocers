@@ -23,6 +23,7 @@ console.log(initialStoreItems)
 export default function App() {
   const [storeItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
+  const [filteredItems, setFilteredItems] = useState(storeItems)
   // Setup state here...
 
   return (
@@ -31,6 +32,8 @@ export default function App() {
         storeItems={storeItems}
         cartItems={cartItems}
         setCartItems={setCartItems}
+        filteredItems={filteredItems}
+        setFilteredItems={setFilteredItems}
       />
       <Main 
         cartItems={cartItems}
