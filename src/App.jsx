@@ -23,8 +23,44 @@ export default function App() {
   const [cart, setCart] = useState([]);
 
   const addToCart = (item) => {
-    setCart([...cart, item]);
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      updatedCart[existingItemIndex].quantity += 1;
+    } else {
+      updatedCart.push({ ...item, quantity: 1 });
+    }
+    setCart(updatedCart);
   };
+
+  const removeFromCart = (item) => {
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      const updatedItem = { ...updatedCart[existingItemIndex] };
+      if (updatedItem.quantity > 1) {
+        updatedItem.quantity -= 1;
+        updatedCart[existingItemIndex] = updatedItem;
+      } else {
+        updatedCart.splice(existingItemIndex, 1);
+      }
+
+      setCart(updatedCart);
+    }
+  };
+
+  function cartPrice() {
+    const money = cart.reduce((sum, item) => {
+      return sum + (item.price * item.quantity);
+    }, 0);
+  
+    const formattedMoney = `£${money.toFixed(2)}`;
+  
+    return formattedMoney;
+  }
+  
 
   return (
     <>
@@ -54,9 +90,11 @@ export default function App() {
                   <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
                 </div>
                 <p>{item.name.toUpperCase()}</p>
-                <button class="quantity-btn remove-btn center">-</button>
-                <span class="quantity-text center">1</span>
-                <button class="quantity-btn add-btn center">+</button>
+                <button className="quantity-btn remove-btn center" onClick={() => removeFromCart(item)}>
+                  -
+                </button>
+                <span className="quantity-text center">{item.quantity}</span>
+                <button className="quantity-btn add-btn center" onClick={() => addToCart(item)}>+</button>
               </li>
             ))}
           </ul>
@@ -66,7 +104,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{cartPrice()}</span>
           </div>
         </div>
       </main >
