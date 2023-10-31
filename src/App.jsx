@@ -12,12 +12,12 @@ export default function App() {
 
   const [store, setStore] = useState(initialStoreItems)
   const [cartItem, setCartItem] = useState([])
-  console.log(cartItem)
+  // console.log(cartItem)
 
   return (
     <>
       <Header store ={store} cartItem={cartItem} setCartItem={setCartItem} />
-      <Main cartItem={cartItem} />
+      <Main cartItem={cartItem} setCartItem={setCartItem} />
       <div>
         Icons made by
         <a
