@@ -20,7 +20,14 @@ console.log(initialStoreItems)
 export default function App() {
 
   const [items, setItems] = useState(initialStoreItems)
-  // Setup state here...
+  const [cart, setCart] = useState(initialStoreItems)
+
+
+  const addToCart = (item) => {
+    setCart([...cart, item])
+  }
+
+
 
   return (
     <>
@@ -32,8 +39,8 @@ export default function App() {
               <div className="store--item-icon">
                 <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
-              <button>Add to cart</button>
-              <p>{item.name}</p>
+              <button onClick={() => addToCart}>Add to cart</button>
+              <p>{item.name.toUpperCase()}</p>
               <p>£{item.price.toFixed(2)}</p>
             </li>
           ))}
@@ -43,7 +50,17 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
+            {cart.map((item) => (
+              <li key={item.id}>
+                <div className="cart--item-icon">
+                  <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+                </div>
+                <p>{item.name.toUpperCase()}</p>
+                <button className="quantity-btn remove-btn center">-</button>
+                <span className="quantity-text center">1</span>
+                <button className="quantity-btn add-btn center">+</button>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="total-section">
