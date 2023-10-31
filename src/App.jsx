@@ -19,18 +19,26 @@ console.log(initialStoreItems)
 export default function App() {
 
   const [storeItems, setStoreItems] = useState(initialStoreItems)
+  const [cartItems, setCartItems] = useState([])
+
+  const addCartItem = (itemClicked) => {
+    console.log(itemClicked)
+    setCartItems([...cartItems, itemClicked])
+  }
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {storeItems.map((item, index) => (
+          {storeItems.map((item) => (
             <li key={item.name}>
-              <div class="store--item-icon">
-                <img src={"/assets/icons/" + item.id + ".svg"} alt={item.name} />
+              <div className="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
-              <button>Add to cart</button>
+              <button
+              onClick={()=>{addCartItem(item)}}
+              >Add to cart</button>
             </li>
           ))}
         </ul>
@@ -39,7 +47,19 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
+          {cartItems.map((item) => (
+            <li key={item.name}>
+            <img
+              className="cart--item-icon"
+              src={`/assets/icons/${item.id}.svg`} 
+              alt={item.name}
+            />
+            <p>{item.name}</p>
+            <button className="quantity-btn remove-btn center">-</button>
+            <span className="quantity-text center">1</span>
+            <button className="quantity-btn add-btn center">+</button>
+          </li>
+          ))}
           </ul>
         </div>
         <div className="total-section">
