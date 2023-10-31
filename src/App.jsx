@@ -2,38 +2,17 @@ import "./styles/reset.css";
 import "./styles/index.css";
 
 
-import Header from "./Header";
+// import Header from "./Header";
 import Items from "./Items";
 import Cart from "./Cart";
 
 
 import initialStoreItems from "./store-items";
+
 import React, { useState } from 'react';
-
-
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
-
- What should a cart item look like? 🤔
- */
 
 console.log(initialStoreItems);
 
-/* 
-
-components
-
-- header (where items list is)
-- items (the items themselves)
-- cart (self explainitory)
-
-
-*/
 
 export default function App() {
   const [storeItems] = useState(initialStoreItems)
@@ -43,14 +22,16 @@ export default function App() {
     setCartItems([...cartItems, item]);
   };
 
+
   const handleRemoveItem = (itemId) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
+  
 
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
-  };
+
   
   return (
     <>
@@ -58,6 +39,7 @@ export default function App() {
         <h1>Greengrocers</h1>
 
         <ul className="item-list store--item-list">
+          
           {initialStoreItems.map(item => (
             <Items key={item.id} item={item} onAddToCart={handleAddToCart}/>
           ))}
@@ -70,7 +52,7 @@ export default function App() {
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {cartItems.map(cartItem => (
-              <CartItem key={cartItem.id} item={cartItem} onRemove={handleRemoveItem}  />
+              <Cart key={cartItem.id} item={cartItem} onRemove={handleRemoveItem}  />
             ))}
           </ul>
         </div>
