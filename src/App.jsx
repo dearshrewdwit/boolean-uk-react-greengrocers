@@ -24,25 +24,13 @@ const initialCartItems = [
 ];
 
 export default function App() {
-  const [storeItems, setStoreItems] = useState(initialStoreItems);
+  const [storeItems] = useState(initialStoreItems);
   const [cartItems, setCartItems] = useState(initialCartItems);
-
-  function addItemToCart(inputItem) {
-    const itemToAdd = cartItems.find(item => item.id === inputItem.id)
-    if (itemToAdd) {
-      itemToAdd.quantity++
-      setCartItems([...cartItems])
-    } else {
-      inputItem.quantity = 1
-      setCartItems([...cartItems, inputItem])
-    }
-    
-  }
 
   return (
     <>
-      <Header storeItems={storeItems} addItemToCart={addItemToCart}></Header>
-      <Main cartItems={cartItems}></Main>
+      <Header storeItems={storeItems} cartItems={cartItems} setCartItems={setCartItems}></Header>
+      <Main cartItems={cartItems} setCartItems={setCartItems}></Main>
       <div className="footer">
         Icons made by
         <a
