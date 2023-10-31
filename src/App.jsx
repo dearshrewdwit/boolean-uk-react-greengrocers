@@ -15,7 +15,7 @@ import { useState } from "react";
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems);
+
 
 export default function App() {
   // Setup state here...
@@ -34,21 +34,23 @@ export default function App() {
    const addItemToCart = (event) => {
 
       const updatedCartItem = items.find(el =>  event.target.value === el.name)
-      setItemsInStore([...itemsInStore, {...updatedCartItem,quantity:1}])
-      console.log(updatedCartItem)
+      
 
       const foundItem = itemsInStore.find(itemInTheList => itemInTheList.name === event.target.value)
-      if (foundItem) {
-        updatedCartItem.quantity++
+      if (!foundItem) {
 
+        setItemsInStore([...itemsInStore, {...updatedCartItem, quantity: 1 }]);
+        
         console.log(updatedCartItem)
         //:)
-      }
-    
+      }else {
+        foundItem.quantity++;
+        setItemsInStore([...itemsInStore]);
+        console.log(itemsInStore)
+      }    
 
 
    }
-   console.log(itemsInStore)
 
   return (
     <>
