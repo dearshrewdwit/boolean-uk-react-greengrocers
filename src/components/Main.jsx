@@ -1,11 +1,11 @@
 import CartItems from "./CartItems"
 
-function Main() {
+function Main({cartItem}) {
 
     return (
         <main id="cart">
         <h2>Your Cart</h2>
-        <CartItems></CartItems>
+        <CartItems cartItem={cartItem}></CartItems>
             <div className="total-section">
                 <div>
                     <h3>Total</h3>

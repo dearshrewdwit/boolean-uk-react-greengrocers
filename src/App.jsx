@@ -23,11 +23,12 @@ export default function App() {
   // Setup state here...
 
   const [store, setStore] = useState(initialStoreItems)
+  const [cartItem, setCartItem] = useState([])
 
   return (
     <>
-      <Header store ={store}></Header>
-      <Main></Main>
+      <Header store ={store} cartItem={cartItem} setCartItem={setCartItem} />
+      <Main cartItem={cartItem} />
       <div>
         Icons made by
         <a
