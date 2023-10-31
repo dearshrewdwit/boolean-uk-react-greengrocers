@@ -2,48 +2,38 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
-
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
-
- What should a cart item look like? 🤔
- */
-
-console.log(initialStoreItems)
+import Header from './components/Header'
+import Main from './components/Main'
+import { useEffect, useState } from 'react'
 
 export default function App() {
-  // Setup state here...
+  const [store, setStore] = useState(initialStoreItems);
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const totalPrice = () => {
+    let num = 0;
+    cart.forEach(item => num += item.quantity * item.price)
+    setTotal(num)
+  };
+
+  useEffect(totalPrice, [cart]);
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
-      <div>
+      <Header 
+        cart={cart}  
+        setCart={setCart}
+        store={store}
+      />
+
+      <Main
+        cart={cart}
+        setCart={setCart}
+        total={total}
+      />
+
+      {/*<div>
         Icons made by
         <a
           href="https://www.flaticon.com/authors/icongeek26"
@@ -55,7 +45,7 @@ export default function App() {
         <a href="https://www.flaticon.com/" title="Flaticon">
           www.flaticon.com
         </a>
-      </div>
-    </>
+      </div>*/}
+  </>
   )
 }
