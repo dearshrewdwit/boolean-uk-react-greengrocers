@@ -1,7 +1,7 @@
 import './styles/reset.css'
 import './styles/index.css'
-
-import initialStoreItems from './store-items'
+import Header from './Components/Header.jsx'
+// import initialStoreItems from './store-items'
 import { useState } from 'react'
 /*
  Here's what a store item should look like
@@ -18,8 +18,7 @@ import { useState } from 'react'
 
 export default function App() {
 
-  const [storeItems] = useState(initialStoreItems)
-  // console.log(storeItems)
+  // const [storeItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
 
   const addCartItem = (itemClicked) => {
@@ -46,10 +45,8 @@ export default function App() {
     const updatedCart = cartItems.filter((item) => item.quantity > 0);
     if (itemClicked.quantity === 0) {
       setCartItems(updatedCart)
-      console.log(updatedCart)
     } else {
       setCartItems([...cartItems])
-      console.log("updated cart", updatedCart, "original", cartItems)
     }
   }
 
@@ -62,21 +59,8 @@ export default function App() {
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {storeItems.map((item, index) => (
-            <li key={`${item.name}${index}`}>
-              <div className="store--item-icon">
-                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-              </div>
-              <button
-                onClick={() => { addCartItem(item) }}
-              >Add to cart</button>
-            </li>
-          ))}
-        </ul>
-      </header>
+    <Header addCartItem={addCartItem} />
+
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
