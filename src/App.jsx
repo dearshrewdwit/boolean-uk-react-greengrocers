@@ -42,6 +42,7 @@ export default function App() {
         updatedCartItem.quantity++
 
         console.log(updatedCartItem)
+        //:)
       }
     
 
