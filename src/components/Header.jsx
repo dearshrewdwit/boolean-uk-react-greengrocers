@@ -7,7 +7,7 @@ function Header({store, addItem, cartItem, setCartItem}) {
             <h1>Greengrocers</h1>
             <ul className="item-list store--item-list">
                 {store.map((item) =>
-                    <StoreItem key={item.id} store={store} item={item} addItem={addItem} cartItem={cartItem} setCartItem={setCartItem} />   
+                    <StoreItem key={item.id} item={item} addItem={addItem} cartItem={cartItem} setCartItem={setCartItem} />   
                 )}
             </ul>
         </header>

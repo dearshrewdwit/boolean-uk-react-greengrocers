@@ -1,4 +1,4 @@
-function StoreItem({item, store, cartItem, setCartItem}) {
+function StoreItem({item, cartItem, setCartItem}) {
 
     function addToCart(item) {
         const selectedItem = cartItem.find((storeItem) => storeItem.id === item.id)
