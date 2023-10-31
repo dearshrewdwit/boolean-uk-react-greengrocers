@@ -17,9 +17,13 @@ const Header = ({ store, cart, setCart }) => {
 
       const filterByFruit = store.filter(item => item.type === "fruit");
       const filterByVeg = store.filter(item => item.type === "veg");
+      const sortByPriceDown = [...store].sort((a, b) => a.price - b.price).reverse();
+      const sortByPriceUp = [...store].sort((a, b) => a.price - b.price);
 
       option === "fruit" ? setFiltered(filterByFruit)
       : option === "veg" ? setFiltered(filterByVeg)
+      : option === "priceHiLo" ? setFiltered(sortByPriceDown)
+      : option === "priceLoHi" ? setFiltered(sortByPriceUp)
       : setFiltered(store);
     };
 
@@ -28,9 +32,11 @@ const Header = ({ store, cart, setCart }) => {
     <header id="store">
     <h1>Greengrocers</h1>
     <select name="filter" id="filter" onChange={() => filter()}>
-      <option value="filter">All</option>
-      <option value="fruit">Fruits</option>
-      <option value="veg">Vegetables</option>
+      <option value="filter">All Items:</option>
+      <option value="fruit">Fruits:</option>
+      <option value="veg">Vegetables:</option>
+      <option value="priceHiLo">Price: High - Low</option>
+      <option value="priceLoHi">Price: Low - High</option>
     </select>
     <ul className="item-list store--item-list">
       {filtered.map(item => 
