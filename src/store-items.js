@@ -1,55 +1,74 @@
-
-const storeItems =  [
+const storeItems = [
   {
     id: "001-beetroot",
     name: "beetroot",
-    price: 0.35
+    price: 2,
+    color: "pink",
+    showDetails: false,
   },
   {
     id: "002-carrot",
     name: "carrot",
-    price: 0.35
+    price: 40,
+    color: "orange",
+    showDetails: false,
   },
   {
     id: "003-apple",
     name: "apple",
-    price: 0.35
+    price: 70,
+    color: "red",
+    showDetails: false,
   },
   {
     id: "004-apricot",
     name: "apricot",
-    price: 0.35
+    price: 100,
+    color: "orange",
+    showDetails: false,
   },
   {
     id: "005-avocado",
     name: "avocado",
-    price: 0.35
+    price: 500,
+    color: "green",
+    showDetails: false,
   },
   {
     id: "006-bananas",
     name: "bananas",
-    price: 0.35
+    price: 1000,
+    color: "yellow",
+    showDetails: false,
   },
   {
     id: "007-bell-pepper",
     name: "bell pepper",
-    price: 0.35
+    price: 60,
+    color: "green",
+    showDetails: false,
   },
   {
     id: "008-berry",
     name: "berry",
-    price: 0.35
+    price: 120,
+    color: "red",
+    showDetails: false,
   },
   {
     id: "009-blueberry",
     name: "blueberry",
-    price: 0.35
+    price: 350,
+    color: "blue",
+    showDetails: false,
   },
   {
     id: "010-eggplant",
     name: "eggplant",
-    price: 0.35
-  }
-]
+    price: 80,
+    color: "purple",
+    showDetails: false,
+  },
+];
 
-export default storeItems
+export default storeItems;
