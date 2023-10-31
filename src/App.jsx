@@ -21,19 +21,31 @@ export default function App() {
   // Setup state here...
   const [items] = useState(initialStoreItems);
   const [itemsInStore, setItemsInStore] = useState([]);
+  
 
   // const itemsInStore = [
   //    {
-  //       id: "001-beetroot",
-  //       name: "beetroot",
-  //       price: 0.35
-  //     }
-    
+  //       ...itemsInStore,
+  //        quantity : 1          
+  //     }    
   // ]
+
+
    const addItemToCart = (event) => {
 
-      const updatedCartItems = items.filter(el => event.target.value === el.name)
-      setItemsInStore([...itemsInStore, updatedCartItems].flat())
+      const updatedCartItem = items.find(el =>  event.target.value === el.name)
+      setItemsInStore([...itemsInStore, {...updatedCartItem,quantity:1}])
+      console.log(updatedCartItem)
+
+      const foundItem = itemsInStore.find(itemInTheList => itemInTheList.name === event.target.value)
+      if (foundItem) {
+        updatedCartItem.quantity++
+
+        console.log(updatedCartItem)
+      }
+    
+
+
    }
    console.log(itemsInStore)
 
