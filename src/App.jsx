@@ -1,6 +1,7 @@
 import './styles/reset.css'
 import './styles/index.css'
 
+import { useState } from 'react'
 import initialStoreItems from './store-items'
 
 /*
@@ -17,6 +18,8 @@ import initialStoreItems from './store-items'
 console.log(initialStoreItems)
 
 export default function App() {
+
+  const [items, setItems] = useState(initialStoreItems)
   // Setup state here...
 
   return (
@@ -24,7 +27,16 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {/* Write some code here... */}
+          {items.map((item) => (
+            <li key={item.id}>
+              <div className="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+              </div>
+              <button>Add to cart</button>
+              <p>{item.name}</p>
+              <p>£{item.price.toFixed(2)}</p>
+            </li>
+          ))}
         </ul>
       </header>
       <main id="cart">
