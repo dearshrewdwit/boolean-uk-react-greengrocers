@@ -9,13 +9,12 @@ import Cart from "./Cart";
 
 import initialStoreItems from "./store-items";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 console.log(initialStoreItems);
 
 
 export default function App() {
-  const [storeItems] = useState(initialStoreItems)
   const [cartItems, setCartItems] = useState([])
 
   const handleAddToCart = (item) => {
@@ -28,10 +27,6 @@ export default function App() {
     setCartItems(updatedCartItems);
   };
   
-
-    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-    setCartItems(updatedCartItems);
-
   
   return (
     <>
