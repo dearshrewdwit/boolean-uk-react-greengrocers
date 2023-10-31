@@ -19,23 +19,29 @@ import { useState } from 'react'
 export default function App() {
 
   const [storeItems] = useState(initialStoreItems)
-  console.log(storeItems)
+  // console.log(storeItems)
   const [cartItems, setCartItems] = useState([])
 
   const addCartItem = (itemClicked) => {
     if (cartItems.some((item) => item.name === itemClicked.name)) {
       const foundItem = cartItems.find(item => item.id === itemClicked.id)
       foundItem.quantity+=1
-      console.log(foundItem)
     } else {
       const newItem = {
         ...itemClicked,
         quantity: 1,
       }
-      console.log(newItem, cartItems)
       setCartItems([...cartItems, newItem])
     }
   }
+
+  const plusOne = (itemClicked) => {
+      itemClicked.quantity+=1
+  }
+
+  const minusOne = (itemClicked) => {
+    itemClicked.quantity-=1
+}
 
   return (
     <>
@@ -48,7 +54,7 @@ export default function App() {
                 <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
               <button
-                onClick={() => { addCartItem(item) }}
+                onClick={() => {addCartItem(item) }}
               >Add to cart</button>
             </li>
           ))}
@@ -66,9 +72,14 @@ export default function App() {
                   alt={item.name}
                 />
                 <p>{item.name}</p>
-                <button className="quantity-btn remove-btn center">-</button>
+                <button 
+                onClick={()=>{minusOne(item)}}
+                className="quantity-btn remove-btn center">-</button>
+
                 <span className="quantity-text center">{item.quantity}</span>
-                <button className="quantity-btn add-btn center">+</button>
+                <button 
+                onClick={()=>{plusOne(item)}}
+                className="quantity-btn add-btn center">+</button>
               </li>
             ))}
           </ul>
