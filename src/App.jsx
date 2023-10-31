@@ -1,5 +1,8 @@
 import './styles/reset.css'
 import './styles/index.css'
+import Store from './components/Store'
+import Cart from './components/Cart'
+
 
 import initialStoreItems from './store-items'
 
@@ -21,28 +24,8 @@ export default function App() {
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+    <Store></Store>
+    <Cart></Cart>
       <div>
         Icons made by
         <a
