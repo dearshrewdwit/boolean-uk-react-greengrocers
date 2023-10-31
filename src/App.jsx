@@ -4,6 +4,9 @@ import './styles/index.css'
 import initialStoreItems from './store-items'
 import { useState } from 'react'
 
+// IMPORT COMPONENTS
+import Header from './components/Header'
+
 /*
  Here's what a store item should look like
  {
@@ -24,19 +27,7 @@ export default function App() {
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {store.map((item) =>
-            <li key={item.id}>
-              <div className="store--item-icon">
-                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-              </div>
-              <button>Add to cart</button>
-            </li>
-            )}
-        </ul>
-      </header>
+      <Header store ={store}></Header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
