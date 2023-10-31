@@ -19,36 +19,42 @@ console.log(initialStoreItems);
 
 export default function App() {
   // Setup state here...
-  const [items, setItems] = useState(initialStoreItems);
-  // const [itemsInStore, setItemsInStore] = useState([]);
+  const [items] = useState(initialStoreItems);
+  const [itemsInStore, setItemsInStore] = useState([]);
 
-  const itemsInStore = [
-     {
-        id: "001-beetroot",
-        name: "beetroot",
-        price: 0.35
-      }
+  // const itemsInStore = [
+  //    {
+  //       id: "001-beetroot",
+  //       name: "beetroot",
+  //       price: 0.35
+  //     }
     
-  ]
+  // ]
+   const addItemToCart = (event) => {
 
-  
+      const updatedCartItems = items.filter(el => event.target.value === el.name)
+      setItemsInStore([...itemsInStore, updatedCartItems].flat())
+   }
+   console.log(itemsInStore)
+
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {items.map((element) => (
-            <>
-              <li>
+          {items.map((element, index) => (
+              <li key={index}>
                 <div className="store--item-icon">
                   <img
                     src={`../public/assets/icons/${element.id}.svg `}
                     alt={element.name}
                   />
                 </div>
-                <button>Add to cart</button>
+                <button 
+                  value={element.name}
+                  onClick={event => addItemToCart(event)}
+                >Add to cart</button>
               </li>
-            </>
           ))}
         </ul>
       </header>
@@ -56,8 +62,8 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {itemsInStore.map((e) => (
-              <li key={e.id}>
+            {itemsInStore.map((e, index) => (
+              <li key={index}>
                 <img
                   className="cart--item-icon"
                   src={`../public/assets/icons/${e.id}.svg `}
