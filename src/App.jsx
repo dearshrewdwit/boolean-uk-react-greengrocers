@@ -20,52 +20,64 @@ import { useState } from "react";
 export default function App() {
   // Setup state here...
   const [items] = useState(initialStoreItems);
-  const [itemsInStore, setItemsInStore] = useState([]);
+  const [itemsInCart, setItemsInCart] = useState([]);
+  const [total, setTotal] = useState(0)
   
 
-  // const itemsInStore = [
+  // const itemsInCart = [
   //    {
-  //       ...itemsInStore,
+  //       ...itemsInCart,
   //        quantity : 1          
   //     }    
   // ]
 
+  const calculator = () => {const sum = itemsInCart.reduce(
+    (total, currentValue) => total + (currentValue.price * currentValue.quantity),
+    0,
+  );  
+  setTotal(sum);} 
+
   
   const addItemToCart = (event) => {
     
-    const foundItem = itemsInStore.find(itemInTheList => itemInTheList.name === event.target.value)
+    const foundItem = itemsInCart.find(itemInTheList => itemInTheList.name === event.target.value)
     const updatedCartItem = items.find(el =>  event.target.value === el.name)
     
 
       if (!foundItem) {
 
-        setItemsInStore([...itemsInStore, {...updatedCartItem, quantity: 1 }]);
+        setItemsInCart([...itemsInCart, {...updatedCartItem, quantity: 1 }]);
         
         console.log(updatedCartItem)
         //:)
+        calculator()
       }else {
         foundItem.quantity++;
-        setItemsInStore([...itemsInStore]);
-        console.log(itemsInStore)
+        setItemsInCart([...itemsInCart]);
+        console.log(itemsInCart)
+        calculator()
       }   
    }
 
    const minusButton = (e) => {
     if (e.quantity === 1){
-      const updatedItems = itemsInStore.filter(item => item !== e)
-      setItemsInStore(updatedItems)
+      const updatedItems = itemsInCart.filter(item => item !== e)
+      setItemsInCart(updatedItems)
+
     }else{
       e.quantity--
-      setItemsInStore([...itemsInStore])
-      console.log(itemsInStore)
+      setItemsInCart([...itemsInCart])
+      console.log(itemsInCart)
     }
+    calculator()
    }
 
    const plusButton = (e) => {
 
     e.quantity++
-    setItemsInStore([...itemsInStore])
-    console.log(itemsInStore)
+    setItemsInCart([...itemsInCart])
+    console.log(itemsInCart)
+    calculator()
    }
 
 
@@ -99,7 +111,7 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {itemsInStore.map((e, index) => (
+            {itemsInCart.map((e, index) => (
               <li key={index}>
                 <img
                   className="cart--item-icon"
@@ -119,7 +131,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{`£ ${total.toFixed(2)}`}</span>
           </div>
         </div>
       </main>
