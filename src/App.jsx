@@ -1,56 +1,52 @@
 import "./styles/reset.css";
 import "./styles/index.css";
 
-
-// import Header from "./Header";
-import Items from "./Items";
-import Cart from "./Cart";
-
+// import Header from "./components/Header";
+import Items from "./components/Items";
+import Cart from "./components/Cart";
 
 import initialStoreItems from "./store-items";
-
-import { useState } from 'react';
-
-console.log(initialStoreItems);
+import { useState } from "react";
 
 
 export default function App() {
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([]);
 
   const handleAddToCart = (item) => {
     setCartItems([...cartItems, item]);
   };
 
-
   const handleRemoveItem = (itemId) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
-  
-  
+
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
 
         <ul className="item-list store--item-list">
-          
-          {initialStoreItems.map(item => (
-            <Items key={item.id} item={item} onAddToCart={handleAddToCart}/>
+          {initialStoreItems.map((item) => (
+            <Items key={item.id} item={item} onAddToCart={handleAddToCart} />
           ))}
         </ul>
-
-
       </header>
+
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cartItems.map(cartItem => (
-              <Cart key={cartItem.id} item={cartItem} onRemove={handleRemoveItem}  />
+            {cartItems.map((cartItem) => (
+              <Cart
+                key={cartItem.id}
+                item={cartItem}
+                onRemove={handleRemoveItem}
+              />
             ))}
           </ul>
         </div>
+
         <div className="total-section">
           <div>
             <h3>Total</h3>
@@ -60,6 +56,7 @@ export default function App() {
           </div>
         </div>
       </main>
+
       <div>
         Icons made by
         <a

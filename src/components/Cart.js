@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function CartItem({ item}) {
+function CartItem({item}) {
  
 
     return (
