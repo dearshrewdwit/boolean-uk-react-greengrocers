@@ -30,13 +30,13 @@ export default function App() {
   //     }    
   // ]
 
+  
+  const addItemToCart = (event) => {
+    
+    const foundItem = itemsInStore.find(itemInTheList => itemInTheList.name === event.target.value)
+    const updatedCartItem = items.find(el =>  event.target.value === el.name)
+    
 
-   const addItemToCart = (event) => {
-
-      const updatedCartItem = items.find(el =>  event.target.value === el.name)
-      
-
-      const foundItem = itemsInStore.find(itemInTheList => itemInTheList.name === event.target.value)
       if (!foundItem) {
 
         setItemsInStore([...itemsInStore, {...updatedCartItem, quantity: 1 }]);
@@ -47,10 +47,32 @@ export default function App() {
         foundItem.quantity++;
         setItemsInStore([...itemsInStore]);
         console.log(itemsInStore)
-      }    
-
-
+      }   
    }
+
+   const minusButton = (e) => {
+    if (e.quantity === 1){
+      const updatedItems = itemsInStore.filter(item => item !== e)
+      setItemsInStore(updatedItems)
+    }else{
+      e.quantity--
+      setItemsInStore([...itemsInStore])
+      console.log(itemsInStore)
+    }
+   }
+
+   const plusButton = (e) => {
+
+    e.quantity++
+    setItemsInStore([...itemsInStore])
+    console.log(itemsInStore)
+   }
+
+
+
+      
+
+
 
   return (
     <>
@@ -85,9 +107,9 @@ export default function App() {
                   alt={e.name}
                 />
                 <p>{e.name}</p>
-                <button className="quantity-btn remove-btn center">-</button>
-                <span className="quantity-text center">1</span>
-                <button className="quantity-btn add-btn center">+</button>
+                <button className="quantity-btn remove-btn center" onClick={() => minusButton(e)}>-</button>
+                <span className="quantity-text center">{e.quantity}</span>
+                <button className="quantity-btn add-btn center" onClick={() => plusButton(e)}>+</button>
             </li>
             ))}
           </ul>
