@@ -1,9 +1,13 @@
 function StoreItem({item, store, cartItem, setCartItem}) {
 
     function addToCart(item) {
-      const selectedItem = store.find((storeItem) => storeItem.id === item.id)
-        if (selectedItem) {
+        const selectedItem = cartItem.find((storeItem) => storeItem.id === item.id)
+        if (!selectedItem) {
             setCartItem([...cartItem, {...item, quantity: 1}])
+        }
+        if (selectedItem) {
+            selectedItem.quantity += 1
+            setCartItem([...cartItem])
         }
     }
 
