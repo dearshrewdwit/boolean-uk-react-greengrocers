@@ -1,7 +1,26 @@
 
 
-function Main({cartItem}){
+function Main({cartItem,setCartItem}){
   console.log(cartItem)
+    function addQuantity(inputItem){
+      inputItem.quantity++;
+      setCartItem([...cartItem])
+    }
+
+    function minusQuantity(inputItem){
+      inputItem.quantity--;
+      if(inputItem.quantity === 0){
+        cartItem = cartItem.filter((product)=>product.id !== inputItem.id)
+      }  
+      setCartItem([...cartItem])
+    }
+
+    function total(){
+       const amount =cartItem.reduce((sum,item)=> {
+         return sum +(item.price *item.quantity)},0)
+      return  amount.toFixed(2)
+    }
+
     return(
         <main id="cart">
         <h2>Your Cart</h2>
@@ -13,9 +32,9 @@ function Main({cartItem}){
                   <img src={`assets/icons/${newItem.id}.svg`} alt={`${newItem.name}`} 
                   className="cart--item-icon" />
                   <p>{newItem.name}</p>
-                  <button className="quantity-btn remove-btn center">-</button>
-                  <span className="quantity-text center">1</span>
-                  <button className="quantity-btn add-btn center">+</button>
+                  <button className="quantity-btn remove-btn center" onClick={()=>minusQuantity(newItem)}>-</button>
+                  <span className="quantity-text center">{newItem.quantity}</span>
+                  <button className="quantity-btn add-btn center" onClick={()=>addQuantity(newItem)}>+</button>
                 </li>
               )
             })}
@@ -26,7 +45,7 @@ function Main({cartItem}){
             <h3>Total</h3> 
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">£{total()}</span>
           </div>
         </div>
       </main>

@@ -23,21 +23,13 @@ import Main from './components/Main'
 export default function App() {
   // Setup state here...
   const [storeItem,setStoreItem] = useState(initialStoreItems)
-  const [cartItem , setCartItem] = useState([{
-    id: "001-beetroot",
-    name: "beetroot",
-    price: 0.35
-  },
-  {
-    id: "002-carrot",
-    name: "carrot",
-    price: 0.35
-  }])
+  const [cartItem , setCartItem] = useState([])
 
   return (
     <>
-      <Header storeItem={storeItem}/>
-      <Main cartItem={cartItem}/>
+      <Header storeItem={storeItem} cartItem={cartItem}
+      setCartItem={setCartItem}/>
+      <Main cartItem={cartItem} setCartItem={setCartItem}/>
       <div>
         Icons made by
         <a
