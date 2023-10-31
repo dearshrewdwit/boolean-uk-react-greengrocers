@@ -20,14 +20,50 @@ console.log(initialStoreItems)
 export default function App() {
 
   const [items, setItems] = useState(initialStoreItems)
-  const [cart, setCart] = useState(initialStoreItems)
-
+  const [cart, setCart] = useState([]);
 
   const addToCart = (item) => {
-    setCart([...cart, item])
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      // If the item is already in the cart, increase its quantity
+      updatedCart[existingItemIndex].quantity += 1;
+    } else {
+      // If the item is not in the cart, add it with a quantity of 1
+      updatedCart.push({ ...item, quantity: 1 });
+    }
+
+    setCart(updatedCart);
+  };
+
+  const removeFromCart = (item) => {
+    const updatedCart = [...cart];
+    const existingItemIndex = updatedCart.findIndex((cartItem) => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      const updatedItem = { ...updatedCart[existingItemIndex] };
+      if (updatedItem.quantity > 1) {
+        // If the item's quantity is greater than 1, decrease its quantity
+        updatedItem.quantity -= 1;
+        updatedCart[existingItemIndex] = updatedItem;
+      } else {
+        // If the item's quantity is 1, remove it from the cart
+        updatedCart.splice(existingItemIndex, 1);
+      }
+
+      setCart(updatedCart);
+    }
   }
-
-
+  function cartPrice() {
+    const money = cart.reduce((sum, item) => {
+      return sum + (item.price * item.quantity);
+    }, 0);
+  
+    const formattedMoney = `£${money.toFixed(2)}`;
+  
+    return formattedMoney;
+  }
 
   return (
     <>
@@ -39,7 +75,7 @@ export default function App() {
               <div className="store--item-icon">
                 <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
-              <button onClick={() => addToCart}>Add to cart</button>
+              <button onClick={() => addToCart(item)}>Add to cart</button>
               <p>{item.name.toUpperCase()}</p>
               <p>£{item.price.toFixed(2)}</p>
             </li>
@@ -56,9 +92,13 @@ export default function App() {
                   <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
                 </div>
                 <p>{item.name.toUpperCase()}</p>
-                <button className="quantity-btn remove-btn center">-</button>
-                <span className="quantity-text center">1</span>
-                <button className="quantity-btn add-btn center">+</button>
+                <button className="quantity-btn remove-btn center" onClick={() => removeFromCart(item)}>
+                  -
+                </button>
+                <span className="quantity-text center">{item.quantity}</span>
+                <button className="quantity-btn add-btn center" onClick={() => addToCart(item)}>
+                  +
+                </button>
               </li>
             ))}
           </ul>
@@ -68,10 +108,10 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{cartPrice()}</span>
           </div>
         </div>
-      </main>
+      </main >
       <div>
         Icons made by
         <a
