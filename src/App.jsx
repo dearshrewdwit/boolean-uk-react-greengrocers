@@ -3,6 +3,7 @@ import './styles/index.css'
 
 import initialStoreItems from './store-items'
 import Header from './components/Header'
+import Main from './components/Main'
 import {useState} from 'react'
 
 
@@ -21,29 +22,20 @@ console.log(initialStoreItems)
 
 export default function App() {
   const [storeItems] = useState(initialStoreItems)
+  const [cartItems, setCartItems] = useState([])
   // Setup state here...
 
   return (
     <>
       <Header
-        items={storeItems}
+        storeItems={storeItems}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
       />
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Main 
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+      />
       <div>
         Icons made by
         <a
