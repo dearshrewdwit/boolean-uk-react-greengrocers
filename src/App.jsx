@@ -1,7 +1,12 @@
-import './styles/reset.css'
-import './styles/index.css'
+import "./styles/reset.css";
+import "./styles/index.css";
+import { useState } from "react";
+import Header from "./Component/Header";
+import MainCart from "./Component/MainCart";
 
-import initialStoreItems from './store-items'
+import Total from "./Component/Total";
+
+import initialStoreItems from "./store-items";
 
 /*
  Here's what a store item should look like
@@ -14,35 +19,18 @@ import initialStoreItems from './store-items'
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
+//console.log(initialStoreItems);
 
 export default function App() {
   // Setup state here...
+  const [storeItems, setStoreItems] = useState(initialStoreItems);
+  const [cartItems, setCartItems] = useState([]);
+  // create a new array that includes the items
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Header storeItems={storeItems} />
+      <MainCart />
       <div>
         Icons made by
         <a
@@ -57,5 +45,5 @@ export default function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
