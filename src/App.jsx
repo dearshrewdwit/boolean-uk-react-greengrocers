@@ -1,10 +1,10 @@
 import './styles/reset.css'
 import './styles/index.css'
-import Store from './components/Store'
 import Cart from './components/Cart'
 
 
 import initialStoreItems from './store-items'
+import { useState } from 'react'
 
 /*
  Here's what a store item should look like
@@ -21,10 +21,26 @@ console.log(initialStoreItems)
 
 export default function App() {
   // Setup state here...
+const [items, setItems] = useState(initialStoreItems)
+return (
+  <>
+    <header id="store">
+                <h1>Greengrocers</h1>
+                <ul className="item-list store--item-list"> 
+                {items.map(element =>  (
+                  <>
+                        <li>
+                  
+                        <div className="store--item-icon">
+                            <img src={`../public/assets/icons/${element.id}.svg `} alt={element.name} />
+                        </div>
+                            <button>Add to cart</button>
+                        </li>
 
-  return (
-    <>
-    <Store></Store>
+                    </>
+                ))}
+            </ul> 
+            </header>
     <Cart></Cart>
       <div>
         Icons made by
