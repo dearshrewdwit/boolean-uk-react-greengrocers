@@ -1,19 +1,10 @@
-import CartItems from "./CartItems"
-
 function StoreItem({item, store, cartItem, setCartItem}) {
 
-
-
     function addToCart(item) {
-      const selectedItem = store.filter((storeItem) => {
-        if (storeItem === item) {
-          return {
-            ...storeItem,
-            quantity: 1
-          }
+      const selectedItem = store.find((storeItem) => storeItem.id === item.id)
+        if (selectedItem) {
+            setCartItem([...cartItem, {...item, quantity: 1}])
         }
-      })
-      setCartItem(selectedItem)
     }
 
     return (
