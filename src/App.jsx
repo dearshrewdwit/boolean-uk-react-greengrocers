@@ -21,17 +21,9 @@ export default function App() {
 
   return (
     <>
-      <Header 
-        cart={cart}  
-        setCart={setCart}
-        store={store}
-      />
+      <Header cart={cart} setCart={setCart} store={store} />
 
-      <Main
-        cart={cart}
-        setCart={setCart}
-        total={total}
-      />
+      <Main cart={cart} setCart={setCart} total={total} />
 
       {/*<div>
         Icons made by

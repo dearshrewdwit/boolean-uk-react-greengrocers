@@ -1,4 +1,20 @@
-const CartItem = ({ cart, addBtn, minusBtn }) => {
+const CartItem = ({ cart, setCart }) => {
+    const addBtn = (item) => {
+        item.quantity++;
+        setCart([...cart])
+    };
+
+    const minusBtn = (item) => {
+        item.quantity--;
+
+        if (item.quantity === 0) {
+            const idx = cart.indexOf(item)
+            if (idx > -1)  cart.splice(idx, 1)
+        };
+    
+        setCart([...cart])
+    };
+
     return (
     <>
     {cart.map(item => 
