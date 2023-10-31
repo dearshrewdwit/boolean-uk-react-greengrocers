@@ -25,7 +25,7 @@ export default function App() {
   const addCartItem = (itemClicked) => {
     if (cartItems.some((item) => item.name === itemClicked.name)) {
       const foundItem = cartItems.find(item => item.id === itemClicked.id)
-      foundItem.quantity+=1
+      foundItem.quantity += 1
       setCartItems([...cartItems])
     } else {
       const newItem = {
@@ -37,27 +37,41 @@ export default function App() {
   }
 
   const plusOne = (itemClicked) => {
-      itemClicked.quantity+=1
-      setCartItems([...cartItems])
+    itemClicked.quantity += 1
+    setCartItems([...cartItems])
   }
 
   const minusOne = (itemClicked) => {
-    itemClicked.quantity-=1
-    setCartItems([...cartItems])
-}
+    itemClicked.quantity -= 1
+    const updatedCart = cartItems.filter((item) => item.quantity > 0);
+    if (itemClicked.quantity === 0) {
+      setCartItems(updatedCart)
+      console.log(updatedCart)
+    } else {
+      setCartItems([...cartItems])
+      console.log("updated cart", updatedCart, "original", cartItems)
+    }
+  }
+
+
+  const totalingItems = cartItems.map((item) => item.quantity * item.price
+  )
+  const Total = totalingItems.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+ 
+
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {storeItems.map((item) => (
-            <li key={item.name}>
+          {storeItems.map((item, index) => (
+            <li key={`${item.name}${index}`}>
               <div className="store--item-icon">
                 <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
               <button
-                onClick={() => {addCartItem(item) }}
+                onClick={() => { addCartItem(item) }}
               >Add to cart</button>
             </li>
           ))}
@@ -67,22 +81,22 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cartItems.map((item) => (
-              <li key={item.name}>
+            {cartItems.map((item, index) => (
+              <li key={`${item.name}${index}`}>
                 <img
                   className="cart--item-icon"
                   src={`/assets/icons/${item.id}.svg`}
                   alt={item.name}
                 />
                 <p>{item.name}</p>
-                <button 
-                onClick={()=>{minusOne(item)}}
-                className="quantity-btn remove-btn center">-</button>
+                <button
+                  onClick={() => { minusOne(item) }}
+                  className="quantity-btn remove-btn center">-</button>
 
                 <span className="quantity-text center">{item.quantity}</span>
-                <button 
-                onClick={()=>{plusOne(item)}}
-                className="quantity-btn add-btn center">+</button>
+                <button
+                  onClick={() => { plusOne(item) }}
+                  className="quantity-btn add-btn center">+</button>
               </li>
             ))}
           </ul>
@@ -92,7 +106,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">{`£${Total.toFixed(2)}`}</span>
           </div>
         </div>
       </main>
@@ -111,4 +125,7 @@ export default function App() {
       </div>
     </>
   )
+
+
 }
+
