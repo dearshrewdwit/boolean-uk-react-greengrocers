@@ -14,16 +14,27 @@ import { useState } from 'react'
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
+// console.log(initialStoreItems)
 
 export default function App() {
 
-  const [storeItems, setStoreItems] = useState(initialStoreItems)
+  const [storeItems] = useState(initialStoreItems)
+  console.log(storeItems)
   const [cartItems, setCartItems] = useState([])
 
   const addCartItem = (itemClicked) => {
-    console.log(itemClicked)
-    setCartItems([...cartItems, itemClicked])
+    if (cartItems.some((item) => item.name === itemClicked.name)) {
+      const foundItem = cartItems.find(item => item.id === itemClicked.id)
+      foundItem.quantity+=1
+      console.log(foundItem)
+    } else {
+      const newItem = {
+        ...itemClicked,
+        quantity: 1,
+      }
+      console.log(newItem, cartItems)
+      setCartItems([...cartItems, newItem])
+    }
   }
 
   return (
@@ -37,7 +48,7 @@ export default function App() {
                 <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
               </div>
               <button
-              onClick={()=>{addCartItem(item)}}
+                onClick={() => { addCartItem(item) }}
               >Add to cart</button>
             </li>
           ))}
@@ -47,19 +58,19 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-          {cartItems.map((item) => (
-            <li key={item.name}>
-            <img
-              className="cart--item-icon"
-              src={`/assets/icons/${item.id}.svg`} 
-              alt={item.name}
-            />
-            <p>{item.name}</p>
-            <button className="quantity-btn remove-btn center">-</button>
-            <span className="quantity-text center">1</span>
-            <button className="quantity-btn add-btn center">+</button>
-          </li>
-          ))}
+            {cartItems.map((item) => (
+              <li key={item.name}>
+                <img
+                  className="cart--item-icon"
+                  src={`/assets/icons/${item.id}.svg`}
+                  alt={item.name}
+                />
+                <p>{item.name}</p>
+                <button className="quantity-btn remove-btn center">-</button>
+                <span className="quantity-text center">{item.quantity}</span>
+                <button className="quantity-btn add-btn center">+</button>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="total-section">
