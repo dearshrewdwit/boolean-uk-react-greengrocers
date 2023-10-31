@@ -2,14 +2,20 @@
 import { useState } from "react";
 
 import ColorOptions from "./ColorOptions";
+import StoreItem from "./StoreItem";
 
-export default function Header({
-  cartItems,
-  setCartItems,
-  storeItems,
-}) {
+
+export default function Header({ cartItems, setCartItems, storeItems, setStoreItems }) {
   const [colorFilter, setColorFilter] = useState("");
   const [itemSort, setItemSort] = useState("nameAsc");
+
+  function showItemDetails(inputItem) {
+    const itemToChange = storeItems.find((item) => item.id === inputItem.id);
+
+    itemToChange.showDetails = !itemToChange.showDetails
+
+    setStoreItems([...storeItems])
+  }
 
   function addItemToCart(inputItem) {
     const itemToAdd = cartItems.find((item) => item.id === inputItem.id);
@@ -58,8 +64,8 @@ export default function Header({
 
       case "priceAsc":
         return storeItems.sort((a, b) => a.price - b.price);
-        
-        case "priceDesc":
+
+      case "priceDesc":
         return storeItems.sort((b, a) => a.price - b.price);
 
       default:
@@ -101,16 +107,9 @@ export default function Header({
         </div>
       </div>
       <ul className="item-list store--item-list">
-        {storeItemsFilterList.map((item) => {
-          return (
-            <li key={item.id}>
-              <div className="store--item-icon">
-                <img src={`assets/icons/${item.id}.svg`} alt={item.name} />
-              </div>
-              <button onClick={() => addItemToCart(item)}>Add to cart</button>
-            </li>
-          );
-        })}
+        {storeItemsFilterList.map((item) => (
+          <StoreItem key={item.id} item={item} addItemToCart={addItemToCart} setStoreItems={setStoreItems} showItemDetails={showItemDetails}></StoreItem>
+        ))}
       </ul>
     </header>
   );

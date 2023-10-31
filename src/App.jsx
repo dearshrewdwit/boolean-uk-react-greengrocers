@@ -9,12 +9,12 @@ import "./styles/index.css";
 import initialStoreItems from "./store-items";
 
 export default function App() {
-  const [storeItems] = useState(initialStoreItems);
+  const [storeItems, setStoreItems] = useState(initialStoreItems);
   const [cartItems, setCartItems] = useState([]);
 
   return (
     <>
-      <Header storeItems={storeItems} cartItems={cartItems} setCartItems={setCartItems}></Header>
+      <Header storeItems={storeItems} setStoreItems={setStoreItems} cartItems={cartItems} setCartItems={setCartItems}></Header>
       <Main cartItems={cartItems} setCartItems={setCartItems}></Main>
       <div className="footer">
         Icons made by
