@@ -1,9 +1,12 @@
 import './styles/reset.css'
 import './styles/index.css'
-import Header from './components/Header'
 
 import initialStoreItems from './store-items'
 import { useState } from 'react'
+
+//importing the jsx
+import Header from './components/Header'
+import Main from './components/Main'
 
 /*
  Here's what a store item should look like
@@ -20,26 +23,21 @@ import { useState } from 'react'
 export default function App() {
   // Setup state here...
   const [storeItem,setStoreItem] = useState(initialStoreItems)
+  const [cartItem , setCartItem] = useState([{
+    id: "001-beetroot",
+    name: "beetroot",
+    price: 0.35
+  },
+  {
+    id: "002-carrot",
+    name: "carrot",
+    price: 0.35
+  }])
 
   return (
     <>
       <Header storeItem={storeItem}/>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Main cartItem={cartItem}/>
       <div>
         Icons made by
         <a
