@@ -91,7 +91,13 @@ export default function App() {
                         <h3>Total</h3>
                     </div>
                     <div>
-                        <span className="total-number">£0.00</span>
+                        <span className="total-number">
+                            £
+                            {cart
+                                .map((item) => item.price * item.count)
+                                .reduce((a, b) => a + b, 0)
+                                .toFixed(2)}
+                        </span>
                     </div>
                 </div>
             </main>
