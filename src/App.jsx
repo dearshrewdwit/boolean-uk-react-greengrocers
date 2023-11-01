@@ -19,6 +19,8 @@ export default function App() {
     //And if Item is already in the cart quantity ++
     // else, add  quantity key and value of 1
     //This function works for the storeItems in the header.jsxf
+
+   ///This function renders the cart  
 const selectTocart = (storeItem)=>{
     const updateCart = [...cartItems]
 
