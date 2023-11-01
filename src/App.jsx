@@ -2,19 +2,34 @@ import { useState } from "react";
 import "./styles/reset.css";
 import "./styles/index.css";
 import Items from "./components/Items";
-import CartItem from "./components/CartItems"; 
+import CartItems from "./components/CartItems"; 
 
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
 
-  const handleAddToCart = (item) => {
-    setCartItems([...cartItems, item]);
-  };
+const handleAddToCart = (item) => {
+  
+  const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
-  const handleRemoveItem = (itemId) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+  if (existingItem) {
+    
+    const updatedCartItems = cartItems.map((cartItem) =>
+      cartItem.id === item.id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem
+    );
     setCartItems(updatedCartItems);
-  };
+  } else {
+
+    setCartItems([...cartItems, { ...item, quantity: 1 }]);
+  }
+};
+
+const handleRemoveItem = (itemId) => {
+  // Remove the item from the cart based on its ID
+  const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+  setCartItems(updatedCartItems);
+};
 
   return (
     <>
@@ -28,9 +43,10 @@ export default function App() {
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {cartItems.map((cartItem) => (
-              <CartItem
+              <CartItems
                 key={cartItem.id}
                 item={cartItem}
+                onAdd= {handleAddToCart}
                 onRemove={handleRemoveItem}
               />
             ))}

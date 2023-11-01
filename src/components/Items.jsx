@@ -1,10 +1,10 @@
-
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import initialStoreItems from '../store-items';
 
-const storeItems = initialStoreItems;
-
 function Items({ addToCart }) {
+  const [storeItems] = useState(initialStoreItems);
+
   return (
     <ul className="item-list store--item-list">
       {storeItems.map((item) => (
