@@ -1,7 +1,12 @@
 import { useState } from "react"
 import StoreItem from "./StoreItem"
+import FilterSort from "./FilterSort"
 
 function Header({store, addItem, cartItem, setCartItem}) {
+
+    // EXTENSION 1
+    const [filter, setFilter] = useState('none')
+    const [sort, setSort] = useState('none')
 
     const filterByType = store.map((item) => {
         if (item.name === 'beetroot' || item.name === 'carrot') {
@@ -18,13 +23,9 @@ function Header({store, addItem, cartItem, setCartItem}) {
         }
     })
 
-    // EXTENSION 1
-    const [filter, setFilter] = useState('none')
-    const [sort, setSort] = useState('none')
-
     const vegItems = filterByType.filter((item) => item.type === 'veg')
     const fruitItems = filterByType.filter((item) => item.type === 'fruit')
-
+    
     function alphabetical(list) {
         const AToZ = list.sort((a, b) => {
             const nameA = a.name.toUpperCase()
@@ -38,9 +39,9 @@ function Header({store, addItem, cartItem, setCartItem}) {
         })
         return AToZ
     }
-
-    let storeItemList
     
+    let storeItemList
+        
     if (filter === 'fruit' && sort === 'AToZ') storeItemList = alphabetical(fruitItems)
     else if (filter === 'fruit' && sort === 'ZToA') storeItemList = alphabetical(fruitItems).reverse()
     else if (filter === 'veg' && sort === 'AToZ') storeItemList = alphabetical(vegItems)
@@ -54,20 +55,7 @@ function Header({store, addItem, cartItem, setCartItem}) {
     return (
         <header id="store">
             <h1>Greengrocers</h1>
-            <div className="sort-filter-container">
-                <div className="filter-container">
-                    <h2>Filter</h2>
-                    <button onClick={() => setFilter('none')}>No Filter</button>
-                    <button onClick={() => setFilter('fruit')}>Fruit</button>
-                    <button onClick={() => setFilter('veg')}>Vegetables</button>
-                </div>
-                <div className="sort-container">
-                    <h2>Sort</h2>
-                    <button onClick={() => setSort('none')}>No Sort</button>
-                    <button onClick={() => setSort('AToZ')}>A-Z</button>
-                    <button onClick={() => setSort('ZToA')}>Z-A</button>
-                </div>
-            </div>
+            <FilterSort setSort={setSort} setFilter={setFilter} />
             <ul className="item-list store--item-list">
                 {storeItemList.map((item) =>
                     <StoreItem key={item.id} item={item} addItem={addItem} cartItem={cartItem} setCartItem={setCartItem} />   
