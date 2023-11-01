@@ -40,7 +40,7 @@ function MainCart({cartItems}){
                     />
                     <p>{cartItem.name}</p>
                     <button class="quantity-btn remove-btn center" onClick={decreaseValue}>-</button>
-                    <span class="quantity-text center">{value}</span>
+                    <span class="quantity-text center">{value}</span> 
                     <button class="quantity-btn add-btn center" onClick={increaseValue}>+</button>
                 </li>
                 )
@@ -61,3 +61,5 @@ function MainCart({cartItems}){
 }
 
 export default MainCart
+
+//// I have issue with the value 
