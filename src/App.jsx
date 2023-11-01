@@ -7,20 +7,10 @@ import { useState } from "react";
 import Product from "./components/Product";
 import CartItem from "./components/CartItem";
 
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
-
- What should a cart item look like? 🤔
- */
-
 export default function App() {
     const [store, setStore] = useState(initialStoreItems);
     const [cart, setCart] = useState([]);
+    const [filter, setFilter] = useState("");
 
     const addProduct = (product) => {
         const itemInCart = cart.find((cartItem) => cartItem.id === product.id);
@@ -62,14 +52,35 @@ export default function App() {
         <>
             <header id="store">
                 <h1>Greengrocers</h1>
+                <div className="store-tools">
+                    <select
+                        onChange={(e) => setFilter(e.target.value)}
+                        name="filter"
+                        id="store-fitler"
+                    >
+                        <option value="">No filter</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="vegetables">Vegetables</option>
+                    </select>
+
+                    <select name="sort" id="store-sort">
+                        <option value="">No sort</option>
+                        <option value="price">By price</option>
+                        <option value="name">By name</option>
+                    </select>
+                </div>
                 <ul className="item-list store--item-list">
-                    {store.map((item, index) => (
-                        <Product
-                            data={item}
-                            key={index}
-                            addProduct={addProduct}
-                        />
-                    ))}
+                    {store
+                        .filter((item) =>
+                            filter ? item.type === filter : item
+                        )
+                        .map((item, index) => (
+                            <Product
+                                data={item}
+                                key={index}
+                                addProduct={addProduct}
+                            />
+                        ))}
                 </ul>
             </header>
             <main id="cart">
