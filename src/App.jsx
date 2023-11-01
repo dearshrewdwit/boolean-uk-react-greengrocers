@@ -11,6 +11,7 @@ export default function App() {
     const [store, setStore] = useState(initialStoreItems);
     const [cart, setCart] = useState([]);
     const [filter, setFilter] = useState("");
+    const [sort, setSort] = useState("");
 
     const addProduct = (product) => {
         const itemInCart = cart.find((cartItem) => cartItem.id === product.id);
@@ -63,7 +64,11 @@ export default function App() {
                         <option value="vegetables">Vegetables</option>
                     </select>
 
-                    <select name="sort" id="store-sort">
+                    <select
+                        onChange={(e) => setSort(e.target.value)}
+                        name="sort"
+                        id="store-sort"
+                    >
                         <option value="">No sort</option>
                         <option value="price">By price</option>
                         <option value="name">By name</option>
@@ -73,6 +78,13 @@ export default function App() {
                     {store
                         .filter((item) =>
                             filter ? item.type === filter : item
+                        )
+                        .sort(
+                            (a, b) =>
+                                sort &&
+                                a[sort]
+                                    .toString()
+                                    .localeCompare(b[sort].toString())
                         )
                         .map((item, index) => (
                             <Product
