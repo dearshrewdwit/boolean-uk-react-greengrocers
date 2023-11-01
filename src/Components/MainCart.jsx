@@ -1,28 +1,14 @@
 import {useState} from 'react'
 
-function MainCart({cartItems}){
+function MainCart({cartItems, updateQuantity}){
 
-    const [value, setValue] = useState(1);
-    const [totalPrice, setTotalPrice]= useState()
 
     const calculateTotal = ()=>{
-     const total = cartItems.reduce((sumPrice, cartItem) => sumPrice + (cartItem.price * value), 0)
-        setTotalPrice(total.toFixed(2))
+     const total = cartItems.reduce((sumPrice, cartItem) => sumPrice + (cartItem.price * cartItem.quantity), 0)
+        return total.toFixed(2)
     }
 
-    
-    const decreaseValue = () => {
-        if (value > 1) {
-            setValue(value - 1);
-        }
-        calculateTotal()
-    }
-    
-    const increaseValue = () => {
-        setValue(value + 1);
 
-        calculateTotal()
-    }
     
 
     return(
@@ -39,9 +25,9 @@ function MainCart({cartItems}){
                         alt={cartItem.name}
                     />
                     <p>{cartItem.name}</p>
-                    <button class="quantity-btn remove-btn center" onClick={decreaseValue}>-</button>
-                    <span class="quantity-text center">{value}</span> 
-                    <button class="quantity-btn add-btn center" onClick={increaseValue}>+</button>
+                    <button class="quantity-btn remove-btn center" onClick={()=> updateQuantity(cartItem.id, -1)}>-</button>
+                    <span class="quantity-text center">{cartItem.quantity}</span> 
+                    <button class="quantity-btn add-btn center" onClick={()=> updateQuantity(cartItem.id, 1)}>+</button>
                 </li>
                 )
 
@@ -53,7 +39,7 @@ function MainCart({cartItems}){
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">${totalPrice}</span>
+            <span className="total-number">${calculateTotal()}</span>
           </div>
         </div>
       </main>

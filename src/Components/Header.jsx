@@ -1,4 +1,4 @@
-function Header({ storeItems, selectToCart }) {
+function Header({ storeItems, selectTocart }) {
     return (
       <header id="store">
         <h1>Greengrocers</h1>
@@ -9,8 +9,9 @@ function Header({ storeItems, selectToCart }) {
                 <div className="store--item-icon">
                   <img src={`./assets/icons/${storeItem.id}.svg`} alt={storeItem.name} />
                 </div>
-                <button onClick={() => selectToCart(storeItem)}>Add to cart</button>
-              </li>
+                <button onClick={() => (selectTocart(storeItem))}>Add to cart</button>
+                {{/* The storeItem arguement passed to the selectTocart function was gotten from the storeItem parameter in the map above */}}
+                </li>
             );
           })}
         </ul>
