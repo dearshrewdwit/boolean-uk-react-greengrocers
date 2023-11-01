@@ -36,6 +36,28 @@ export default function App() {
             : setCart([...cart, { ...product, count: 1 }]);
     };
 
+    const decreaseCount = (product) => {
+        product.count === 1
+            ? setCart(cart.filter((item) => item.id !== product.id))
+            : setCart(
+                  cart.map((item) =>
+                      item.id === product.id
+                          ? { ...product, count: --product.count }
+                          : item
+                  )
+              );
+    };
+
+    const increaseCount = (product) => {
+        setCart(
+            cart.map((item) =>
+                item.id === product.id
+                    ? { ...product, count: ++product.count }
+                    : item
+            )
+        );
+    };
+
     return (
         <>
             <header id="store">
@@ -55,7 +77,12 @@ export default function App() {
                 <div className="cart--item-list-container">
                     <ul className="item-list cart--item-list">
                         {cart.map((item, index) => (
-                            <CartItem data={item} key={index} />
+                            <CartItem
+                                data={item}
+                                key={index}
+                                decreaseCount={decreaseCount}
+                                increaseCount={increaseCount}
+                            />
                         ))}
                     </ul>
                 </div>

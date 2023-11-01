@@ -1,4 +1,4 @@
-const CartItem = ({ data }) => {
+const CartItem = ({ data, decreaseCount, increaseCount }) => {
     return (
         <li>
             <img
@@ -7,9 +7,19 @@ const CartItem = ({ data }) => {
                 alt={data.name}
             />
             <p>{data.name}</p>
-            <button className="quantity-btn remove-btn center">-</button>
+            <button
+                onClick={() => decreaseCount(data)}
+                className="quantity-btn remove-btn center"
+            >
+                -
+            </button>
             <span className="quantity-text center">{data.count}</span>
-            <button className="quantity-btn add-btn center">+</button>
+            <button
+                onClick={() => increaseCount(data)}
+                className="quantity-btn add-btn center"
+            >
+                +
+            </button>
         </li>
     );
 };
