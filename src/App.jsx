@@ -1,13 +1,14 @@
-import "./styles/reset.css";
-import "./styles/index.css";
+import './styles/reset.css'
+import './styles/index.css'
 
-import initialStoreItems from "./store-items";
-import { useState } from "react";
+import initialStoreItems from './store-items'
+import { useState } from 'react';
 
-//importing the jsx
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+
+console.log(initialStoreItems)
 
 export default function App() {
   // Setup state here...
@@ -16,7 +17,7 @@ export default function App() {
 
   return (
     <>
-      <Header
+       <Header
         storeItem={storeItem}
         cartItem={cartItem}
         setCartItem={setCartItem}
@@ -24,5 +25,5 @@ export default function App() {
       <Main cartItem={cartItem} setCartItem={setCartItem} />
       <Footer />
     </>
-  );
+  )
 }
