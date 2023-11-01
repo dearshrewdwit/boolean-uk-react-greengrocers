@@ -182,3 +182,10 @@ button {
     border-bottom: 2px solid #00675b;
   }
 }
+
+/* EXTENSION 1 */
+
+.filter-container {
+  position: fixed;
+  top: 50px
+}

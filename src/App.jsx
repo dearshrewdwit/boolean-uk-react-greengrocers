@@ -13,9 +13,18 @@ export default function App() {
   const [store, setStore] = useState(initialStoreItems)
   const [cartItem, setCartItem] = useState([])
 
+  // EXTENSION 1 
+  // const [itemType, setItemType] = useState([])
+
+
   return (
     <>
       <Header store ={store} cartItem={cartItem} setCartItem={setCartItem} />
+      {/* <div>
+        <h2>Filter</h2>
+        <button onClick={() => y()}>Fruit</button>
+        <button>Vegetables</button>
+      </div> */}
       <Main cartItem={cartItem} setCartItem={setCartItem} />
       <div>
         Icons made by
