@@ -3,7 +3,7 @@ import "./styles/index.css";
 
 // import Header from "./components/Header";
 import Items from "./components/Items";
-import Cart from "./components/Cart";
+import Cart from "./components/CartItems";
 
 import initialStoreItems from "./store-items";
 import { useState } from "react";

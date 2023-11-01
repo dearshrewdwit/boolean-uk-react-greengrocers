@@ -1,21 +1,25 @@
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import initialStoreItems from '../store-items';
 
-function Items({ item, addToCart }) {
+function Items({ addToCart }) {
+  const [storeItems] = useState(initialStoreItems);
+
   return (
-    <li>
-      <div className="store--item-icon">
-        <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-      </div>
-      <button onClick={() => addToCart(item)}>Add to cart</button>
-    </li>
+    <ul className="item-list store--item-list">
+      {storeItems.map((item) => (
+        <li key={item.id}>
+          <div className="store--item-icon">
+            <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+          </div>
+          <button onClick={() => addToCart(item)}>Add to cart</button>
+        </li>
+      ))}
+    </ul>
   );
 }
 
 Items.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }),
   addToCart: PropTypes.func.isRequired,
 };
 

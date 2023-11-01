@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+
 function CartItem({ item, quantity, onQuantityChange }) {
   return (
     <li>
