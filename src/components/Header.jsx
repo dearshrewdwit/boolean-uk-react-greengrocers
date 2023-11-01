@@ -25,8 +25,8 @@ function Header({store, addItem, cartItem, setCartItem}) {
     const vegItems = filterByType.filter((item) => item.type === 'veg')
     const fruitItems = filterByType.filter((item) => item.type === 'fruit')
 
-    function alphabetical() {
-        const AToZ = filterByType.sort((a, b) => {
+    function alphabetical(list) {
+        const AToZ = list.sort((a, b) => {
             const nameA = a.name.toUpperCase()
             const nameB = b.name.toUpperCase()
             if (nameA < nameB) {
@@ -38,16 +38,17 @@ function Header({store, addItem, cartItem, setCartItem}) {
         })
         return AToZ
     }
-    
-    function reverseAlphabetical() {
-        return alphabetical().reverse()
-    }
 
     let storeItemList
-    if (filter === 'fruit') storeItemList = fruitItems
+    
+    if (filter === 'fruit' && sort === 'AToZ') storeItemList = alphabetical(fruitItems)
+    else if (filter === 'fruit' && sort === 'ZToA') storeItemList = alphabetical(fruitItems).reverse()
+    else if (filter === 'veg' && sort === 'AToZ') storeItemList = alphabetical(vegItems)
+    else if (filter === 'veg' && sort === 'ZToA') storeItemList = alphabetical(vegItems).reverse()
+    else if (filter === 'fruit') storeItemList = fruitItems
     else if (filter === 'veg') storeItemList = vegItems
-    else if (sort === 'AToZ') storeItemList = alphabetical()
-    else if (sort === 'ZToA') storeItemList = reverseAlphabetical()
+    else if (sort === 'AToZ') storeItemList = alphabetical(filterByType)
+    else if (sort === 'ZToA') storeItemList = alphabetical(filterByType).reverse()
     else storeItemList = filterByType
 
     return (

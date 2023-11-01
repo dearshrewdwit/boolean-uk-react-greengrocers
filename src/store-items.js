@@ -16,6 +16,11 @@ const storeItems =  [
     price: 0.35
   },
   {
+    id: "010-eggplant",
+    name: "eggplant",
+    price: 0.35
+  },
+  {
     id: "004-apricot",
     name: "apricot",
     price: 0.35
@@ -45,11 +50,11 @@ const storeItems =  [
     name: "blueberry",
     price: 0.35
   },
-  {
-    id: "010-eggplant",
-    name: "eggplant",
-    price: 0.35
-  }
+  // {
+  //   id: "010-eggplant",
+  //   name: "eggplant",
+  //   price: 0.35
+  // }
 ]
 
 export default storeItems
