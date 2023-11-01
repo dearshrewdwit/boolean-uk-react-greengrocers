@@ -2,9 +2,7 @@ import "./styles/reset.css";
 import "./styles/index.css";
 import { useState } from "react";
 import Header from "./Component/Header";
-import MainCart from "./Component/MainCart";
-
-import Total from "./Component/Total";
+import Main from "./Component/Main";
 
 import initialStoreItems from "./store-items";
 
@@ -26,11 +24,28 @@ export default function App() {
   const [storeItems, setStoreItems] = useState(initialStoreItems);
   const [cartItems, setCartItems] = useState([]);
   // create a new array that includes the items
+  const addTheCartItem = (itemadded) => {
+    const itemAlreadyInCart = cartItems.some(
+      (item) => item.name === itemadded.name
+    );
+
+    if (itemAlreadyInCart) {
+      const theFoundItem = cartItems.find((item) => item.id === itemadded.id);
+      theFoundItem.quantity += 1;
+      setCartItems([...cartItems]);
+    } else {
+      const newItem = {
+        ...itemClicked,
+        quantity: 1,
+      };
+      setCartItems([...cartItems, newItem]);
+    }
+  };
 
   return (
     <>
-      <Header storeItems={storeItems} />
-      <MainCart />
+      <Header addTheCartItem={addTheCartItem} />
+      <Main />
       <div>
         Icons made by
         <a

@@ -1,4 +1,4 @@
-function MainCart() {
+function Main() {
   return (
     <main id="cart">
       <h2>Your Cart</h2>
@@ -19,4 +19,4 @@ function MainCart() {
   );
 }
 
-export default MainCart;
+export default Main;
