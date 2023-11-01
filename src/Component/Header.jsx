@@ -1,28 +1,14 @@
-//import { useState } from "react"
-import initialStoreItems from "./store-items";
-console.log(initialStoreItems);
+import ItemInCart from "./ItemInCart";
 
-export default function Header(props) {
-  // const [storeItems, setstoreItems] = useState(initialStoreItems)
-
+function Header({ addTheCartItem }) {
   return (
     <header id="store">
       <h1>Greengrocers</h1>
       <ul className="item-list store--item-list">
-        {props.storeItems.map((storeItem) => (
-          <li key={storeItem.id}>
-            <div className="store--item-icon">
-              <img
-                src={`/assets/icons/${storeItem.id}.svg`}
-                alt={storeItem.name}
-              />
-            </div>
-            <button onClick={() => props.addItemToCart(storeItem)}>
-              Add to cart
-            </button>
-          </li>
-        ))}
+        <ItemInCart addTheCartItem={addTheCartItem} />
       </ul>
     </header>
   );
 }
+
+export default Header;

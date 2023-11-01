@@ -4,8 +4,6 @@ import { useState } from "react";
 import Header from "./Component/Header";
 import Main from "./Component/Main";
 
-import initialStoreItems from "./store-items";
-
 /*
  Here's what a store item should look like
  {
@@ -21,23 +19,32 @@ import initialStoreItems from "./store-items";
 
 export default function App() {
   // Setup state here...
-  const [storeItems, setStoreItems] = useState(initialStoreItems);
+
+  // Initialize the cartItems state as an empty array
   const [cartItems, setCartItems] = useState([]);
-  // create a new array that includes the items
+
+  // Function to add an item to the cart
   const addTheCartItem = (itemadded) => {
+    // Check if an item with the same name is already in the cart
     const itemAlreadyInCart = cartItems.some(
       (item) => item.name === itemadded.name
     );
 
     if (itemAlreadyInCart) {
+      // If the item is already in the cart, find it and increase its quantity
       const theFoundItem = cartItems.find((item) => item.id === itemadded.id);
       theFoundItem.quantity += 1;
+
+      // Update the cart by creating a new array with the modified items
       setCartItems([...cartItems]);
     } else {
+      // If the item is not in the cart, create a new item with a quantity of 1
       const newItem = {
-        ...itemClicked,
+        ...itemadded,
         quantity: 1,
       };
+
+      // Update the cart by creating a new array that includes the new item
       setCartItems([...cartItems, newItem]);
     }
   };
@@ -45,20 +52,7 @@ export default function App() {
   return (
     <>
       <Header addTheCartItem={addTheCartItem} />
-      <Main />
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <Main cartItems={cartItems} setCartItems={setCartItems} />
     </>
   );
 }
