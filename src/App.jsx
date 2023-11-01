@@ -1,13 +1,8 @@
+import { useState } from "react";
 import "./styles/reset.css";
 import "./styles/index.css";
-
-// import Header from "./components/Header";
 import Items from "./components/Items";
-import Cart from "./components/CartItems";
-
-import initialStoreItems from "./store-items";
-import { useState } from "react";
-
+import CartItem from "./components/CartItems"; 
 
 export default function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -25,12 +20,7 @@ export default function App() {
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-
-        <ul className="item-list store--item-list">
-          {initialStoreItems.map((item) => (
-            <Items key={item.id} item={item} onAddToCart={handleAddToCart} />
-          ))}
-        </ul>
+        <Items addToCart={handleAddToCart} />
       </header>
 
       <main id="cart">
@@ -38,7 +28,7 @@ export default function App() {
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
             {cartItems.map((cartItem) => (
-              <Cart
+              <CartItem
                 key={cartItem.id}
                 item={cartItem}
                 onRemove={handleRemoveItem}
@@ -73,3 +63,4 @@ export default function App() {
     </>
   );
 }
+
