@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
-import storeItems from "../store-items";
 
-
-function CartItem({ item, quantity, onQuantityChange }) {
-
-
-  const Total = storeItems.map((item) => item.quantity * item.price)
+function CartItem({ item, onQuantityChange, onRemove }) {
+  const handleQuantityChange = (quantityChange) => {
+    onQuantityChange(item.id, quantityChange);
+  };
 
   return (
     <>
@@ -16,20 +14,23 @@ function CartItem({ item, quantity, onQuantityChange }) {
           alt={item.name}
         />
         <p>{item.name}</p>
-        <button className="quantity-btn remove-btn center" onClick={() => onQuantityChange(-1)}>-</button>
-        <span className="quantity-text center">{quantity}</span>
-        <button className="quantity-btn add-btn center" onClick={() => onQuantityChange(1)}>+</button>
+        <button
+          className="quantity-btn remove-btn center"
+          onClick={() => handleQuantityChange(-1)}
+        >
+          -
+        </button>
+        <span className="quantity-text center">{item.quantity}</span>
+        <button
+          className="quantity-btn add-btn center"
+          onClick={() => handleQuantityChange(1)}
+        >
+          +
+        </button>
+        <button className="remove-btn" onClick={() => onRemove(item.id)}>
+          Remove
+        </button>
       </li>
-
-
-      <div className="total-section">
-        <div>
-          <h3>Total</h3>
-        </div>
-        <div>
-          <span className="total-number">{`£${Total}`}</span>
-        </div>
-      </div>
     </>
   );
 }
@@ -38,11 +39,9 @@ CartItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    price:PropTypes.number.isRequired,
-    quantity:PropTypes.number.isRequired,
   }).isRequired,
-  quantity: PropTypes.number.isRequired,
   onQuantityChange: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default CartItem;

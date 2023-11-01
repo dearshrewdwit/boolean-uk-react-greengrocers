@@ -2,8 +2,6 @@
 
 You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) from scratch. But this time, using React!
 
-![](images/greengrocer-exercise.gif)
-
 > Reusing an exercise that you already know will help you understand the fundamentals of React.
 
 ## Setup
@@ -11,15 +9,14 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 1. Fork this repository
 2. Clone the forked repository onto your local machines
 3. In the root directory, type `npm ci`, which installs dependencies for the project
-4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server 
-   will reload your website whenever you make any changes to source files
+4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server will reload your website whenever you make any changes to source files
 
 ## Deliverables
 
 - A user can view a selection of items in the store
 - From the store, a user can add an item to their cart
 - From the cart, a user can view and adjust the number of items in their cart
-    - If an item's quantity equals zero it is removed from the cart
+- If an item's quantity equals zero it is removed from the cart
 - A user can view the current total in their cart
 
 ## Instructions
@@ -36,7 +33,7 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 ## Extension 1
 
 - Add filters to the store i.e. filter by item type; when a user clicks a filter they will only see items of that type
-- Add sorting to the store i.e. sort by price or sort alphabetically; when a user clicks sort they will see a sorted 
+- Add sorting to the store i.e. sort by price or sort alphabetically; when a user clicks sort they will see a sorted
   list of items
 
 ## Extension 2
