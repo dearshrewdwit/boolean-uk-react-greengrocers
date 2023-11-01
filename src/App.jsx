@@ -12,6 +12,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const selectToCart = (storeItem) => {
+    
     if(!cartItems.some( (item) => item.id === storeItem.id)){
       setCartItems([...cartItems, storeItem]);
 
@@ -19,10 +20,21 @@ export default function App() {
 
   };
 
+
+
+  const [totalPrice, setTotalPrice]= useState()
+
+  const calculateTotal = ()=>{
+ 
+    const total = cartItems.reduce((sumPrice, cartItem) => sumPrice + (cartItem.price * value), 0)
+
+    setTotalPrice(total.toFixed(2))
+}
+
   return (
     <>
       <Header storeItems={storeItems} selectToCart={selectToCart} />
-      <MainCart  cartItems= {cartItems}/>
+      <MainCart  cartItems= {cartItems} totalPrice= {totalPrice} setTotalPrice= {setTotalPrice} calculateTotal= {calculateTotal} />
       <div>
         Icons made by{" "}
         <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">
