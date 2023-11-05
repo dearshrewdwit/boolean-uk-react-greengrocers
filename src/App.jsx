@@ -5,7 +5,7 @@ import initialStoreItems from "./store-items";
 
 import { useState } from "react";
 import Product from "./components/Product";
-import CartItem from "./components/CartItem";
+import CartItem from "./components/cartItem";
 
 export default function App() {
   const [store, setStore] = useState(initialStoreItems);
