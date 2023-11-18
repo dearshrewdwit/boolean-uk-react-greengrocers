@@ -1,48 +1,26 @@
-import './styles/reset.css'
-import './styles/index.css'
+import "./styles/reset.css";
+import "./styles/index.css";
+import { addItemToCart, calculator } from "../utilities/functions";
 
-import initialStoreItems from './store-items'
 
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
+import initialStoreItems from "./store-items";
+import { useState } from "react";
+import Cart from "./components/Cart";
+import Store from "./components/Store";
 
- What should a cart item look like? 🤔
- */
-
-console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+  const initialStoreItemsWithQuantities = initialStoreItems.map(item => ({...item, quantity: 1}))
+
+  const [items, setItems] = useState(initialStoreItemsWithQuantities);
+  const [itemsInCart, setItemsInCart] = useState([]);
+  const [total, setTotal] = useState(0)
+
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Store itemsInStore={items} setItemsInStore={setItems} total={total} setTotal={setTotal} items={items} itemsInCart={itemsInCart} setItemsInCart={setItemsInCart}/>
+      <Cart itemsInCart={itemsInCart} setItemsInCart={setItemsInCart} total={total} setTotal={setTotal}/>
       <div>
         Icons made by
         <a
@@ -57,5 +35,5 @@ export default function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
