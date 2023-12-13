@@ -1,3 +1,5 @@
+import { capitalize } from "../App"
+
 function CartItem ({item, changeQuantity}) {
   return (
     <li>
@@ -5,7 +7,7 @@ function CartItem ({item, changeQuantity}) {
       className="cart--item-icon"
       src={"../public/assets/icons/"+item.id+".svg"}
       alt={item.name} />
-      <p>{item.name}</p>
+      <p>{capitalize(item.name)}</p>
       <button className="quantity-btn remove-btn center"
       onClick={() => changeQuantity(item, -1)}>-</button>
       <span className="quantity-text center">{item.quantity}</span>

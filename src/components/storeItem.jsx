@@ -1,3 +1,5 @@
+import { capitalize } from "../App"
+
 function StoreItem({item, addToCart}) {
   return (
     <li>
@@ -6,7 +8,7 @@ function StoreItem({item, addToCart}) {
       alt={item.name}
       />
     </div>
-    <p>{item.name}</p>
+    <p>{capitalize(item.name)}</p>
     <button onClick={() => addToCart(item)}>Add to cart</button>
   </li>
   )

@@ -8,12 +8,12 @@ import Cart from './components/cartItem'
 import Footer from './components/footer'
 import Button from './components/button'
 
+export const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
+
 export default function App() {
   // Setup state here...
   const [store, setStoreItems] = useState(initialStoreItems)
   const [cart, setCart] = useState([])
-
-  const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
 
   const fruits = ["apple", "apricot", "bananas", "berry", "blueberry"]
   const filteredForFruits = () => setStoreItems(initialStoreItems.filter(item => fruits.includes(item.name)))
