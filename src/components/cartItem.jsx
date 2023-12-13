@@ -1,6 +1,6 @@
-export default function cartItem ({item, index}) {
+export default function cartItem ({item}) {
   return (
-    <li key={index}>
+    <li>
       <img 
       className="cart--item-icon"
       src={"../public/assets/icons/"+item.id+".svg"}

@@ -3,6 +3,7 @@ import './styles/index.css'
 
 import initialStoreItems from './store-items'
 import { useState } from 'react'
+import { useContext } from 'react'
 import StoreItem from './components/storeItem'
 
 /*
@@ -36,7 +37,7 @@ export default function App() {
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
           {
-            store.map((item, index) => <StoreItem item={item} index={index} />)
+            store.map((item, index) => <StoreItem item={item} key={index} />)
           }
         </ul>
       </header>
@@ -44,7 +45,7 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cart.map((item, index) => <CartItem item={item} index={index} />)}
+            {cart.map((item, index) => <CartItem item={item} key={index} />)}
           </ul>
         </div>
         <div className="total-section">
@@ -56,7 +57,8 @@ export default function App() {
           </div>
         </div>
       </main>
-      <div>
+      <footer>
+        <span>
         Icons made by
         <a
           href="https://www.flaticon.com/authors/icongeek26"
@@ -68,7 +70,8 @@ export default function App() {
         <a href="https://www.flaticon.com/" title="Flaticon">
           www.flaticon.com
         </a>
-      </div>
+        </span>
+      </footer>
     </>
   )
 }
