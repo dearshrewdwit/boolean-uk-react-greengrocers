@@ -38,7 +38,6 @@ export default function App() {
     storeItem.quantity = 1
     setCart([...cart, storeItem])
   }
-
   
   const increaseQuantity = (itemToChange) => {
     setCart(cart.map((cartItem) => {
@@ -53,12 +52,17 @@ export default function App() {
     }))
   }
   
-  const decreaseQuantity = (cartItem) => {
+  const decreaseQuantity = (itemToChange) => {
+    if (itemToChange.quantity === 1) {
+      removeFromCart(itemToChange)
+      return
+    }
+
     setCart(cart.map((cartItem) => {
       if (cartItem.name === itemToChange.name) {
         return {
           ...cartItem,
-          quantity: cartItem.quantity - 1
+          quantity: Math.max(cartItem.quantity - 1, 0)
         }
       } else {
         return cartItem
@@ -70,8 +74,14 @@ export default function App() {
     if (difference > 0) {
       increaseQuantity(cartItem)
     } else if (difference < 0) {
-      increaseQuantity(cartItem)
+      decreaseQuantity(cartItem)
     }
+  }
+
+  const removeFromCart = (itemToRemove) => {
+    const newCart = cart.filter((cartItem) => cartItem.name !== itemToRemove.name)
+    console.log(newCart.length)
+    setCart(newCart)
   }
 
   return (
