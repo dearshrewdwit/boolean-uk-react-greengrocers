@@ -6,6 +6,15 @@ body {
   font-family: "Trebuchet MS", "Lucida Sans", Arial, sans-serif;
 }
 
+footer {
+  background-color: #e7f4ea;
+  place-content: center;
+  padding: 1rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
 h1,
 h2 {
   margin-bottom: 1rem;
@@ -13,9 +22,13 @@ h2 {
 
 /* Buttons */
 
+.buttoncontainer {
+  position: absolute;
+  margin: 2em;
+}
+
 button {
   padding: 0.25rem 0.5rem;
-
   text-transform: uppercase;
   font-size: 0.725rem;
 }
@@ -23,9 +36,8 @@ button {
 /* Store */
 
 #store {
-  height: 40vh;
+  height: 50vh;
   padding: 1rem;
-
   overflow-y: scroll;
 
   background-color: #e7f4ea;
@@ -37,7 +49,7 @@ button {
 
 .store--item-list {
   display: grid;
-  grid-template-columns: repeat(4, 125px);
+  grid-template-columns: repeat(5, 125px);
   grid-gap: 1rem;
   justify-content: center;
 }
@@ -68,7 +80,7 @@ button {
 /* Cart */
 
 #cart {
-  height: 60vh;
+  height: 40vh;
   padding: 1rem;
 
   display: grid;

@@ -2,60 +2,83 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import { useState } from 'react'
+import Store from './components/storeItem'
+import Cart from './components/cartItem'
+import Footer from './components/footer'
+import Button from './components/button'
 
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
-
- What should a cart item look like? 🤔
- */
-
-console.log(initialStoreItems)
+export const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
 
 export default function App() {
   // Setup state here...
+  const [store, setStoreItems] = useState(initialStoreItems)
+  const [cart, setCart] = useState([])
+
+  const fruits = ["apple", "apricot", "bananas", "berry", "blueberry"]
+  const filteredForFruits = () => setStoreItems(initialStoreItems.filter(item => fruits.includes(item.name)))
+  const vegetables = ["beetroot", "carrot", "avocado", "bell pepper", "eggplant"]
+  const filteredForVegetables = () => setStoreItems(initialStoreItems.filter(item => vegetables.includes(item.name)))
+  const resetFilter = () => setStoreItems(initialStoreItems)
+
+  const addToCart = (storeItem) => {
+    const cartCheck = cart.find((cartItem) => cartItem.name === storeItem.name)
+    if (!!cartCheck) return false
+    storeItem.quantity = 1
+    setCart([...cart, storeItem])
+  }
+  
+  const increaseQuantity = (itemToChange) => {
+    setCart(cart.map((cartItem) => {
+      if (cartItem.name === itemToChange.name) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1
+        }
+      } else {
+        return cartItem
+      }
+    }))
+  }
+  
+  const decreaseQuantity = (itemToChange) => {
+    if (itemToChange.quantity === 1) {
+      removeFromCart(itemToChange)
+      return
+    }
+
+    setCart(cart.map((cartItem) => {
+      if (cartItem.name === itemToChange.name) {
+        return {
+          ...cartItem,
+          quantity: Math.max(cartItem.quantity - 1, 0)
+        }
+      } else {
+        return cartItem
+      }
+    }))
+  }
+
+  const changeQuantity = (cartItem, difference) => {
+    if (difference > 0) {
+      increaseQuantity(cartItem)
+    } else if (difference < 0) {
+      decreaseQuantity(cartItem)
+    }
+  }
+
+  const removeFromCart = (itemToRemove) => setCart(cart.filter((cartItem) => cartItem.name !== itemToRemove.name))
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
+      <div className='buttoncontainer'>
+        <Button description="Fruits" onClickFunction={filteredForFruits} />
+        <Button description="Vegetables" onClickFunction={filteredForVegetables} />
+        <Button description="Show All" onClickFunction={resetFilter} />
       </div>
+      <Store storeItems={store} addToCart={addToCart} />
+      <Cart cartItems={cart} changeQuantity={changeQuantity}/>
+      <Footer />
     </>
   )
 }
