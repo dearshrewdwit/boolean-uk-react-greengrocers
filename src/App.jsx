@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Store from './components/storeItem'
 import Cart from './components/cartItem'
 import Footer from './components/footer'
+import Button from './components/button'
 
 export default function App() {
   // Setup state here...
@@ -15,9 +16,10 @@ export default function App() {
   const capitalize = (str) => str[0].toUpperCase() + str.slice(1).toLowerCase()
 
   const fruits = ["apple", "apricot", "bananas", "berry", "blueberry"]
-  const filteredForFruits = store.filter(item => fruits.includes(item.name))
+  const filteredForFruits = () => setStoreItems(initialStoreItems.filter(item => fruits.includes(item.name)))
   const vegetables = ["beetroot", "carrot", "avocado", "bell pepper", "eggplant"]
-  const filteredForVegetables = store.filter(item => vegetables.includes(item.name))
+  const filteredForVegetables = () => setStoreItems(initialStoreItems.filter(item => vegetables.includes(item.name)))
+  const resetFilter = () => setStoreItems(initialStoreItems)
 
   const addToCart = (storeItem) => {
     const cartCheck = cart.find((cartItem) => cartItem.name === storeItem.name)
@@ -69,6 +71,11 @@ export default function App() {
 
   return (
     <>
+      <div className='buttoncontainer'>
+        <Button description="Fruits" onClickFunction={filteredForFruits} />
+        <Button description="Vegetables" onClickFunction={filteredForVegetables} />
+        <Button description="ShowAll" onClickFunction={resetFilter} />
+      </div>
       <Store storeItems={store} addToCart={addToCart} />
       <Cart cartItems={cart} changeQuantity={changeQuantity}/>
       <Footer />

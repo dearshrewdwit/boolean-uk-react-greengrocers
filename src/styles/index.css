@@ -22,6 +22,11 @@ h2 {
 
 /* Buttons */
 
+.buttoncontainer {
+  position: absolute;
+  margin: 2em;
+}
+
 button {
   padding: 0.25rem 0.5rem;
   text-transform: uppercase;
