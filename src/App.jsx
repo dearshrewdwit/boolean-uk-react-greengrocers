@@ -32,10 +32,52 @@ export default function App() {
   const vegetables = ["beetroot", "carrot", "avocado", "bell pepper", "eggplant"]
   const filteredForVegetables = store.filter(item => vegetables.includes(item.name))
 
+  const addToCart = (storeItem) => {
+    const cartCheck = cart.find((cartItem) => cartItem.name === storeItem.name)
+    if (!!cartCheck) return false
+    storeItem.quantity = 1
+    setCart([...cart, storeItem])
+  }
+
+  
+  const increaseQuantity = (itemToChange) => {
+    setCart(cart.map((cartItem) => {
+      if (cartItem.name === itemToChange.name) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity + 1
+        }
+      } else {
+        return cartItem
+      }
+    }))
+  }
+  
+  const decreaseQuantity = (cartItem) => {
+    setCart(cart.map((cartItem) => {
+      if (cartItem.name === itemToChange.name) {
+        return {
+          ...cartItem,
+          quantity: cartItem.quantity - 1
+        }
+      } else {
+        return cartItem
+      }
+    }))
+  }
+
+  const changeQuantity = (cartItem, difference) => {
+    if (difference > 0) {
+      increaseQuantity(cartItem)
+    } else if (difference < 0) {
+      increaseQuantity(cartItem)
+    }
+  }
+
   return (
     <>
-      <Store storeItems={store} />
-      <Cart cartItems={cart} />
+      <Store storeItems={store} addToCart={addToCart} />
+      <Cart cartItems={cart} changeQuantity={changeQuantity}/>
       <Footer />
     </>
   )
