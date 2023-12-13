@@ -15,10 +15,9 @@ function CartItem ({item}) {
 
 export default function Cart({cartItems}) {
   const calcCartTotal = () => {
-    let sum = 0
-    cartItems.forEach((cartItem) => {
-      sum += cartItem.quantity * cartItem.price
-    })
+    let sum = cartItems.reduce((accumulator, cartItem) => {
+      return accumulator + cartItem.quantity * cartItem.price;
+    }, 0);
     return sum.toFixed(2)
   }
 
