@@ -1,4 +1,4 @@
-export default function StoreItem({item, index}) {
+function StoreItem({item, index}) {
   return (
     <li key={index}>
     <div className="store--item-icon">
@@ -9,5 +9,16 @@ export default function StoreItem({item, index}) {
     <p>{item.name}</p>
     <button>Add to cart</button>
   </li>
+  )
+}
+
+export default function Store({storeItems}) {
+  return (
+    <header id="store">
+      <h1>Greengrocers</h1>
+      <ul className="item-list store--item-list">
+        {storeItems.map((item, index) => <StoreItem item={item} key={index} />)}
+      </ul>
+    </header>
   )
 }

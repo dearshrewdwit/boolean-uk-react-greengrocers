@@ -7,10 +7,12 @@ body {
 }
 
 footer {
-  display: grid;
-  background-color: lightblue;
+  background-color: #e7f4ea;
   place-content: center;
   padding: 1rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 h1,
