@@ -7,19 +7,6 @@ import Store from './components/storeItem'
 import Cart from './components/cartItem'
 import Footer from './components/footer'
 
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
-
- What should a cart item look like? 🤔
- */
-
-// console.log(initialStoreItems)
-
 export default function App() {
   // Setup state here...
   const [store, setStoreItems] = useState(initialStoreItems)
@@ -78,11 +65,7 @@ export default function App() {
     }
   }
 
-  const removeFromCart = (itemToRemove) => {
-    const newCart = cart.filter((cartItem) => cartItem.name !== itemToRemove.name)
-    console.log(newCart.length)
-    setCart(newCart)
-  }
+  const removeFromCart = (itemToRemove) => setCart(cart.filter((cartItem) => cartItem.name !== itemToRemove.name))
 
   return (
     <>
