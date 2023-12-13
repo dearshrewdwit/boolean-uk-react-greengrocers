@@ -14,6 +14,14 @@ function CartItem ({item}) {
 }
 
 export default function Cart({cartItems}) {
+  const calcCartTotal = () => {
+    let sum = 0
+    cartItems.forEach((cartItem) => {
+      sum += cartItem.quantity * cartItem.price
+    })
+    return sum.toFixed(2)
+  }
+
   return (
     <main id="cart">
       <h2>Your Cart</h2>
@@ -27,7 +35,7 @@ export default function Cart({cartItems}) {
           <h3>Total</h3>
         </div>
         <div>
-          <span className="total-number">£0.00</span>
+          <span className="total-number">£{calcCartTotal()}</span>
         </div>
       </div>
     </main>
