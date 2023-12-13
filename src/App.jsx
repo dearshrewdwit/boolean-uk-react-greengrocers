@@ -74,7 +74,7 @@ export default function App() {
       <div className='buttoncontainer'>
         <Button description="Fruits" onClickFunction={filteredForFruits} />
         <Button description="Vegetables" onClickFunction={filteredForVegetables} />
-        <Button description="ShowAll" onClickFunction={resetFilter} />
+        <Button description="Show All" onClickFunction={resetFilter} />
       </div>
       <Store storeItems={store} addToCart={addToCart} />
       <Cart cartItems={cart} changeQuantity={changeQuantity}/>
