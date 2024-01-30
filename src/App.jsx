@@ -2,7 +2,9 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import { useState } from 'react'
 
+import Header from './Components/Header'
 /*
  Here's what a store item should look like
  {
@@ -17,16 +19,12 @@ import initialStoreItems from './store-items'
 console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+  const [items, setStoreItems] = useState(initialStoreItems)
+  const [cart, setCart] = useState()
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
+      <Header/>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
