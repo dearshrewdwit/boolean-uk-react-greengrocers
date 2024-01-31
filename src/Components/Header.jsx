@@ -8,7 +8,6 @@ function Header({ items, setCart }) {
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
           {initialStoreItems.map((e) => {
-            console.log(e)
             return <StoreItem item={e} key={e.id}/>
           })}
         </ul>
