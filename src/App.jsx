@@ -5,6 +5,7 @@ import initialStoreItems from './store-items'
 import { useState } from 'react'
 
 import Header from './Components/Header'
+import Cart from './Components/Cart'
 /*
  Here's what a store item should look like
  {
@@ -16,8 +17,6 @@ import Header from './Components/Header'
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
-
 export default function App() {
   const [items, setStoreItems] = useState(initialStoreItems)
   const [cart, setCart] = useState()
@@ -25,22 +24,7 @@ export default function App() {
   return (
     <>
       <Header/>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Cart/>
       <div>
         Icons made by
         <a
