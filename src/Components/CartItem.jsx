@@ -19,11 +19,7 @@ function CartItem({ item, cart, setCart }) {
     return (
         <>
         <li>
-            <img
-            className="cart--item-icon"
-            src={`/assets/icons/${item.id}.svg`}
-            alt={item.name}
-            />
+            <img className="cart--item-icon" src={`/assets/icons/${item.id}.svg`} alt={item.name}/>
             <p>{item.name}</p>
             <button onClick={() => removeItem(item)} className="quantity-btn remove-btn center">-</button>
             <span className="quantity-text center">{item.count}</span>

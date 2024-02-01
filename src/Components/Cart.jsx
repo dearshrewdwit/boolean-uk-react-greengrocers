@@ -16,7 +16,11 @@ function Cart({cart, setCart}) {
             <div className="cart--item-list-container">
                 <ul className="item-list cart--item-list">
                     {cart.map((item) => {
-                        return <CartItem item={item} cart={cart} setCart={setCart} key={item.id}/>
+                        return <CartItem 
+                            item={item} 
+                            cart={cart} 
+                            setCart={setCart} 
+                            key={item.id}/>
                     })}
                 </ul>
             </div>

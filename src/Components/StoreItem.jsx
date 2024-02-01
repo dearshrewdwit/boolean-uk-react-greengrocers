@@ -6,7 +6,7 @@ function StoreItem({ item, cart, setCart }) {
             setCart([...cart]);
         } else {
             setCart([...cart, {...item, count: 1 }]);
-        };
+        }
     };
 
     return (
