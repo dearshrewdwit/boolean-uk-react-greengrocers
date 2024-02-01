@@ -21,7 +21,7 @@ function CartItem({ item, cart, setCart }) {
         <li>
             <img
             className="cart--item-icon"
-            src={`../../public/assets/icons/${item.id}.svg`}
+            src={`/assets/icons/${item.id}.svg`}
             alt={item.name}
             />
             <p>{item.name}</p>

@@ -13,7 +13,7 @@ function StoreItem({ item, cart, setCart }) {
         <>
         <li>
             <div className="store--item-icon">
-                <img src={`../../public/assets/icons/${item.id}.svg`} alt={item.name}/>
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name}/>
             </div>
             <button onClick={addItem}>Add to cart</button>
         </li>
