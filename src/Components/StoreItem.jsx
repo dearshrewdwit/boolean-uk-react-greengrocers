@@ -1,13 +1,13 @@
 function StoreItem({ item, cart, setCart }) {
     const addItem = () => {
-        const inCart = cart.find((e) => e.id === item.id)
+        const inCart = cart.find((e) => e.id === item.id);
         if (inCart) {
-            inCart.count++
-            setCart([...cart])
+            inCart.count++;
+            setCart([...cart]);
         } else {
-            setCart([...cart, {...item, count: 1 }])
-        }
-    }
+            setCart([...cart, {...item, count: 1 }]);
+        };
+    };
 
     return (
         <>

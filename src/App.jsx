@@ -1,11 +1,11 @@
-import './styles/reset.css'
-import './styles/index.css'
+import './styles/reset.css';
+import './styles/index.css';
 
-import initialStoreItems from './store-items'
-import { useState } from 'react'
+import initialStoreItems from './store-items';
+import { useState } from 'react';
 
-import Header from './Components/Header'
-import Cart from './Components/Cart'
+import Header from './Components/Header';
+import Cart from './Components/Cart';
 /*
  Here's what a store item should look like
  {
@@ -18,7 +18,7 @@ import Cart from './Components/Cart'
  */
 
 export default function App() {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
 
   return (
     <>

@@ -1,14 +1,14 @@
-import CartItem from './CartItem'
+import CartItem from './CartItem';
 
 function Cart({cart, setCart}) {
     
     const totalCount = () => {
-        let total = 0
+        let total = 0;
         cart.forEach(item => {
-            total += item.price * item.count
+            total += item.price * item.count;
         });
-        return total.toFixed(2)
-    }
+        return total.toFixed(2);
+    };
 
     return (
         <>

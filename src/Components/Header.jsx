@@ -1,5 +1,5 @@
 import StoreItem from "./StoreItem";
-import initialStoreItems from '../store-items'
+import initialStoreItems from '../store-items';
 
 function Header({ cart, setCart }) {
   return (

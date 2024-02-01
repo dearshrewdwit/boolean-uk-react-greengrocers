@@ -1,20 +1,20 @@
 function CartItem({ item, cart, setCart }) {
     const addItem = (i) => {
-        i.count++
-        setCart([...cart])
-    }
+        i.count++;
+        setCart([...cart]);
+    };
 
     const removeItem = (i) => {
         if (i.count === 1) {
             cart.forEach((e, index) => {
                 if (e.id === i.id) {
-                    cart.splice(index, 1)
+                    cart.splice(index, 1);
                 }
             });
         }
-        i.count--
-        setCart([...cart])
-    }
+        i.count--;
+        setCart([...cart]);
+    };
 
     return (
         <>
