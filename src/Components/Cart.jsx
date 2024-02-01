@@ -1,6 +1,15 @@
 import CartItem from './CartItem'
 
 function Cart({cart, setCart}) {
+    
+    const totalCount = () => {
+        let total = 0
+        cart.forEach(item => {
+            total += item.price * item.count
+        });
+        return total.toFixed(2)
+    }
+
     return (
         <>
         <main id="cart">
@@ -17,7 +26,7 @@ function Cart({cart, setCart}) {
                     <h3>Total</h3>
                 </div>
                 <div>
-                    <span className="total-number">£0.00</span>
+                    <span className="total-number">£{totalCount()}</span>
                 </div>
             </div>
         </main>
