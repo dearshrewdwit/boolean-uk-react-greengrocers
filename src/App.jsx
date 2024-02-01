@@ -1,7 +1,6 @@
 import './styles/reset.css';
 import './styles/index.css';
 
-import initialStoreItems from './store-items';
 import { useState } from 'react';
 
 import Header from './Components/Header';

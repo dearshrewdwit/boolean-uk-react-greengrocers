@@ -1,7 +1,6 @@
 import CartItem from './CartItem';
 
 function Cart({cart, setCart}) {
-    
     const totalCount = () => {
         let total = 0;
         cart.forEach(item => {
