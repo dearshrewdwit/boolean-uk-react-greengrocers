@@ -19,11 +19,11 @@ import Cart from './Components/Cart'
 
 export default function App() {
   const [items, setStoreItems] = useState(initialStoreItems)
-  const [cart, setCart] = useState()
+  const [cart, setCart] = useState([])
 
   return (
     <>
-      <Header/>
+      <Header setCart={setCart}/>
       <Cart/>
       <div>
         Icons made by
