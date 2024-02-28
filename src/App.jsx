@@ -1,6 +1,10 @@
 import './styles/reset.css'
 import './styles/index.css'
 
+import { useState } from 'react'
+import StoreItem from './StoreItem'
+import Cart from './Cart'
+
 import initialStoreItems from './store-items'
 
 /*
@@ -12,37 +16,81 @@ import initialStoreItems from './store-items'
  }
 
  What should a cart item look like? 🤔
+
+ For reference for myself: 
+ {
+  id: '001-beetroot',
+  name: 'beetroot',
+  price: 0.35,
+  amount: 5
+ }
  */
 
-console.log(initialStoreItems)
-
 export default function App() {
-  // Setup state here...
+  const [cart, setCart] = useState([])
+  const [storeItems, setStoreItems] = useState(initialStoreItems)
+
+  // Check if item is already in cart
+  const countItemAppearences = (item) => {
+    const filteredList = cart.filter(((currentItem) =>
+      currentItem.id === item.id
+    ))
+    return filteredList.length
+  }
+
+  const addToCart = (item) => {
+    if(countItemAppearences(item) === 0)
+      setCart([...cart, {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        amount: 1
+      }])
+
+    else {
+      const updatedCart = cart.map((currentItem) => 
+        currentItem.id === item.id ? {...currentItem, amount:currentItem.amount + 1} : currentItem
+      ) 
+      setCart(updatedCart)
+    }
+  }
+
+  const removeFromCart = (item) => {
+    if(countItemAppearences(item) === 1 && item.amount <= 1)
+    {
+      const updatedCart = cart.filter((currentItem) =>
+        currentItem.id !== item.id
+      )
+      setCart(updatedCart)
+    }
+    else {
+      const updatedCart = cart.map((currentItem) => 
+      currentItem.id === item.id ? {...currentItem, amount:currentItem.amount - 1} : currentItem
+    ) 
+    setCart(updatedCart)
+    }
+  }
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {/* Write some code here... */}
+          {storeItems.map((storeItem) =>
+            <StoreItem 
+              storeItem={storeItem}
+              addToCart={addToCart}
+              cart={cart}
+            />
+          )}
         </ul>
       </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Cart
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        storeItems={storeItems}
+       />
       <div>
         Icons made by
         <a
