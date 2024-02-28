@@ -182,3 +182,12 @@ button {
     border-bottom: 2px solid #00675b;
   }
 }
+
+.filter li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sort, .filter {
+  list-style: none;
+}

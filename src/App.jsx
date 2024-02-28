@@ -1,37 +1,152 @@
-import './styles/reset.css'
-import './styles/index.css'
+import { useState } from "react";
 
-import initialStoreItems from './store-items'
+import "./styles/reset.css";
+import "./styles/index.css";
 
-/*
- Here's what a store item should look like
- {
- id: '001-beetroot',
- name: 'beetroot',
- price: 0.35
- }
+import initialStoreItems from "./store-items";
 
- What should a cart item look like? 🤔
- */
+const getFilteredItemsByType = (filters, items) => items.filter((item) => filters.includes(item.type)) 
 
-console.log(initialStoreItems)
+const allFilters = ["berry", "fruit", "vegetable"];
 
 export default function App() {
-  // Setup state here...
+  const [storeItems] = useState(initialStoreItems);
+  const [cartItems, setCartItems] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+  const [filters, setFilters] = useState([]);
+
+  const addToCart = (toAdd) => {
+    setTotalCost(totalCost + toAdd.price);
+    let containsItem = false;
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === toAdd.id) {
+        containsItem = true;
+        return { ...item, quantity: item.quantity + 1 };
+      } else {
+        return item;
+      }
+    });
+    if (containsItem) {
+      setCartItems(updatedCartItems);
+    } else {
+      toAdd.quantity = 1;
+      setCartItems([...cartItems, toAdd]);
+    }
+  };
+
+  const updateFilters = (targetFilter) => {
+    if (filters.includes(targetFilter)) {
+      setFilters(filters.filter((f) => f !==targetFilter));
+    } else {
+      setFilters([...filters, targetFilter]);
+    }
+  }
+
+  const increaseQuantity = (targetItem) => {
+    setTotalCost(totalCost + targetItem.price);
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === targetItem.id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setCartItems(updatedCartItems);
+  };
+
+  const decreaseQuantity = (targetItem) => {
+    setTotalCost(totalCost - targetItem.price);
+    let quantityLeft;
+    const updatedCartItems = cartItems.map((item) => {
+      if (item.id === targetItem.id) {
+        quantityLeft = item.quantity - 1;
+        return { ...item, quantity: quantityLeft };
+      } else {
+        return item;
+      }
+    });
+    if (quantityLeft === 0) {
+      setCartItems(
+        updatedCartItems.filter((item) => item.id !== targetItem.id)
+      );
+      return;
+    }
+    setCartItems(updatedCartItems);
+  };
+
+  let filteredItems = storeItems;
+
+  if (filters.length > 0) {
+    filteredItems = getFilteredItemsByType(filters, filteredItems);
+  }
+
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
+        <div className="filter">
+          <ul className="filter">
+            {allFilters.map((filter, index) => (
+              <li key={index}>
+                <label htmlFor={filter}>
+                  <input
+                    type="checkbox"
+                    id={filter}
+                    onChange={() => updateFilters(filter)}
+                  />{" "}
+                  {filter}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
         <ul className="item-list store--item-list">
-          {/* Write some code here... */}
+          {filteredItems.map((item, index) => (
+            <li key={index}>
+              <div className="store--item-icon">
+                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+              </div>
+              <button
+                onClick={() => {
+                  addToCart(item);
+                }}
+              >
+                Add to cart
+              </button>
+            </li>
+          ))}
         </ul>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
+            {cartItems.map((item, index) => (
+              <li key={index}>
+                <img
+                  className="cart--item-icon"
+                  src={`/assets/icons/${item.id}.svg`}
+                  alt={item.name}
+                />
+                <p>{item.name}</p>
+                <button
+                  className="quantity-btn remove-btn center"
+                  onClick={() => {
+                    decreaseQuantity(item);
+                  }}
+                >
+                  -
+                </button>
+                <span className="quantity-text center">{item.quantity}</span>
+                <button
+                  className="quantity-btn add-btn center"
+                  onClick={() => {
+                    increaseQuantity(item);
+                  }}
+                >
+                  +
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="total-section">
@@ -39,7 +154,7 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">£{totalCost.toFixed(2)}</span>
           </div>
         </div>
       </main>
@@ -57,5 +172,5 @@ export default function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
