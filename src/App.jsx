@@ -3,7 +3,7 @@ import './styles/index.css'
 
 import { useState } from 'react'
 import StoreItem from './StoreItem'
-import CartItem from './CartItem'
+import Cart from './Cart'
 
 import initialStoreItems from './store-items'
 
@@ -25,8 +25,6 @@ import initialStoreItems from './store-items'
   amount: 5
  }
  */
-
-console.log(initialStoreItems)
 
 export default function App() {
   const [cart, setCart] = useState([])
@@ -73,20 +71,6 @@ export default function App() {
     }
   }
 
-  const calculateTotal = () => {
-    let total = 0.0
-    for(let item in cart) {
-      console.log("price ", cart[item])
-      total += cart[item].price * cart[item].amount
-    }
-    return total
-  }
-
-  const getTotal = () => {
-    const total = calculateTotal()
-    return `£${total.toFixed(2)}`
-  }
-
   return (
     <>
       <header id="store">
@@ -101,28 +85,11 @@ export default function App() {
           )}
         </ul>
       </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {cart.map((cartItem) =>
-              <CartItem 
-              cartItem={cartItem}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-              />
-            )}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">{getTotal()}</span>
-          </div>
-        </div>
-      </main>
+      <Cart
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+       />
       <div>
         Icons made by
         <a

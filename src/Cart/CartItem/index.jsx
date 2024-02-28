@@ -1,3 +1,5 @@
+import './style.css'
+
 function CartItem(props) {
     return(
         <li>
