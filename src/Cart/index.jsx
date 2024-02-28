@@ -1,6 +1,14 @@
+import { useState } from 'react'
+
 import CartItem from "./CartItem"
+import Filter from "./Filter"
 
 function Cart(props) {
+    const [filters, setFilters] = useState([])
+
+    let filteredCart = props.cart
+    if (filters.length !== 0) filteredCart = console.log("filters in place")
+
     const calculateTotal = () => {
         let total = 0.0
         for(let item in props.cart) {
@@ -13,6 +21,13 @@ function Cart(props) {
         const total = calculateTotal()
         return `£${total.toFixed(2)}`
       }
+
+    const handleSelect = (item) => {
+        if(filters.filter((currentItem) => currentItem === item).length !== 0)
+            setFilters(filters.filter((currentItem) => currentItem !== item))
+        else 
+            setFilters([...filters, item])
+    }
 
     return(
         <main id="cart">
@@ -37,6 +52,10 @@ function Cart(props) {
             <span className="total-number">{getTotal()}</span>
           </div>
         </div>
+        <Filter 
+            storeItems={props.storeItems}
+            handleSelect={handleSelect}
+        />
       </main>
     )
 }

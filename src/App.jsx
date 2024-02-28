@@ -89,6 +89,7 @@ export default function App() {
         cart={cart}
         addToCart={addToCart}
         removeFromCart={removeFromCart}
+        storeItems={storeItems}
        />
       <div>
         Icons made by
