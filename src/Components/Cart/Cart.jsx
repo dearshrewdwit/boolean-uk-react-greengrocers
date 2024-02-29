@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import "./Cart.css"
 import TotalCost from "./TotalCost/TotalCost.jsx"
+import PropTypes from 'prop-types'
 
 const Cart = ({cart, increment, decrement}) => {
   const [cartPrice, setCartPrice] = useState(0)
@@ -18,7 +19,8 @@ const Cart = ({cart, increment, decrement}) => {
       <h2>Your Cart</h2>
       <div className="cart--item-list-container">
         <ul className="item-list cart--item-list">
-          {cart?.filter((e) => e.quantity !== 0).map((entry, index) => 
+          {cart?.filter((e) => e.quantity !== 0)
+            .map((entry, index) => 
             <li key={index}>
               <img 
                 className="cart--item-icon"
@@ -41,6 +43,12 @@ const Cart = ({cart, increment, decrement}) => {
       <TotalCost cartPrice={cartPrice} />
     </main>
   )
+}
+
+Cart.propTypes = {
+  cart: PropTypes.array,
+  increment: PropTypes.func,
+  decrement: PropTypes.func,
 }
 
 export default Cart

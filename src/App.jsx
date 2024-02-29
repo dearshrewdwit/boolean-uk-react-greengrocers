@@ -12,13 +12,14 @@ import initialStoreItems from './store-items'
  {
  id: '001-beetroot',
  name: 'beetroot',
- price: 0.35
+ price: 0.35,
+ type: "vegetable"
  }
 
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
+//console.log(initialStoreItems)
 
 export default function App() {
   const [cartItems, setCartItems] = useState([])
@@ -32,9 +33,12 @@ export default function App() {
   },[])
 
   const addItemToCart = (itemId) => {
-    const updateItem = cartItems
-    updateItem[updateItem.findIndex((i) => i.id === itemId)].quantity += 1
-    setCartItems([...updateItem])
+    const items = cartItems
+    const itemIndex = items.findIndex((i) => i.id == itemId)
+    const updatedItem = items.at(itemIndex)
+    updatedItem.quantity += 1
+    items.splice(itemIndex, 1)
+    setCartItems([updatedItem, ...items])
   }
 
   const removeItemFromCart = (itemId) => {
