@@ -53,3 +53,4 @@ const storeItems =  [
 ]
 
 export default storeItems
+
