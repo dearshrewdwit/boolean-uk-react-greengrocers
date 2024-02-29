@@ -14,7 +14,6 @@ export default function App() {
   const handleClick = (target) => {
     const itemInCart = cart.findIndex((cartItem) => cartItem.id === target.id)
 
-    
     if (itemInCart === -1){
       setCart([...cart,{...target, count: 1}])
     }
@@ -34,6 +33,22 @@ export default function App() {
     setCart(newCart)
     }
 
+  const decrementCartItem = (target) => {
+    const itemInCart = cart.findIndex((cartItem) => cartItem.id === target.id)
+    // console.log(cart[itemInCart])
+
+    if (cart[itemInCart].count === 1) {
+      const updatedCart = cart.filter((cartItem, index) => index !== itemInCart);
+      console.log(updatedCart)
+      setCart(updatedCart);
+
+    } else {
+      const newCart = [...cart]
+      newCart[itemInCart].count--
+      setCart(newCart)
+    }
+  }
+  
   
   
   return (
@@ -64,7 +79,7 @@ export default function App() {
                 src={`/assets/icons/${item.id}.svg`} alt={item.name}
               />
               <p>{item.name}</p>
-              <button className="quantity-btn remove-btn center">-</button>
+              <button className="quantity-btn remove-btn center" onClick={() => decrementCartItem(item)}>-</button>
               <span className="quantity-text center">{item.count}
               </span>
               <button className="quantity-btn add-btn center" onClick={() => incrementCartItem(item)}>+</button>
