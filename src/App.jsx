@@ -5,7 +5,8 @@ import "./styles/index.css";
 
 import initialStoreItems from "./store-items";
 
-const getFilteredItemsByType = (filters, items) => items.filter((item) => filters.includes(item.type)) 
+const getFilteredItemsByType = (filters, items) =>
+  items.filter((item) => filters.includes(item.type));
 
 const allFilters = ["berry", "fruit", "vegetable"];
 
@@ -14,6 +15,7 @@ export default function App() {
   const [cartItems, setCartItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [filters, setFilters] = useState([]);
+  const [sorting, setSorting] = useState("none");
 
   const addToCart = (toAdd) => {
     setTotalCost(totalCost + toAdd.price);
@@ -36,11 +38,11 @@ export default function App() {
 
   const updateFilters = (targetFilter) => {
     if (filters.includes(targetFilter)) {
-      setFilters(filters.filter((f) => f !==targetFilter));
+      setFilters(filters.filter((f) => f !== targetFilter));
     } else {
       setFilters([...filters, targetFilter]);
     }
-  }
+  };
 
   const increaseQuantity = (targetItem) => {
     setTotalCost(totalCost + targetItem.price);
@@ -53,6 +55,7 @@ export default function App() {
   };
 
   const decreaseQuantity = (targetItem) => {
+    console.log(totalCost - targetItem.price);
     setTotalCost(totalCost - targetItem.price);
     let quantityLeft;
     const updatedCartItems = cartItems.map((item) => {
@@ -78,6 +81,19 @@ export default function App() {
     filteredItems = getFilteredItemsByType(filters, filteredItems);
   }
 
+  if (sorting === "price") {
+    filteredItems.sort((a, b) => {
+      return a.price > b.price ? 1 : -1;
+    });
+  } else if (sorting === "alphabetically") {
+    filteredItems.sort((a, b) => {
+      return a.name > b.name ? 1 : -1;
+    });
+  } else if (sorting === "none") {
+    filteredItems.sort((a, b) => {
+      return a.id > b.id ? 1 : -1;
+    });
+  }
 
   return (
     <>
@@ -85,6 +101,7 @@ export default function App() {
         <h1>Greengrocers</h1>
         <div className="filter">
           <ul className="filter">
+            Filters:
             {allFilters.map((filter, index) => (
               <li key={index}>
                 <label htmlFor={filter}>
@@ -92,11 +109,52 @@ export default function App() {
                     type="checkbox"
                     id={filter}
                     onChange={() => updateFilters(filter)}
-                  />{" "}
+                  />
                   {filter}
                 </label>
               </li>
             ))}
+          </ul>
+        </div>
+        <div className="sorting">
+          <ul className="sorting">
+            Sorting:
+            <li>
+              <label htmlFor="no-sorting">
+                <input
+                  type="radio"
+                  id="no-sorting"
+                  name="sorting"
+                  checked={sorting === "none"}
+                  onChange={() => setSorting("none")}
+                />
+                None
+              </label>
+            </li>
+            <li>
+              <label htmlFor="alphabetical-sorting">
+                <input
+                  type="radio"
+                  id="alphabetical-sorting"
+                  name="sorting"
+                  checked={sorting === "alphabetically"}
+                  onChange={() => setSorting("alphabetically")}
+                />
+                Alphabetically
+              </label>
+            </li>
+            <li>
+              <label htmlFor="price-sorting">
+                <input
+                  type="radio"
+                  id="price-sorting"
+                  name="sorting"
+                  checked={sorting === "price"}
+                  onChange={() => setSorting("price")}
+                />
+                Price
+              </label>
+            </li>
           </ul>
         </div>
         <ul className="item-list store--item-list">
@@ -154,7 +212,9 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£{totalCost.toFixed(2)}</span>
+            <span className="total-number">
+              £{Math.abs(totalCost).toFixed(2)}
+            </span>
           </div>
         </div>
       </main>
