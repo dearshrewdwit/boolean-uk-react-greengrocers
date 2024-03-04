@@ -1,0 +1,33 @@
+.product-view-container {
+    position: fixed;
+    top: 5%;
+    left: 80%;
+    width: 200px;
+    border: solid black 1px;
+    border-radius: 10%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#close-component {
+    position: fixed;
+    width: 30px;
+    left: 88.5%;
+    top: 5.5%;
+    z-index: 5;
+}
+
+.product-view-container > img {
+    width: 100px;
+    position: relative;
+    top: 5%;
+    left: 5%;
+}
+
+.product-view-container > h3 {
+    font-size: 26px;
+}
+
+.product-view-container > p {
+    font-size: 18px;
+}
