@@ -1,0 +1,41 @@
+.filter-and-sort-container {
+    position: absolute;
+    left: 30%;
+    width: 130px;
+}
+
+@media only screen and (max-width: 1450px) {
+    .filter-and-sort-container {
+        left: 20%;
+    }
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .filter-and-sort-container {
+        left: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .filter-and-sort-container {
+        left: 5%;
+    }
+}
+
+.filter-and-sort-container > p {
+    font-weight: bold;
+}
+
+.filter-and-sort-container > div > button {
+    background: #aee6bb;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    border-radius: 30%;
+    border: none;
+}
+
+.filter-and-sort-container > div > button:hover {
+    background-color:gainsboro;
+}

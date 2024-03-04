@@ -1,61 +1,56 @@
+import { useState, useEffect } from 'react'
 import './styles/reset.css'
 import './styles/index.css'
-
+import Header from "./Components/Header/Header.jsx"
+import Cart from "./Components/Cart/Cart.jsx"
+import Credit from "./Components/Credit/Credit.jsx"
 import initialStoreItems from './store-items'
+
 
 /*
  Here's what a store item should look like
  {
  id: '001-beetroot',
  name: 'beetroot',
- price: 0.35
+ price: 0.35,
+ type: "vegetable"
  }
 
  What should a cart item look like? 🤔
  */
 
-console.log(initialStoreItems)
+//console.log(initialStoreItems)
 
 export default function App() {
-  // Setup state here...
+  const [cartItems, setCartItems] = useState([])
+
+  useEffect(() => {
+    const initialCart = []
+    initialStoreItems?.forEach((entry) => {
+      initialCart.push({...entry, quantity: 0})
+    })
+    setCartItems(initialCart)
+  },[])
+
+  const addItemToCart = (itemId) => {
+    const items = cartItems
+    const itemIndex = items.findIndex((i) => i.id == itemId)
+    const updatedItem = items.at(itemIndex)
+    updatedItem.quantity += 1
+    setCartItems([...items])
+  }
+
+  const removeItemFromCart = (itemId) => {
+    const updateItem = cartItems
+    updateItem[updateItem.findIndex((i) => i.id === itemId)].quantity -= 1
+    setCartItems([...updateItem])
+  }
 
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {/* Write some code here... */}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {/* Write some code here... */}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <Header storeItems={initialStoreItems} addFunction={addItemToCart}/>
+      <Cart cart={cartItems} increment={addItemToCart} decrement={removeItemFromCart}/>
+      <Credit/>
     </>
   )
 }
