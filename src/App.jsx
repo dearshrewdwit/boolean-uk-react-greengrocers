@@ -37,8 +37,7 @@ export default function App() {
     const itemIndex = items.findIndex((i) => i.id == itemId)
     const updatedItem = items.at(itemIndex)
     updatedItem.quantity += 1
-    items.splice(itemIndex, 1)
-    setCartItems([updatedItem, ...items])
+    setCartItems([...items])
   }
 
   const removeItemFromCart = (itemId) => {
