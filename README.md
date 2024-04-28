@@ -4,7 +4,7 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 
 ![](images/greengrocer-exercise.gif)
 
-> Reusing an exercise that you already know will help you understand the fundamentals of React.
+> Reusing an exercise that you already know will help you deepen your understanding of the fundamentals of React by removing the requirement to get familiar with a new domain and context.
 
 ## Setup
 
