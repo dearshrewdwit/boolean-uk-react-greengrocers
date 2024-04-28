@@ -1,6 +1,6 @@
 # React Greengrocers
 
-You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) from scratch. But this time, using React!
+You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) but this time, using React!
 
 ![](images/greengrocer-exercise.gif)
 
