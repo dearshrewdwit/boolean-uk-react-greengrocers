@@ -26,8 +26,8 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 
 - Create a diagram of your component hierarchy before starting to code. Add this diagram to the root directory
 - Annotate your diagram by adding what state each component needs to manage - React State or React Props
-- Create all the components you need, using the templates as a reference
-- Create all the pieces of the state you need, using the example provided
+- Create all the components you need, using the HTML templates as a reference
+- Create all the pieces of the state you need
 - Add all the event listeners you need to make the page reactive
 
 ## Extension 1
