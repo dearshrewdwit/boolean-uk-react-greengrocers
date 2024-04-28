@@ -14,7 +14,7 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server 
    will reload your website whenever you make any changes to source files
 
-## Deliverables
+## User Stories
 
 - A user can view a selection of items in the store
 - From the store, a user can add an item to their cart
@@ -22,16 +22,13 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
     - If an item's quantity equals zero it is removed from the cart
 - A user can view the current total in their cart
 
-## Instructions
+## Core Requirements
 
+- Create a diagram of your component hierarchy before starting to code. Add this diagram to the root directory
+- Annotate your diagram by adding what state each component needs to manage - React State or React Props
 - Create all the components you need, using the templates as a reference
 - Create all the pieces of the state you need, using the example provided
 - Add all the event listeners you need to make the page reactive
-
-## Tips
-
-- Create a diagram of your component hierarchy before starting to code
-- Annotate your diagram by adding what state each component needs to manage - React State or React Props
 
 ## Extension 1
 
