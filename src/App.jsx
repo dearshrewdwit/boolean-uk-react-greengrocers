@@ -2,10 +2,12 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
-import MainContent from './components/MainContent'
+import Content from './components/Content'
 export default function App() {
+  
   return (
-
-    <MainContent items = {initialStoreItems}/>
+    <>
+    <Content items = { initialStoreItems } />
+    </>
   )
 }

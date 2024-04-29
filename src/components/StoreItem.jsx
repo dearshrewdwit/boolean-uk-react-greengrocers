@@ -1,5 +1,4 @@
-export default function StoreItem({ initialStoreItems }){
-  
+export default function StoreItem({ initialStoreItems, onClick }){
   const itemsList = initialStoreItems.items
   return (
     <ul className="item-list store--item-list">
@@ -9,7 +8,7 @@ export default function StoreItem({ initialStoreItems }){
             <div className="store--item-icon">
               <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
             </div>
-            <button>Add to cart</button>
+            <button onClick={onClick} id = {item.id} value={item.name} >Add to cart</button>
           </li>
         )
       })}
