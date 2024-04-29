@@ -26,6 +26,7 @@ export default function App() {
             addToCart={addToCart}
             cart={cart}
             filter={filter}
+            sort={sort}
           />
         </ul>
       </header>
