@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default function StoreCard({
   initialStoreItems,
   addToCart,
@@ -5,6 +7,8 @@ export default function StoreCard({
   filter,
   sort,
 }) {
+  const [itemDetailDisplay, setItemDetailDisplay] = useState("");
+
   function handleClick(item) {
     if (item.quantity) {
       item.quantity++;
@@ -16,6 +20,11 @@ export default function StoreCard({
       return;
     }
     addToCart([...cart, item]);
+  }
+
+  function handleImgClick(item) {
+   itemDetailDisplay === item.name ? setItemDetailDisplay('') : setItemDetailDisplay(item.name)
+    
   }
 
   let filteredItems;
@@ -38,8 +47,13 @@ export default function StoreCard({
     return (
       <li key={index}>
         <div className="store--item-icon">
-          <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+          <img
+            onClick={() => handleImgClick(item)}
+            src={`/assets/icons/${item.id}.svg`}
+            alt={item.name}
+          />
         </div>
+        {item.name === itemDetailDisplay && <p className="item-detail">{item.description}</p>}
         <button onClick={() => handleClick(item)}>Add to cart</button>
       </li>
     );
