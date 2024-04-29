@@ -1,4 +1,4 @@
-export default function StoreCard({ initialStoreItems, addToCart, cart }) {
+export default function StoreCard({ initialStoreItems, addToCart, cart, filter }) {
 
 function handleClick (item) {
     if (item.quantity) {
@@ -13,7 +13,15 @@ function handleClick (item) {
     addToCart([...cart, item])
 }
 
-  return initialStoreItems.map((item, index) => {
+let filteredItems;
+
+if (filter !== 'all') {
+    filteredItems = initialStoreItems.filter((item) => item.type === filter)
+} else {
+    filteredItems = initialStoreItems
+}
+
+  return filteredItems.map((item, index) => {
     return (
       <li key={index}>
         <div className="store--item-icon">
