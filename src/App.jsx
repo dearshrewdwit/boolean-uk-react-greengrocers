@@ -16,16 +16,13 @@ export default function App() {
     <>
       <header id="store">
         <h1>Greengrocers</h1>
-        <button>Sort by name</button>
-        <button style={{marginLeft: '10px' }}>Sort by Type</button>
-        <button style={{marginLeft: '10px' }}>Sort by price</button>
         <Store  cartProds={cartProds} setCartProds={setCartProds} />
       </header>
-
       <main id="cart">
         <Cart cartProds={cartProds} setCartProds={setCartProds} />
         <Total cartProds={cartProds} />
       </main>
+      
       <div>
         Icons made by
         <a

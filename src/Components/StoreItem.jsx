@@ -2,6 +2,7 @@ import AddToCart from "./AddToCart"
 
 export default function StoreItem({ products, cartProds, setCartProds }) {
 
+
     return (
         products.map(product => (
         <li key={product.id}>
