@@ -38,4 +38,4 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 
 ## Extension 2
 
-- Add a new detail component for each of the items, and render it conditionally after clicking on an item
+- Add a new detail component for each of the items, and render it conditionally after clicking on an item. Only one detail component should be rendered at a time; clicking a second item should remove the previous item's details.
