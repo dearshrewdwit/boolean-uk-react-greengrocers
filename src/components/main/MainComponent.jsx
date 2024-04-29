@@ -1,6 +1,8 @@
 import CartItemUl from "./CartItemUl"
 
-function MainComponent({ cartItem, setCartItem }) {
+function MainComponent({ cartItem, setCartItem}) {
+    const total = (cartItem.reduce((total, item) => total += item.price * item.quantity, 0)).toFixed(2)
+
     return (
         <main id="cart">
             <h2>Your Cart</h2>
@@ -12,7 +14,7 @@ function MainComponent({ cartItem, setCartItem }) {
                     <h3>Total</h3>
                 </div>
                 <div>
-                    <span className="total-number">£0.00</span>
+                    <span className="total-number">£{total}</span>
                 </div>
             </div>
         </main>

@@ -7,6 +7,7 @@ function StoreItemLi({ item, setCartItem, cartItem}) {
                 setCartItem([
                     ...cartItem
                 ])
+
           } else {
                 const productToAdd = { ...item }
                 productToAdd.quantity = 1
