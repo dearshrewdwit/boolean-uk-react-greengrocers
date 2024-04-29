@@ -1,10 +1,10 @@
 import StoreItemUl from './StoreItemUl'
 
-function Header() {
+function Header({ setCartItem, cartItem }) {
     return (
         <header id="store">
             <h1>Greengrocers</h1>
-            <StoreItemUl />
+            <StoreItemUl setCartItem={setCartItem} cartItem={cartItem} />
         </header>
     )
 }
