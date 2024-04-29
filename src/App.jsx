@@ -5,6 +5,8 @@ import Heading from './components/Heading'
 import initialStoreItems from './store-items'
 import ProductItems from './components/ProductItems'
 import React from 'react'
+import YourCart from './components/YourCart'
+import CartContainer from './components/CartContainer'
 
 
 
@@ -13,33 +15,43 @@ const [productList, setProductList] = React.useState(initialStoreItems)
 const [cartList, setCartList] = React.useState([])
 
 const onItemClick = (product) => { return () => {
-console.log('Ive been clicked', product)
+  const foundProduct = cartList.find((item)=> {return item.name === product.name}) 
+  if (foundProduct != undefined) {
+    const filteredCartList = cartList.filter((item)=>{return item.name != product.name})
+    const newCart = [...filteredCartList, {...product, amount:foundProduct.amount+1 }]
+    setCartList(newCart)
+  } else {
+    const newCart = [...cartList, {...product, amount:1 }]
+    setCartList(newCart)
+  }
 }}
 
-const onCartUpdate = () => {
-  console.log('Ive been changed')
+const onCartUpdate = (product, changeNumber) => {
+return ()=>{
+  const newAmount = product.amount + changeNumber
+  const newCart = cartList.map((item)=>{return {...item, amount:newAmount}}).filter((item)=>{return item.amount > 0})
+  setCartList(newCart)
+  console.log('product:', product, changeNumber)
 }
+}
+const totalAmount = cartList.reduce((a, b)=>{return a + (b.amount * b.price)}, 0)
   return (
     <><YourItems>       
     <Heading>Green Grocers</Heading>
     <ProductItems onItemClick={onItemClick} productList={productList}/>
     </YourItems>
-
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
+    <YourCart>
+    <Heading>Your Cart</Heading>
+    <CartContainer onCartUpdate={onCartUpdate} cartList={cartList}></CartContainer>
+    <div className="total-section">
           <div>
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">£{totalAmount.toFixed(2)}</span>
           </div>
         </div>
-      </main>
+    </YourCart>
       <div>
         Icons made by
         <a
