@@ -1,9 +1,21 @@
 function StoreItemLi({ item, setCartItem, cartItem}) {
     function handleClick() {
-        setCartItem([
-            ...cartItem,
-            item
-        ])
+        const foundItem = cartItem.find(product => product.id === item.id)
+
+        if (foundItem) {
+                foundItem.quantity++
+                setCartItem([
+                    ...cartItem
+                ])
+          } else {
+                const productToAdd = { ...item }
+                productToAdd.quantity = 1
+                setCartItem([
+                    ...cartItem,
+                    productToAdd
+                ])
+          }
+
     }
 
     return (

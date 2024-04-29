@@ -8,7 +8,7 @@ function CartItemLi({ item }) {
             />
             <p>{item.name}</p>
             <button className="quantity-btn remove-btn center">-</button>
-            <span className="quantity-text center">1</span>
+            <span className="quantity-text center">{item.quantity}</span>
             <button className="quantity-btn add-btn center">+</button>
         </li>
     )
