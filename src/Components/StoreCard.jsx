@@ -1,4 +1,6 @@
-export default function StoreCard ({ initialStoreItems } ) {
+export default function StoreCard ({ initialStoreItems, addToCart, cart } ) {
+
+
     return (
         initialStoreItems.map((item, index) => {
             return ( 
@@ -6,7 +8,7 @@ export default function StoreCard ({ initialStoreItems } ) {
                     <div className="store--item-icon">
                         <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
                     </div>
-                    <button>Add to cart</button>
+                    <button onClick={() => addToCart([...cart, item])}>Add to cart</button>
                 </li>
             )
         })

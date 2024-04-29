@@ -3,14 +3,19 @@ import './styles/index.css'
 
 import initialStoreItems from './store-items'
 import StoreCard from './Components/StoreCard'
+import { useState } from 'react'
+
+
 
 export default function App() {
+  const [cart, addToCart] = useState([])
+
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          <StoreCard initialStoreItems={initialStoreItems}/>
+          <StoreCard initialStoreItems={initialStoreItems} addToCart={addToCart} cart={cart}/>
         </ul>
       </header>
 
