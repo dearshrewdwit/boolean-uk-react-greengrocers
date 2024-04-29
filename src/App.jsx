@@ -38,16 +38,7 @@ export default function App() {
 
 
 
-  function calculateTotal() {
-    let runningTotal = 0
 
-    cart.forEach((element, index) => {  
-      runningTotal += element.price * element.quantity
-    })
-  
-    return '£' + runningTotal.toFixed(2)
-  
-  }
   
 
   return (
@@ -61,7 +52,7 @@ export default function App() {
           
         </ul>
       </header>
-      <Cart storeItems={storeItems} cart={cart} setCart={setCart} />
+      <Cart cart={cart} setCart={setCart} />
       <div>
         Icons made by
         <a
