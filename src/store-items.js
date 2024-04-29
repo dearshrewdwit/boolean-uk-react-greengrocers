@@ -31,7 +31,7 @@ const storeItems =  [
   {
     id: "005-avocado",
     name: "avocado",
-    price: 0.35,
+    price: 0.37,
     description: "The avocado, alligator pear or avocado pear (Persea americana) is a medium-sized, evergreen tree in the laurel family (Lauraceae).",
     type: "fruit"
   },
@@ -45,7 +45,7 @@ const storeItems =  [
   {
     id: "007-bell-pepper",
     name: "bell pepper",
-    price: 0.35,
+    price: 0.36,
     description: "The bell pepper (also known as sweet pepper, pepper, capsicum /ˈkæpsɪkəm/ or in some places, mangoes) is the fruit of plants in the Grossum Group of the species Capsicum annuum.",
     type: "fruit"
   },
