@@ -10,23 +10,25 @@ export default function App() {
   const [cart, setCart] = useState([]);
   const [store, setStore] = useState(initialStoreItems);
   
-
-  const addToCart = (item) => {
-    const updatedCart = [...cart, {item, quantity: 1}]
+  const removeFromCart = (item) => {
+    const updatedCart = cart.filter((cartItem) => cartItem.id === item.id)
     setCart(updatedCart)
   }
+  
 
-  const updateCart = () => {
-    setCart([
-      ...cart,
-      store
-    ])
+  const addToCart = (item) => {
+    const checkItem = cart.find((cartItem) => cartItem.id === item.id)
+    if(checkItem) {
+      const updatedCart = checkItem.map((cartItem) => cartItem.quantity ++)
+      setCart(updatedCart)
+    } else {const updatedCart = [...cart, {...item, quantity: 1}]
+      setCart(updatedCart)}
   }
 
   return (
     <>
       <Header store={store} addToCart={addToCart}/>
-      <MainBody updateCart={updateCart} />
+      <MainBody cart={cart} addToCart={addToCart} removeFromCart={removeFromCart}/>
       <div>
         Icons made by
         <a

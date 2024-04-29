@@ -1,33 +1,18 @@
-import { useState } from "react"
+/* eslint-disable react/prop-types */
 
-export default function CartItem({ item, numItemsInCart, setNumItemsInCart }) {
-    const [checkBtn, setCheckBtn] = useState('+')
-
-    const handleClick = (event) => {
-        setCheckBtn(event.target.textContent)
-    }
-
-    const updateCart = () => {
-        if(checkBtn === '+') {
-            setNumItemsInCart(numItemsInCart++)
-        }
-        else if(checkBtn === '-') {
-            setNumItemsInCart(numItemsInCart--)
-        }
-        return numItemsInCart
-    }
+export default function CartItem({cartItem, index, addToCart, removeFromCart}) {
 
   return (
-    <li>
+    <li key={index}>
       <img
         className="cart--item-icon"
-        src={`assets/icons/${item.name}.svg`}
-        alt={item.name}
+        src={`../../assets/icons/${cartItem.id}.svg`}
+        alt={cartItem.name}
       />
-      <p>{item.name}</p>
-      <button className="quantity-btn remove-btn center">-</button>
-      <span className="quantity-text center">{updateCart}</span>
-      <button className="quantity-btn add-btn center" onClick={handleClick}>+</button>
+      <p>{cartItem.name}</p>
+      <button className="quantity-btn remove-btn center" onClick={() => removeFromCart()}>-</button>
+      <span className="quantity-text center">{cartItem.quantity}</span>
+      <button className="quantity-btn add-btn center" onClick={() => addToCart(cartItem)}>+</button>
     </li>
   );
 }
