@@ -53,9 +53,8 @@ button {
   height: 125px;
 }
 
-.store-container {
-  display: grid;
-  grid-template-columns: 200px 1fr 200px;
+.details {
+  font-size: 0.8rem;
 }
 
 @media only screen and (max-width: 600px) {

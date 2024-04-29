@@ -1,11 +1,9 @@
 import StoreItemLi from './StoreItemLi'
 
-function StoreItemUl({ setCartItem, cartItem, filteredItems, details, setDetails}) {
+function StoreItemUl({ setCartItem, cartItem, filteredItems}) {
     return (
         <ul className="item-list store--item-list">
-            {filteredItems.map((item, index) => {
-                return <StoreItemLi key={index} item={item} setCartItem={setCartItem} cartItem={cartItem} details={details} setDetails={setDetails}/>
-            })}
+            <StoreItemLi setCartItem={setCartItem} cartItem={cartItem} filteredItems={filteredItems} />
         </ul>
     )
 }

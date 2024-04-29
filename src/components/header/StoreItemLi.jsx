@@ -1,5 +1,9 @@
-function StoreItemLi({ item, setCartItem, cartItem, details, setDetails}) {
-    function handleClick() {
+import { useState } from "react"
+
+function StoreItemLi({ setCartItem, cartItem, filteredItems}) {
+    const [details, setDetails] = useState('')
+
+    function handleClick(item) {
         const foundItem = cartItem.find(product => product.id === item.id)
 
         if (foundItem) {
@@ -19,21 +23,22 @@ function StoreItemLi({ item, setCartItem, cartItem, details, setDetails}) {
 
     }
 
-    function handleDetails() {
-        setDetails(item.description)
-        console.log(details)
+    function handleDetails(item) {
+        setDetails(item)
     }
 
-    return (
-        <li>
-            <div className="store--item-icon">
-                <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
-            </div>
-            <button onClick={handleClick}>Add to cart</button>
-            <button onClick={handleDetails}>Details</button>
-        </li>
-
-    )
+    return filteredItems.map((item, index) => {
+        return (
+            <li key={index}>
+                <div className="store--item-icon">
+                    <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
+                </div>
+                {details === item && <p className="details">{item.description}</p>}
+                <button onClick={() => handleClick(item)}>Add to cart</button>
+                <button onClick={() => handleDetails(item)}>Details</button>
+            </li>
+        )
+    })
 }
 
 export default StoreItemLi
