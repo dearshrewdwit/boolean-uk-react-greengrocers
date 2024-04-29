@@ -1,16 +1,30 @@
 import './styles/reset.css'
 import './styles/index.css'
-
+import YourItems from './components/YourItems'
+import Heading from './components/Heading'
 import initialStoreItems from './store-items'
+import ProductItems from './components/ProductItems'
+import React from 'react'
+
+
 
 export default function App() {
+const [productList, setProductList] = React.useState(initialStoreItems)
+const [cartList, setCartList] = React.useState([])
+
+const onItemClick = (product) => { return () => {
+console.log('Ive been clicked', product)
+}}
+
+const onCartUpdate = () => {
+  console.log('Ive been changed')
+}
   return (
-    <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
-      </header>
+    <><YourItems>       
+    <Heading>Green Grocers</Heading>
+    <ProductItems onItemClick={onItemClick} productList={productList}/>
+    </YourItems>
+
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
