@@ -6,6 +6,7 @@ import Item from './Item'
 import initialStoreItems from './store-items'
 import Cart from './Cart'
 import Sort from './Sort'
+import Filter from './Filter'
 
 
 
@@ -37,19 +38,33 @@ function sortPriceLowHigh(a, b) {
 export default function App() {
   const [cart, setCart] = useState([])
   const [storeItems, setStoreItems] = useState(initialStoreItems)
+  const [displayedItems, setDisplayedItems] = useState(initialStoreItems)
 
-  function sortCheck(sortSelect) {
-    if (sortSelect === "default") {
-      const sorted = storeItems.sort(sortingPopular)
+  function sortCheck(selectedSort) {
+    if (selectedSort === "default") {
+      const sorted = displayedItems.sort(sortingPopular)
       setStoreItems([...sorted])
-    } else if (sortSelect === "price-low-high") {
-      const sorted = storeItems.sort(sortPriceLowHigh)
+    } else if (selectedSort === "price-low-high") {
+      const sorted = displayedItems.sort(sortPriceLowHigh)
       setStoreItems([...sorted])
-    } else if (sortSelect === "price-high-low") {
-      const sorted = storeItems.sort(sortPriceHighLow)
+    } else if (selectedSort === "price-high-low") {
+      const sorted = displayedItems.sort(sortPriceHighLow)
       setStoreItems([...sorted])
     }
   }
+
+  function filterCheck(selectedFilter) {
+    
+    const filteredItems = []
+
+    storeItems.forEach(element => {
+      if(selectedFilter === "all" || selectedFilter === selectedFilter  && element.type === selectedFilter){
+        filteredItems.push(element)
+      }
+
+ 
+    setDisplayedItems([...filteredItems])
+  })}
   
   function addCartItem(item) {
     const element = storeItems.find(e => (e.name === item.name))
@@ -83,9 +98,10 @@ export default function App() {
     <>
       <header id="store">
         <h1>Greengrocers</h1>
+        <Filter filterCheck={filterCheck} />
         <Sort sortCheck={sortCheck}/>
         <ul className="item-list store--item-list">
-          {storeItems.map( (e, index)=> {
+          {displayedItems.map( (e, index)=> {
             return <Item key={index} item={e} addCartItem={addCartItem}/>
           })}
         </ul>
@@ -105,5 +121,4 @@ export default function App() {
         </a>
       </div>
     </>
-  )
-}
+  )}
