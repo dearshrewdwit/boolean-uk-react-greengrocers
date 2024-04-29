@@ -5,7 +5,7 @@ export default function StoreItem({storeItem, index, addToCart}) {
             <div className="store--item-icon" key={index}>
                 <img src={`../../assets/icons/${storeItem.id}.svg`} alt={storeItem.name}/>
             </div>
-            <button onClick={addToCart}>Add to cart</button>
+            <button onClick={() => addToCart(storeItem)}>Add to cart</button>
         </li>
     )
 }

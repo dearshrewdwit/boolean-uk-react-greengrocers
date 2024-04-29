@@ -11,10 +11,9 @@ export default function App() {
   const [store, setStore] = useState(initialStoreItems);
   
 
-  const addToCart = () => {
-    setStore({
-      ...store,
-      quantity: 1})
+  const addToCart = (item) => {
+    const updatedCart = [...cart, {item, quantity: 1}]
+    setCart(updatedCart)
   }
 
   const updateCart = () => {
