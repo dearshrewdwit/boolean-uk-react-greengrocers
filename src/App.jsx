@@ -9,12 +9,19 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
+          <li>
+  <div className="store--item-icon">
+    <img src="/assets/icons/001-beetroot.svg" alt="beetroot" />
+  </div>
+  <button>Add to cart</button>
+</li>
         </ul>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
+            <li>test</li>
           </ul>
         </div>
         <div className="total-section">
