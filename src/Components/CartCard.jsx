@@ -19,7 +19,7 @@ export default function Cart({ cart, addToCart }) {
             alt={item.name}
             className="cart--item-icon"
           />
-          <p>{item.name}</p>
+          <p id="in-cart-product-name">{item.name}</p>
           <button
             onClick={(e) => handleClick(e, item)}
             className="quantity-btn remove-btn center"
