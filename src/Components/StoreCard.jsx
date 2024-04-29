@@ -7,6 +7,7 @@ function handleClick (item) {
         item.quantity = 1
     }
     if (cart.includes(item)) {
+        addToCart([...cart])
         return
     }
     addToCart([...cart, item])

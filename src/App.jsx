@@ -4,6 +4,7 @@ import './styles/index.css'
 import initialStoreItems from './store-items'
 import StoreCard from './Components/StoreCard'
 import CartCard from './Components/CartCard'
+import TotalPrice from './Components/TotalPrice'
 import { useState } from 'react'
 
 
@@ -26,16 +27,12 @@ export default function App() {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            <CartCard cart={cart}/>
+            <CartCard cart={cart} addToCart={addToCart}/>
           </ul>
         </div>
         <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
+        <TotalPrice cart={cart}/>
+          
         </div>
       </main>
       <div>

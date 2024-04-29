@@ -1,32 +1,39 @@
-export default function Cart({ cart }) {
-  return cart.map((item, index) => {
-    if (!cart.includes(item))
-    return (
-      <li key={index}>
-        <img
-          src={`/assets/icons/${item.id}.svg`}
-          alt={item.name}
-          className="cart--item-icon"
-        />
-        <p>{item.name}</p>
-        <button className="quantity-btn remove-btn center">-</button>
-        <span className="quantity-text center">1</span>
-        <button className="quantity-btn add-btn center">+</button>
-      </li>
-    );
-  });
-}
+export default function Cart({ cart, addToCart }) {
+  function handleClick(e, item) {
+    if (e.target.innerText === "+") {
+      item.quantity++;
+    }
+    if (e.target.innerText === "-") {
+      item.quantity--;
+    }
+    addToCart([...cart]);
+  }
 
-{
-  /* <li>
-  <img
-    class="cart--item-icon"
-    src="assets/icons/001-beetroot.svg"
-    alt="beetroot"
-  />
-  <p>beetroot</p>
-  <button class="quantity-btn remove-btn center">-</button>
-  <span class="quantity-text center">1</span>
-  <button class="quantity-btn add-btn center">+</button>
-</li> */
+  return cart.map((item, index) => {
+    if (item.quantity) {
+      return (
+        <li key={index}>
+          <img
+            src={`/assets/icons/${item.id}.svg`}
+            alt={item.name}
+            className="cart--item-icon"
+          />
+          <p>{item.name}</p>
+          <button
+            onClick={(e) => handleClick(e, item)}
+            className="quantity-btn remove-btn center"
+          >
+            -
+          </button>
+          <span className="quantity-text center">{item.quantity}</span>
+          <button
+            onClick={(e) => handleClick(e, item)}
+            className="quantity-btn add-btn center"
+          >
+            +
+          </button>
+        </li>
+      );
+    }
+  });
 }
