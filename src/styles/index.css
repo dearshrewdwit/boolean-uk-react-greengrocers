@@ -31,7 +31,7 @@ button {
   background-color: #e7f4ea;
 }
 
-#store h1 {
+#store h1, #store .filter-form, #store .sort-form {
   text-align: center;
 }
 
@@ -51,6 +51,14 @@ button {
 .store--item-icon {
   width: 125px;
   height: 125px;
+}
+
+.item-detail {
+  font-size: 7px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
@@ -162,6 +170,10 @@ button {
   font-weight: bold;
 }
 
+#in-cart-product-name::first-letter {
+  text-transform: uppercase;
+}
+
 /* Total */
 
 .total-section {
@@ -175,6 +187,8 @@ button {
 .total-number {
   font-weight: bold;
 }
+
+
 
 @media only screen and (max-width: 450px) {
   .total-section {
