@@ -55,6 +55,10 @@ button {
 
 .item-detail {
   font-size: 7px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 600px) {
