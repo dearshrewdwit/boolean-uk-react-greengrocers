@@ -31,7 +31,7 @@ button {
   background-color: #e7f4ea;
 }
 
-#store h1, #store .filter-form {
+#store h1, #store .filter-form, #store .sort-form {
   text-align: center;
 }
 

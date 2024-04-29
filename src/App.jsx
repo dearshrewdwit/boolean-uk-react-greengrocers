@@ -6,17 +6,20 @@ import StoreCard from "./Components/StoreCard";
 import CartCard from "./Components/CartCard";
 import TotalPrice from "./Components/TotalPrice";
 import TypeFilter from "./Components/TypeFilter";
+import SortDropdown from "./Components/SortDropdown"
 import { useState } from "react";
 
 export default function App() {
   const [cart, addToCart] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [sort, setSort] = useState('')
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <TypeFilter setFilter={setFilter}/>
+        <SortDropdown setSort={setSort} />
         <ul className="item-list store--item-list">
           <StoreCard
             initialStoreItems={initialStoreItems}
