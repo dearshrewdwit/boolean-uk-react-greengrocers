@@ -43,13 +43,13 @@ export default function App() {
   function sortCheck(selectedSort) {
     if (selectedSort === "default") {
       const sorted = displayedItems.sort(sortingPopular)
-      setStoreItems([...sorted])
+      setDisplayedItems([...sorted])
     } else if (selectedSort === "price-low-high") {
       const sorted = displayedItems.sort(sortPriceLowHigh)
-      setStoreItems([...sorted])
+      setDisplayedItems([...sorted])
     } else if (selectedSort === "price-high-low") {
       const sorted = displayedItems.sort(sortPriceHighLow)
-      setStoreItems([...sorted])
+      setDisplayedItems([...sorted])
     }
   }
 
