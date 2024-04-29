@@ -13,7 +13,7 @@ export default function App() {
   return (
     <>
       <Header setCartItem={setCartItem} cartItem={cartItem} />
-      <MainComponent cartItem={cartItem}/>
+      <MainComponent cartItem={cartItem} setCartItem={setCartItem}/>
       <Footer />
     </>
   )
