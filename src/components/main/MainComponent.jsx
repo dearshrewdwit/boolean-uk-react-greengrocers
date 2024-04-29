@@ -1,10 +1,11 @@
-function MainComponent() {
+import CartItemUl from "./CartItemUl"
+
+function MainComponent({ cartItem }) {
     return (
         <main id="cart">
             <h2>Your Cart</h2>
             <div className="cart--item-list-container">
-                <ul className="item-list cart--item-list">
-                </ul>
+            <CartItemUl cartItem={cartItem}/>
             </div>
             <div className="total-section">
                 <div>
