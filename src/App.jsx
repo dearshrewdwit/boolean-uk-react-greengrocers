@@ -8,10 +8,11 @@ import { useState } from 'react'
 
 export default function App() {
   const [cartItem, setCartItem] = useState([])
+  const [details, setDetails] = useState([])
 
   return (
     <>
-      <Header setCartItem={setCartItem} cartItem={cartItem}/>
+      <Header setCartItem={setCartItem} cartItem={cartItem} details={details} setDetails={setDetails}/>
       <MainComponent cartItem={cartItem} setCartItem={setCartItem}/>
       <Footer />
     </>

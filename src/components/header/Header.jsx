@@ -4,7 +4,7 @@ import { useState } from 'react'
 import initialStoreItems from '../../store-items'
 import Sort from './Sort'
 
-function Header({ setCartItem, cartItem}) {
+function Header({ setCartItem, cartItem, details, setDetails}) {
     const [storeItems] = useState(initialStoreItems)
     const [sortedItems, setSortedItems] = useState('')
     const [filteredItems, setFilteredItems] = useState(storeItems)
@@ -22,9 +22,14 @@ function Header({ setCartItem, cartItem}) {
     return (
         <header id="store">
             <h1>Greengrocers</h1>
-            <Filter setFilteredItems={setFilteredItems} storeItems={storeItems}/>
-            <Sort filteredItems={filteredItems} setSortedItems={setSortedItems}/>
-            <StoreItemUl setCartItem={setCartItem} cartItem={cartItem} filteredItems={filteredItems}/>
+            <div className='store-container'>
+                <div>
+                    <Filter setFilteredItems={setFilteredItems} storeItems={storeItems}/>
+                    <Sort filteredItems={filteredItems} setSortedItems={setSortedItems}/>
+                </div>
+                <StoreItemUl setCartItem={setCartItem} cartItem={cartItem} filteredItems={filteredItems} details={details} setDetails={setDetails}/>
+                <p>{details}</p>
+            </div>
         </header>
     )
 }
