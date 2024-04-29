@@ -2,6 +2,7 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
+import StoreCard from './Components/StoreCard'
 
 export default function App() {
   return (
@@ -9,8 +10,11 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
+          <StoreCard initialStoreItems={initialStoreItems}/>
         </ul>
       </header>
+
+
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
