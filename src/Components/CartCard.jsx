@@ -1,4 +1,4 @@
-export default function Cart({ cart, addToCart, filter }) {
+export default function Cart({ cart, addToCart }) {
 
   function handleClick(e, item) {
     if (e.target.innerText === "+") {
@@ -8,7 +8,6 @@ export default function Cart({ cart, addToCart, filter }) {
       item.quantity--;
     }
     addToCart([...cart]);
-    console.log(filter)
   }
 
   return cart.map((item, index) => {
