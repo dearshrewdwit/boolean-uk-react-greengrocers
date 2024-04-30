@@ -1,31 +1,44 @@
-import './styles/reset.css'
-import './styles/index.css'
+import "./styles/reset.css";
+import "./styles/index.css";
+import initialStoreItems from "./store-items";
 
-import initialStoreItems from './store-items'
+import { useState } from "react";
+import Header from "./Header";
+import Cart from "./Cart";
 
 export default function App() {
+  const [products, setProducts] = useState(initialStoreItems);
+  const [cart, setCart] = useState([]);
+
+  function handleAddToCartClick(event) {
+    const { id } = event.target;
+    const isFound = cart.find((product) => product.id === id);
+
+    products.forEach((product) => {
+      if (product.id === id && !isFound) {
+        setCart([...cart, { ...product, quantity: 1 }]);
+      }
+
+      if (product.id === id && isFound) {
+        const index = cart.findIndex((product) => product.id === id);
+        const item = cart[index];
+
+        const newCart = cart.map((product) => {
+          if (product.id === item.id) {
+            product.quantity = product.quantity + 1;
+          }
+          return product;
+        });
+
+        setCart(newCart);
+      }
+    });
+  }
+
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Header products={products} handleAddToCartClick={handleAddToCartClick} />
+      <Cart cart={cart} setCart={setCart} />
       <div>
         Icons made by
         <a
@@ -40,5 +53,5 @@ export default function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
