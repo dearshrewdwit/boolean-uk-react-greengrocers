@@ -10,7 +10,7 @@ export default function CartItem({cartItem, index, addToCart, removeFromCart}) {
         alt={cartItem.name}
       />
       <p>{cartItem.name}</p>
-      <button className="quantity-btn remove-btn center" onClick={() => removeFromCart()}>-</button>
+      <button className="quantity-btn remove-btn center" onClick={() => removeFromCart(cartItem)}>-</button>
       <span className="quantity-text center">{cartItem.quantity}</span>
       <button className="quantity-btn add-btn center" onClick={() => addToCart(cartItem)}>+</button>
     </li>

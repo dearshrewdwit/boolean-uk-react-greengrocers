@@ -11,15 +11,24 @@ export default function App() {
   const [store, setStore] = useState(initialStoreItems);
   
   const removeFromCart = (item) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id === item.id)
-    setCart(updatedCart)
+    const checkItem = cart.find((cartItem) => { if(cartItem.id === item.id) return true})
+    
+    if(checkItem) {
+      const updatedCart = cart.map((cartItem) => {if(cartItem.quantity >=1) item.quantity--; return {...item} })
+      setCart(updatedCart)
+    } else {
+        const updatedCart = cart.filter((cartItem) => {cartItem.quantity <1; return {...cart}})
+        setCart(updatedCart)
+    }
+    console.log(cart)
   }
   
 
   const addToCart = (item) => {
-    const checkItem = cart.find((cartItem) => cartItem.id === item.id)
+    const checkItem = cart.find((cartItem) => { if(cartItem.id === item.id) return true})
+
     if(checkItem) {
-      const updatedCart = checkItem.map((cartItem) => cartItem.quantity ++)
+      const updatedCart = cart.map((cartItem) => {if(cartItem.quantity >=1) item.quantity++; return {...item}})
       setCart(updatedCart)
     } else {const updatedCart = [...cart, {...item, quantity: 1}]
       setCart(updatedCart)}

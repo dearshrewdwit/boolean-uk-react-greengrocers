@@ -5,7 +5,6 @@ import CartItem from "./CartItem";
 export default function MainBody({cart, addToCart, removeFromCart}) {
 
   const calculateTotal = () => {
-    console.log(cart)
     const calculateCartTotal = cart.reduce((cartTotal, item) => cartTotal += item.quantity * item.price, 0)
     return calculateCartTotal.toFixed(2)
   }
