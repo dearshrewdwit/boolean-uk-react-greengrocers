@@ -1,5 +1,10 @@
 export default function CartItem({initialStoreItems, items}){
-  return (
+  console.log(items)
+  if(items.idName === ''){
+    return(
+      <></>
+    )
+  }else return (
     <li>
       <img
         className="cart--item-icon"
