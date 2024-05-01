@@ -1,0 +1,13 @@
+App
+│
+├── Header
+│
+├── GroceryStore
+│   │
+│   └── GroceryItem (Props: item, addToCart)
+│
+└── Cart
+    │
+    ├── CartItem (Props: item, updateQuantity, removeItem)
+    │
+    └── CartTotal (Props: total)
