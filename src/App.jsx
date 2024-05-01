@@ -9,35 +9,51 @@ import MainBody from "./Components/MainBody";
 export default function App() {
   const [cart, setCart] = useState([]);
   const [store, setStore] = useState(initialStoreItems);
-  
+
   const removeFromCart = (item) => {
-    const checkItem = cart.find((cartItem) => { if(cartItem.id === item.id) return true})
-    
-    if(checkItem) {
-      const updatedCart = cart.map((cartItem) => {if(cartItem.quantity >=1) item.quantity--; return {...item} })
-      setCart(updatedCart)
+    const checkItem = cart.find((cartItem) => {
+      if (cartItem.quantity < 1) return true;
+    });
+
+    if (checkItem) {
+      const updatedCart = (item) => {
+        setCart(cart.filter((cartItem) => cartItem.id !== item.id));
+      };
+      setCart(updatedCart);
     } else {
-        const updatedCart = cart.filter((cartItem) => {cartItem.quantity <1; return {...cart}})
-        setCart(updatedCart)
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.id === item.id) cartItem.quantity--;
+        return { ...cartItem };
+      });
+      setCart(updatedCart);
     }
-    console.log(cart)
-  }
-  
+  };
 
   const addToCart = (item) => {
-    const checkItem = cart.find((cartItem) => { if(cartItem.id === item.id) return true})
+    const checkItem = cart.find((cartItem) => {
+      if (cartItem.id === item.id) return true;
+    });
 
-    if(checkItem) {
-      const updatedCart = cart.map((cartItem) => {if(cartItem.quantity >=1) item.quantity++; return {...item}})
-      setCart(updatedCart)
-    } else {const updatedCart = [...cart, {...item, quantity: 1}]
-      setCart(updatedCart)}
-  }
+    if (!checkItem) {
+      const updatedCart = [...cart, { ...item, quantity: 1 }];
+      setCart(updatedCart);
+    } else {
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.id === item.id && cartItem.quantity >= 1) cartItem.quantity++;
+        return { ...cartItem };
+      });
+      setCart(updatedCart);
+    }
+  };
 
   return (
     <>
-      <Header store={store} addToCart={addToCart}/>
-      <MainBody cart={cart} addToCart={addToCart} removeFromCart={removeFromCart}/>
+      <Header store={store} addToCart={addToCart} />
+      <MainBody
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+      />
       <div>
         Icons made by
         <a
