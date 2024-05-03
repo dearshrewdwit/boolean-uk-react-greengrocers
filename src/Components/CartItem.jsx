@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-export default function CartItem({cartItem, index, addToCart, removeFromCart}) {
+export default function CartItem({cartItem, addToCart, removeFromCart}) {
 
   return (
-    <li key={index}>
+    <li key={cartItem.id}>
       <img
         className="cart--item-icon"
         src={`../../assets/icons/${cartItem.id}.svg`}

@@ -12,14 +12,17 @@ export default function App() {
 
   const removeFromCart = (item) => {
 
-    const checkItem = cart.find((cartItem) => {if(cartItem.quantity  < 1) return true})
+    const checkItem = cart.find((cartItem) => {if(cartItem.quantity === 1 && cartItem.id === item.id) return true})
+
+  
 
     if (checkItem) {
       const updatedCart = cart.filter((cartItem) => {
-        cartItem.id !== item.id
+        if(cartItem.id !== checkItem.id)
+        return cartItem
       })
       setCart(updatedCart)
-   
+
     } else {
       const updatedCart = cart.map((cartItem) => {
         if (cartItem.id === item.id) cartItem.quantity--;

@@ -14,8 +14,8 @@ export default function MainBody({cart, addToCart, removeFromCart}) {
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {cart.map((cartItem, index) => {
-              return <CartItem cartItem={cartItem} key={index} addToCart={addToCart} removeFromCart={removeFromCart}/>
+            {cart.map((cartItem) => {
+              return <CartItem cartItem={cartItem} key={cartItem.id} addToCart={addToCart} removeFromCart={removeFromCart}/>
             })}
           </ul>
         </div>
