@@ -11,7 +11,7 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 1. Fork this repository
 2. Clone the forked repository onto your local machines
 3. In the root directory, type `npm ci`, which installs dependencies for the project
-4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server 
+4. Finally, type `npm run dev`, which starts a development server that runs your website in the browser. That server
    will reload your website whenever you make any changes to source files
 
 ## Deliverables
@@ -36,9 +36,12 @@ You're going to recreate the [javascript greengrocers exercise](./images/greengr
 ## Extension 1
 
 - Add filters to the store i.e. filter by item type; when a user clicks a filter they will only see items of that type
-- Add sorting to the store i.e. sort by price or sort alphabetically; when a user clicks sort they will see a sorted 
+- Add sorting to the store i.e. sort by price or sort alphabetically; when a user clicks sort they will see a sorted
   list of items
 
 ## Extension 2
 
 - Add a new detail component for each of the items, and render it conditionally after clicking on an item
+
+# Test
+Another addition
