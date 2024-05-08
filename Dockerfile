@@ -34,7 +34,7 @@ RUN npm install
 COPY . .
 
 # Build the React application
-RUN npm build
+RUN npm run build
 
 # Use Nginx as a lightweight web server to serve the built app
 FROM nginx:alpine
