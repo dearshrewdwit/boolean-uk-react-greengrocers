@@ -4,7 +4,7 @@ function StoreItem({item, addToCart}) {
   return (
     <li>
     <div className="store--item-icon">
-      <img src={"../public/assets/icons/"+item.id+".svg"}
+      <img src={"../assets/icons/"+item.id+".svg"}
       alt={item.name}
       />
     </div>

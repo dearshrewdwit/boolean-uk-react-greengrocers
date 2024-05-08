@@ -3,9 +3,9 @@ import { capitalize } from "../App"
 function CartItem ({item, changeQuantity}) {
   return (
     <li>
-      <img 
+      <img
       className="cart--item-icon"
-      src={"../public/assets/icons/"+item.id+".svg"}
+      src={"../assets/icons/"+item.id+".svg"}
       alt={item.name} />
       <p>{capitalize(item.name)}</p>
       <button className="quantity-btn remove-btn center"
