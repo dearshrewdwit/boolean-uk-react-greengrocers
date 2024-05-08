@@ -16,10 +16,7 @@ RUN npm ci
 COPY . .
 
 # Run the build script.
-RUN npm build
-
-# Use a Node.js image as base
-FROM node:20.11.1 AS builder
+RUN npm run build
 
 # Set working directory
 WORKDIR /app
