@@ -1,31 +1,62 @@
-import './styles/reset.css'
-import './styles/index.css'
+import "./styles/reset.css";
+import "./styles/index.css";
 
-import initialStoreItems from './store-items'
+import initialStoreItems from "./store-items";
+import Header from "./Components/Header";
+import { useState } from "react";
+import MainBody from "./Components/MainBody";
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+  const [store, setStore] = useState(initialStoreItems);
+
+  const removeFromCart = (item) => {
+
+    const checkItem = cart.find((cartItem) => {if(cartItem.quantity === 1 && cartItem.id === item.id) return true})
+
+  
+
+    if (checkItem) {
+      const updatedCart = cart.filter((cartItem) => {
+        if(cartItem.id !== checkItem.id)
+        return cartItem
+      })
+      setCart(updatedCart)
+
+    } else {
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.id === item.id) cartItem.quantity--;
+        return { ...cartItem };
+      });
+      setCart(updatedCart);
+    }
+  };
+
+  const addToCart = (item) => {
+    const checkItem = cart.find((cartItem) => {
+      if (cartItem.id === item.id) return true;
+    });
+
+    if (!checkItem) {
+      const updatedCart = [...cart, { ...item, quantity: 1 }];
+      setCart(updatedCart);
+    } else {
+      const updatedCart = cart.map((cartItem) => {
+        if (cartItem.id === item.id && cartItem.quantity >= 1) cartItem.quantity++;
+        return { ...cartItem };
+      });
+      setCart(updatedCart);
+    }
+  };
+
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Header store={store} addToCart={addToCart} />
+      <MainBody
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+      />
       <div>
         Icons made by
         <a
@@ -40,5 +71,5 @@ export default function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
