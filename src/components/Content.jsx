@@ -15,17 +15,18 @@ export default function Content(initialStoreItems){
 
   const handleclick = (e) => {
     const { id , value, name} = e.target
-    console.log(e.target)
-    console.log(name)
-    const addormin = name !== 'negative-button' ? +1 : -1
-    console.log('test', addormin)
+    const plusOrMin = name !== 'negative-button' ? +1 : -1
     const existItem = items.find((item) => item.idName === id)
     console.log(existItem)
+    if(plusOrMin === -1 && existItem.quantity === 1){
+      setItems(items.filter(item => item.idName !== id))
+      return
+    }
      if (existItem){
       setItems(
         items.map(item => item.idName === id ? {
           ...item,
-          quantity: item.quantity + addormin
+          quantity: item.quantity + plusOrMin
         } : item)
       )
     } else {
@@ -36,6 +37,7 @@ export default function Content(initialStoreItems){
       }])
     }
   }
+  console.log(items)
   return (
     <>
       <HeaderContent>
