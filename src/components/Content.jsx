@@ -5,33 +5,101 @@ import StoreItem from "./StoreItem";
 import CartItem from "./CartItem";
 
 export default function Content(initialStoreItems){
-  // console.log(initialStoreItems.items)
-  const [item, setItem] = useState({
+
+  
+  const [items, setItems] = useState([{
+    itemName : '',
+    quantity : 0,
+    idName : ''
+  }])
+  const [newitem, setNewItem] = useState({
     itemName : '',
     quantity : 0,
     idName : ''
   })
-
   const handleclick = (e) => {
     const { id , value} = e.target
-  
-    setItem({
-      ...item,
-      itemName : value,
-      quantity : +1,
-      idName : id
+    console.log(e.target)
+    setNewItem({
+      ...newitem,
+      itemName:value,
+      quantity:1,
+      idName:id
     })
+    console.log(newitem)
+    let i = 0
+    items.map((item) => {
+     if (item.idName === id){
+      i++
+      item.quantity++
+    }})
+    if(i<1){
+      setItems([
+        ...items,{
+          itemName : value,
+          quantity: 1,
+          idName : id
+    }])
+    }
+    
   }
+  console.log(items)
   return (
     <>
       <HeaderContent>
         <StoreItem initialStoreItems = { initialStoreItems } onClick = {handleclick}  />
       </HeaderContent>
 
-      <Cart>
-        <CartItem initialStoreItems = {initialStoreItems } items = {item} />
-      </Cart>
+        <main id="cart">
+            <h2>Your Cart</h2>
+            <div className="cart--item-list-container">
+              
+            <ul className="item-list cart--item-list">
+              {
+                items.map((item, index) =>
+                  
+                  <li key={index}>
+                    <img
+                      className="cart--item-icon"
+                      src={`assets/icons/${item.idName}.svg`}
+                      alt="beetroot"
+                    />
+                    <p>beetroot</p>
+                    <button className="quantity-btn remove-btn center">-</button>
+                    <span className="quantity-text center">1</span>
+                    <button className="quantity-btn add-btn center">+</button>
+                  </li>
+                )
+              }
+            
 
+              {/* {items.map((item) => {
+                <li>
+                  <img
+                    className="cart--item-icon"
+                    src={`assets/icons/${item.idName}.svg`}
+                    alt={item.itemName}
+                  />
+                  <p>{item.itemName}</p>
+                  <button className="quantity-btn remove-btn center">-</button>
+                  <span className="quantity-text center">{item.quantity}</span>
+                  <button className="quantity-btn add-btn center">+</button>
+                </li>
+              })} */}
+              </ul>
+              
+            </div>
+            <div className="total-section">
+              <div>
+                <h3>Total</h3>
+              </div>
+              <div>
+                <span className="total-number">£0.00</span>
+              </div>
+            </div>
+          </main>
+  
+        
       <div>
         Icons made by
         <a

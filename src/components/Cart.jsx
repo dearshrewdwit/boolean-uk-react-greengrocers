@@ -1,15 +1,13 @@
 import CartItem from "./CartItem";
 
-export default function Cart({children}){
+export default function Cart({ items }){
   return (
     <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-
-            {children}
-            
-          </ul>
+          
+            <CartItem items={ items }/>
+          
         </div>
         <div className="total-section">
           <div>
