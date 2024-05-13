@@ -8,7 +8,7 @@ export default function StoreItem({ initialStoreItems, onClick }){
             <div className="store--item-icon">
               <img src={`/assets/icons/${item.id}.svg`} alt={item.name} />
             </div>
-            <button onClick={onClick} id = {item.id} value={item.name} >Add to cart</button>
+            <button onClick={onClick} id = {item.id} value={item.name} name="add-button">Add to cart</button>
           </li>
         )
       })}

@@ -12,81 +12,37 @@ export default function Content(initialStoreItems){
     quantity : 0,
     idName : ''
   }])
-  const [newitem, setNewItem] = useState({
-    itemName : '',
-    quantity : 0,
-    idName : ''
-  })
+
   const handleclick = (e) => {
-    const { id , value} = e.target
+    const { id , value, name} = e.target
     console.log(e.target)
-    setNewItem({
-      ...newitem,
-      itemName:value,
-      quantity:1,
-      idName:id
-    })
-    console.log(newitem)
-    let i = 0
-    items.map((item) => {
-     if (item.idName === id){
-      i++
-      item.quantity++
-    }})
-    if(i<1){
-      setItems([
-        ...items,{
-          itemName : value,
-          quantity: 1,
-          idName : id
-    }])
+    console.log(name)
+    const addormin = name !== 'negative-button' ? +1 : -1
+    console.log('test', addormin)
+    const existItem = items.find((item) => item.idName === id)
+    console.log(existItem)
+     if (existItem){
+      setItems(
+        items.map(item => item.idName === id ? {
+          ...item,
+          quantity: item.quantity + addormin
+        } : item)
+      )
+    } else {
+      setItems([...items,{
+        itemName:value,
+        quantity:1,
+        idName:id
+      }])
     }
-    
   }
-  console.log(items)
   return (
     <>
       <HeaderContent>
         <StoreItem initialStoreItems = { initialStoreItems } onClick = {handleclick}  />
       </HeaderContent>
 
-        <main id="cart">
-            <h2>Your Cart</h2>
-            <div className="cart--item-list-container">
-              
-            <ul className="item-list cart--item-list">
-              {
-                items.map((item, index) =>
-                  <>
-                  {
-                    item.idName !== '' && <li key={index}>
-                    <img
-                      className="cart--item-icon"
-                      src={`assets/icons/${item.idName}.svg`}
-                      alt={item.idName}
-                    />
-                    <p>{item.itemName}</p>
-                    <button className="quantity-btn remove-btn center">-</button>
-                    <span className="quantity-text center">{item.quantity}</span>
-                    <button className="quantity-btn add-btn center">+</button>
-                  </li>
-                  }
-                  
-                  </>
-                )
-              }
-              </ul>
-              
-            </div>
-            <div className="total-section">
-              <div>
-                <h3>Total</h3>
-              </div>
-              <div>
-                <span className="total-number">£0.00</span>
-              </div>
-            </div>
-          </main>
+       <Cart onClick={handleclick} items={items}/>
   
         
       <div>
