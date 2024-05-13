@@ -57,35 +57,24 @@ export default function Content(initialStoreItems){
             <ul className="item-list cart--item-list">
               {
                 items.map((item, index) =>
-                  
-                  <li key={index}>
+                  <>
+                  {
+                    item.idName !== '' && <li key={index}>
                     <img
                       className="cart--item-icon"
                       src={`assets/icons/${item.idName}.svg`}
-                      alt="beetroot"
+                      alt={item.idName}
                     />
-                    <p>beetroot</p>
+                    <p>{item.itemName}</p>
                     <button className="quantity-btn remove-btn center">-</button>
-                    <span className="quantity-text center">1</span>
+                    <span className="quantity-text center">{item.quantity}</span>
                     <button className="quantity-btn add-btn center">+</button>
                   </li>
+                  }
+                  
+                  </>
                 )
               }
-            
-
-              {/* {items.map((item) => {
-                <li>
-                  <img
-                    className="cart--item-icon"
-                    src={`assets/icons/${item.idName}.svg`}
-                    alt={item.itemName}
-                  />
-                  <p>{item.itemName}</p>
-                  <button className="quantity-btn remove-btn center">-</button>
-                  <span className="quantity-text center">{item.quantity}</span>
-                  <button className="quantity-btn add-btn center">+</button>
-                </li>
-              })} */}
               </ul>
               
             </div>
