@@ -1,6 +1,6 @@
 import CartItem from "./CartItem";
 
-export default function Cart({ onClick, items }){
+export default function Cart({ onClick, items , total}){
   return (
     <main id="cart">
     <h2>Your Cart</h2>
@@ -12,7 +12,7 @@ export default function Cart({ onClick, items }){
         <h3>Total</h3>
       </div>
       <div>
-        <span className="total-number">£0.00</span>
+        <span className="total-number">£{total.toFixed(2)}</span>
       </div>
     </div>
   </main>
