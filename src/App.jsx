@@ -1,7 +1,9 @@
 import './styles/reset.css'
 import './styles/index.css'
 import {useState} from 'react'
-import initialStoreItems from './store-items'
+import initialStoreItems from './store-items' 
+import Header from './Header'
+import MainSection from  './MainSection'
 
 export default function App() {
 
@@ -39,46 +41,8 @@ export default function App() {
   
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-          {storeItems.map((storeItems) => (
-            <li key={storeItems.id}>
-              <div className='store--item-icon'>
-                <img src={`/assets/icons/${storeItems.id}.svg`} alt={storeItems.name} />
-              </div>
-              {<button onClick={() => {addToCart({...storeItems, quantity : 1})}}>Add to Cart</button>}
-            </li>
-          ))}
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-            {cartItems.map((cartItems) =>
-            <li key={cartItems.id}>
-              <img className='cart--item-icon'
-              src={`./assets/icons/${cartItems.id}.svg`}
-              alt={cartItems.name}
-              />
-              <p>{cartItems.name}</p>
-              <button onClick={() => removeItem(cartItems)} className='quantity-btn remove-btn center'>-</button>
-              <span className='quantity-text center'>{cartItems.quantity}</span>
-              <button onClick={() => addToCart(cartItems)} className='quantity-btn add-btn center'>+</button>
-            </li>
-          )}
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£{calculateTotal()}</span>
-          </div>
-        </div>
-      </main>
+      <Header storeItems={storeItems} addToCart={addToCart} />
+      <MainSection cartItems={cartItems} addToCart={addToCart} removeItem={removeItem} calculateTotal={calculateTotal} />
       <div>
         Icons made by
         <a
