@@ -1,31 +1,48 @@
 import './styles/reset.css'
 import './styles/index.css'
-
-import initialStoreItems from './store-items'
+import {useState} from 'react'
+import initialStoreItems from './store-items' 
+import Header from './Header'
+import MainSection from  './MainSection'
 
 export default function App() {
+
+  const [storeItems] = useState(initialStoreItems)
+  const[cartItems, setCartItems] = useState([])
+
+
+  const addToCart = (targetItem) => {
+    const exisitingItem = cartItems.find(item => item.id === targetItem.id)
+    if(exisitingItem) {
+      const updateCart = cartItems.map(item =>
+        item.id === targetItem.id ? {...item, quantity: item.quantity + 1 } : item
+      )
+      setCartItems(updateCart)
+    } else {
+      setCartItems([...cartItems, targetItem])
+    }
+  }
+
+  const removeItem = (targetItem) => {
+    const exisitingItem = cartItems.find(item => item.id === targetItem.id)
+    if (exisitingItem.quantity > 1) {
+      const updateCart = cartItems.map(item =>
+        item.id === targetItem.id ? {...item, quantity: item.quantity - 1 } : item
+      )
+      setCartItems(updateCart)
+      } else {
+        setCartItems(cartItems.filter(item => item != targetItem))
+      }
+    }
+
+    const calculateTotal = () => {
+      return cartItems.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2);
+    }
+  
   return (
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
+      <Header storeItems={storeItems} addToCart={addToCart} />
+      <MainSection cartItems={cartItems} addToCart={addToCart} removeItem={removeItem} calculateTotal={calculateTotal} />
       <div>
         Icons made by
         <a
