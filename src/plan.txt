@@ -1,0 +1,27 @@
+Greengrocers
+
+
+state:
+store initial data (storeItems)
+
+basket in state; initially empty but to be added: 
+{
+data: {object from storeItems},
+quantity: X,
+}
+
+total, made up of sum of price of basket item(s)
+
+
+Display section:
+array.map over initial data and render each item ->
+  pass relevant info as props (image, price, name) use ID as key
+
+create separate function for adding item to basket, 
+pass to item element also as prop
+
+
+basket section:
+array.map over items in basket from useState, render each in basket
+define functions for decrement/increment item
+display total from state
