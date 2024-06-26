@@ -1,44 +1,33 @@
-import './styles/reset.css'
-import './styles/index.css'
+import "./styles/reset.css";
+import "./styles/index.css";
+import { useState } from "react";
+import initialStoreItems from "./store-items";
+import Header from "./Header";
+import MainCart from "./MainCart";
+import Footer from "./Footer";
 
-import initialStoreItems from './store-items'
+console.log("Initial store item", initialStoreItems);
 
 export default function App() {
+  //Items in state:
+  const [storeItems, setStoreItems] = useState(initialStoreItems);
+  const [cart, setCart] = useState([]);
+  const [filteredItems, setFilteredItems] = useState(storeItems);
+
+  console.log("updated cart", cart);
+
   return (
+    //Breaking down components:
     <>
-      <header id="store">
-        <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
-      </header>
-      <main id="cart">
-        <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
-      </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <Header
+        storeItems={storeItems}
+        cart={cart}
+        setCart={setCart}
+        filteredItems={filteredItems}
+        setFilteredItems={setFilteredItems}
+      />
+      <MainCart cart={cart} setCart={setCart} />
+      <Footer />
     </>
-  )
+  );
 }
