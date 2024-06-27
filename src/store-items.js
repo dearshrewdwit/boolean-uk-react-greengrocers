@@ -1,75 +1,84 @@
+const initialStoreItems = [
+  {
+    id: 1,
+    name: "Beetroot",
+    type: "vegetable",
+    price: 0.5,
+    image: "/assets/icons/001-beetroot.svg",
+    description: "Fresh beetroot, perfect for salads and juices.",
+  },
+  {
+    id: 2,
+    name: "Carrot",
+    type: "vegetable",
+    price: 0.3,
+    image: "/assets/icons/002-carrot.svg",
+    description: "Crunchy and sweet carrots, great for snacking.",
+  },
+  {
+    id: 3,
+    name: "Apple",
+    type: "fruit",
+    price: 0.6,
+    image: "/assets/icons/003-apple.svg",
+    description: "Juicy and crisp apples, ideal for a healthy snack.",
+  },
+  {
+    id: 4,
+    name: "Apricot",
+    type: "fruit",
+    price: 0.7,
+    image: "/assets/icons/004-apricot.svg",
+    description: "Sweet and tangy apricots, great for desserts.",
+  },
+  {
+    id: 5,
+    name: "Avocado",
+    type: "fruit",
+    price: 1.5,
+    image: "/assets/icons/005-avocado.svg",
+    description: "Creamy avocados, perfect for guacamole.",
+  },
+  {
+    id: 6,
+    name: "Bananas",
+    type: "fruit",
+    price: 0.4,
+    image: "/assets/icons/006-bananas.svg",
+    description: "Ripe and sweet bananas, ideal for a quick snack.",
+  },
+  {
+    id: 7,
+    name: "Bell Pepper",
+    type: "vegetable",
+    price: 0.8,
+    image: "/assets/icons/007-bell-pepper.svg",
+    description: "Colorful bell peppers, great for salads and stir-fries.",
+  },
+  {
+    id: 8,
+    name: "Berry",
+    type: "fruit",
+    price: 2.0,
+    image: "/assets/icons/008-berry.svg",
+    description: "Mixed berries, perfect for smoothies and desserts.",
+  },
+  {
+    id: 9,
+    name: "Blueberry",
+    type: "fruit",
+    price: 1.8,
+    image: "/assets/icons/009-blueberry.svg",
+    description: "Sweet and tangy blueberries, ideal for snacking.",
+  },
+  {
+    id: 10,
+    name: "Eggplant",
+    type: "vegetable",
+    price: 1.0,
+    image: "/assets/icons/010-eggplant.svg",
+    description: "Versatile eggplants, perfect for grilling and baking.",
+  },
+];
 
-const storeItems =  [
-  {
-    id: "001-beetroot",
-    name: "beetroot",
-    price: 0.35,
-    description: "The beetroot is the taproot portion of a beet plant, usually known in North America as beets while the vegetable is referred to as beetroot in British English, and also known as the table beet, garden beet, red beet, dinner beet or golden beet.",
-    type: "vegetable"
-  },
-  {
-    id: "002-carrot",
-    name: "carrot",
-    price: 0.35,
-    description: "The carrot is a root vegetable, typically orange in color, though heirloom variants including purple, black, red, white, and yellow cultivars exist, all of which are domesticated forms of the wild carrot, Daucus carota, native to Europe and Southwestern Asia.",
-    type: "vegetable"
-  },
-  {
-    id: "003-apple",
-    name: "apple",
-    price: 0.35,
-    description: "An apple is a round, edible fruit produced by an apple tree (Malus spp., among them the domestic or orchard apple; Malus domestica).",
-    type: "fruit"
-  },
-  {
-    id: "004-apricot",
-    name: "apricot",
-    price: 0.35,
-    description: "An apricot is a fruit, or the tree that bears the fruit, of several species in the genus Prunus.",
-    type: "fruit"
-  },
-  {
-    id: "005-avocado",
-    name: "avocado",
-    price: 0.35,
-    description: "The avocado, alligator pear or avocado pear (Persea americana) is a medium-sized, evergreen tree in the laurel family (Lauraceae).",
-    type: "fruit"
-  },
-  {
-    id: "006-bananas",
-    name: "bananas",
-    price: 0.35,
-    description: "A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.",
-    type: "fruit"
-  },
-  {
-    id: "007-bell-pepper",
-    name: "bell pepper",
-    price: 0.35,
-    description: "The bell pepper (also known as sweet pepper, pepper, capsicum /ˈkæpsɪkəm/ or in some places, mangoes) is the fruit of plants in the Grossum Group of the species Capsicum annuum.",
-    type: "fruit"
-  },
-  {
-    id: "008-berry",
-    name: "berry",
-    price: 0.35,
-    description: "A berry is a small, pulpy, and often edible fruit. Typically, berries are juicy, rounded, brightly colored, sweet, sour or tart, and do not have a stone or pit, although many pips or seeds may be present.",
-    type: "fruit"
-  },
-  {
-    id: "009-blueberry",
-    name: "blueberry",
-    price: 0.35,
-    description: "Blueberry is a widely distributed and widespread group of perennial flowering plant with blue or purple berries.",
-    type: "fruit"
-  },
-  {
-    id: "010-eggplant",
-    name: "eggplant",
-    price: 0.35,
-    description: "Eggplant, aubergine, brinjal, or baigan is a plant species in the nightshade family Solanaceae. Solanum melongena is grown worldwide for its edible fruit.",
-    type: "vegetable"
-  }
-]
-
-export default storeItems
+export default initialStoreItems;
