@@ -1,7 +1,6 @@
 import initialStoreItems from "./store-items";
 
 export default function AllItems(props) {
-  const cartItems = props.cartItems;
   return initialStoreItems.map((item) => {
     return (
       <li key={item.id}>
@@ -10,9 +9,7 @@ export default function AllItems(props) {
         </div>
         <button
           onClick={() => {
-            props.increaseCartItem(item);
-            props.setCartItems([...cartItems, item]);
-            console.log(item);
+            props.addToCart(item);
           }}
         >
           Add to cart

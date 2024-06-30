@@ -10,14 +10,24 @@ export default function App() {
   const [totalPrice, setTotalPrice] = useState(0.0);
   const [cartItems, setCartItems] = useState([]);
 
-  function increaseCartItem(target) {
-    const updatedCartItems = cartItems.map((cartItem) =>
-      cartItem == target
-        ? ({ ...cartItem, quantity: 5 }, console.log(cartItem))
-        : cartItem
-    );
+  // function no(id) {
+  //   const updatedCartItems = cartItems.map((cartItem) =>
+  //     cartItem.id == id ? { ...cartItem, quantity: 5 } : cartItem
+  //   );
 
-    setCartItems(updatedCartItems);
+  //   setCartItems(updatedCartItems);
+  // }
+
+  function addToCart(item) {
+    if (cartItems.includes(item)) {
+      setCartItems([{ ...item, quantity: item.quantity + 1 }]);
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  }
+
+  function removeFromCart(item) {
+    setCartItems([{ ...item, quantity: item.quantity - 1 }]);
   }
 
   return (
@@ -28,7 +38,7 @@ export default function App() {
           <AllItems
             cartItems={cartItems}
             setCartItems={setCartItems}
-            increaseCartItem={increaseCartItem}
+            addToCart={addToCart}
           />
         </ul>
       </header>
@@ -39,7 +49,8 @@ export default function App() {
             <CartItems
               cartItems={cartItems}
               setCartItems={setCartItems}
-              increaseCartItem={increaseCartItem}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
           </ul>
         </div>
