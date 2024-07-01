@@ -10,24 +10,36 @@ export default function App() {
   const [totalPrice, setTotalPrice] = useState(0.0);
   const [cartItems, setCartItems] = useState([]);
 
-  // function no(id) {
-  //   const updatedCartItems = cartItems.map((cartItem) =>
-  //     cartItem.id == id ? { ...cartItem, quantity: 5 } : cartItem
-  //   );
-
-  //   setCartItems(updatedCartItems);
-  // }
-
   function addToCart(item) {
-    if (cartItems.includes(item)) {
-      setCartItems([{ ...item, quantity: item.quantity + 1 }]);
+    const previousItem = cartItems.find((target) => target.id === item.id);
+    if (previousItem) {
+      const updatedCart = cartItems.map((cartItem) =>
+        cartItem.id === item.id
+          ? { ...item, quantity: previousItem.quantity + 1 }
+          : cartItem
+      );
+      setCartItems(updatedCart);
     } else {
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
+    setTotalPrice(totalPrice + item.price);
   }
 
   function removeFromCart(item) {
-    setCartItems([{ ...item, quantity: item.quantity - 1 }]);
+    const updatedCart = cartItems.map((cartItem) =>
+      cartItem.id === item.id
+        ? { ...item, quantity: item.quantity - 1 }
+        : cartItem
+    );
+    setCartItems(updatedCart);
+
+    if (item.quantity <= 1) {
+      const removeItem = (target) => {
+        setCartItems(cartItems.filter((cItem) => cItem.id !== target.id));
+      };
+      removeItem(item);
+    }
+    setTotalPrice(totalPrice - item.price);
   }
 
   return (
@@ -35,11 +47,7 @@ export default function App() {
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          <AllItems
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-            addToCart={addToCart}
-          />
+          <AllItems addToCart={addToCart} />
         </ul>
       </header>
       <main id="cart">
@@ -48,7 +56,6 @@ export default function App() {
           <ul className="item-list cart--item-list">
             <CartItems
               cartItems={cartItems}
-              setCartItems={setCartItems}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
             />
@@ -60,7 +67,7 @@ export default function App() {
           </div>
           <div>
             <span className="total-number">
-              {`£` + totalPrice.toPrecision(3)}
+              {`£` + Math.abs(totalPrice).toFixed(2)}
             </span>
           </div>
         </div>
