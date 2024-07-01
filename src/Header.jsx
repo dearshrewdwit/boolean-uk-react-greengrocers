@@ -1,7 +1,7 @@
 import Filter from "./Filter";
 import Sort from "./Sort";
 
-export default function Header({ storeItems, cart, setCart, setFilteredItems, filteredItems }) {
+export default function Header({ storeItems, cart, setCart, setFilteredItems, filteredItems, sortItems, setSortItems}) {
     //function which updates cart whenever a user clicks "Add to Basket":
   function addToCart(item) {
     console.log("selected item", item);
@@ -36,6 +36,8 @@ export default function Header({ storeItems, cart, setCart, setFilteredItems, fi
         storeItems={storeItems}
         filteredItems={filteredItems}
         setFilteredItems={setFilteredItems}
+        sortItems= {sortItems}
+        setSortItems = {setSortItems}
       />
       <ul className="item-list store--item-list">
         {filteredItems.map((item, index) => (

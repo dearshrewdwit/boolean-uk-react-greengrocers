@@ -1,4 +1,8 @@
-export default function Filter({ storeItems, setFilteredItems }) {
+export default function Filter({
+  storeItems,
+  setFilteredItems,
+  filteredItems,
+}) {
   //function to filter items in store:
   function FilterStoreItems(event) {
     console.log("filter event", event.target.value);

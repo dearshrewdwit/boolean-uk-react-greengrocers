@@ -13,6 +13,8 @@ export default function App() {
   const [storeItems, setStoreItems] = useState(initialStoreItems);
   const [cart, setCart] = useState([]);
   const [filteredItems, setFilteredItems] = useState(storeItems);
+  const [sortItems, setSortItems] = useState("")
+
 
   console.log("updated cart", cart);
 
@@ -25,6 +27,8 @@ export default function App() {
         setCart={setCart}
         filteredItems={filteredItems}
         setFilteredItems={setFilteredItems}
+        sortItems={sortItems}
+        setSortItems={setSortItems}
       />
       <MainCart cart={cart} setCart={setCart} />
       <Footer />

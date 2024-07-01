@@ -2,13 +2,16 @@ export default function Sort({ storeItems, filteredItems, setFilteredItems }) {
   //Adding sort function:
   function sortStoreItems(event) {
     if (event.target.value === "alphabet") {
-      filteredItems.sort((a, b) => a.name.localeCompare(b.name));
-      setFilteredItems([...filteredItems]);
+      const alphabetArray = [...filteredItems];
+      alphabetArray.sort((a, b) => a.name.localeCompare(b.name));
+      setFilteredItems(alphabetArray);
     } else if (event.target.value === "price") {
-      filteredItems.sort((a, b) => a.price - b.price);
-      setFilteredItems([...filteredItems]);
+      const priceArray = [...filteredItems];
+      priceArray.sort((a, b) => a.price - b.price);
+      setFilteredItems(priceArray);
     } else {
-      console.log("no sortig needed");
+      console.log("no sorting needed");
+      setFilteredItems(storeItems);
     }
   }
 
