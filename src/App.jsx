@@ -1,44 +1,45 @@
-import './styles/reset.css'
-import './styles/index.css'
+import React, { useState } from 'react';
+import Store from './Store';
+import Cart from './Cart';
+import storeItems from './store-items';
+import './styles/index.css';
 
-import initialStoreItems from './store-items'
+function App() {
+  const [cart, setCart] = useState([]);
 
-export default function App() {
+  const addToCart = (item) => {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+      setCart(cart.map(cartItem =>
+        cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+      ));
+    } else {
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const updateQuantity = (id, quantity) => {
+    setCart(cart.map(cartItem =>
+      cartItem.id === id ? { ...cartItem, quantity: Math.max(0, cartItem.quantity + quantity) } : cartItem
+    ).filter(cartItem => cartItem.quantity > 0));
+  };
+
+  const getTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
+
   return (
-    <>
+    <div>
       <header id="store">
         <h1>Greengrocers</h1>
-        <ul className="item-list store--item-list">
-        </ul>
+        <Store items={storeItems} addToCart={addToCart} />
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
-        <div className="cart--item-list-container">
-          <ul className="item-list cart--item-list">
-          </ul>
-        </div>
-        <div className="total-section">
-          <div>
-            <h3>Total</h3>
-          </div>
-          <div>
-            <span className="total-number">£0.00</span>
-          </div>
-        </div>
+        <Cart cart={cart} updateQuantity={updateQuantity} total={getTotal()} />
       </main>
-      <div>
-        Icons made by
-        <a
-          href="https://www.flaticon.com/authors/icongeek26"
-          title="Icongeek26"
-        >
-          Icongeek26
-        </a>
-        from
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
-    </>
-  )
+    </div>
+  );
 }
+
+export default App;

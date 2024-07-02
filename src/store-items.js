@@ -1,4 +1,3 @@
-
 const storeItems =  [
   {
     id: "001-beetroot",
@@ -70,6 +69,6 @@ const storeItems =  [
     description: "Eggplant, aubergine, brinjal, or baigan is a plant species in the nightshade family Solanaceae. Solanum melongena is grown worldwide for its edible fruit.",
     type: "vegetable"
   }
-]
+];
 
-export default storeItems
+export default storeItems;
