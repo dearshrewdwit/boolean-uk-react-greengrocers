@@ -3,7 +3,7 @@ export default function Filter({
   setFilteredItems,
   filteredItems,
 }) {
-  //function to filter items in store:
+  //Function to filter items in store:
   function FilterStoreItems(event) {
     console.log("filter event", event.target.value);
 
